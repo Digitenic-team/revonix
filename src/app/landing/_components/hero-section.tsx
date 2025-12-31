@@ -7,7 +7,7 @@ interface IMAGE {
 }
 
 const IMAGES: IMAGE[] = [
-  { src: "/assets/images/phone-image-new.png", alt: "Phone UI" },
+  { src: "/assets/images/phone-image.png", alt: "Phone UI" },
   { src: "/assets/images/dashboard-image.png", alt: "Dashboard UI" },
   {
     src: "/assets/images/sound-collection-image.png",
