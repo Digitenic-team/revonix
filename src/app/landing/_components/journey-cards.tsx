@@ -34,14 +34,14 @@ export function JourneyCards() {
 
       <div className="relative flex items-start gap-5 self-stretch">
         <Image
-          src="/assets/images/card-vector1.png"
+          src="/assets/images/card-vector-1.png"
           width={500}
           height={161}
           alt="Card Vetor 1"
           className="absolute -top-4 -left-12"
         />
         <Image
-          src="/assets/images/card-vector2.png"
+          src="/assets/images/card-vector-2.png"
           width={1476}
           height={316}
           alt="Card Vector 2"
