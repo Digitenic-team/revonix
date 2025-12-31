@@ -1,6 +1,17 @@
 import Image from "next/image";
 
-const IMAGES: string[] = [""];
+const IMAGES: string[] = [
+  "com-1.png",
+  "com-2.png",
+  "com-3.png",
+  "com-4.png",
+  "com-5.png",
+  "com-6.png",
+  "com-7.png",
+  "com-8.png",
+  "com-9.png",
+  "com-10.png",
+];
 
 export function CompaniesSection() {
   return (
@@ -15,18 +26,21 @@ export function CompaniesSection() {
         together.
       </h1>
 
-      <div className="flex flex-col items-start gap-5">
+      <div className="flex max-w-208 flex-wrap items-start justify-center gap-5">
         {IMAGES.map((url: string) => (
           <div
             key={url}
-            className="realtive flex h-37 w-37 shrink-0 flex-col items-start justify-center gap-2.5 rounded-3xl border border-[#EEE] bg-[#F5F7F9] p-6"
+            className="flex h-[9.25rem] w-[9.25rem] flex-col items-center justify-center gap-2.5 rounded-[1rem] border border-[#EEE] bg-[#F5F7F9] p-6"
           >
-            <Image
-              src={url}
-              fill
-              className="object-contain"
-              alt="companies logo"
-            />
+            <div className="flex h-full w-full items-center justify-center">
+              <Image
+                src={`/assets/images/${url}`}
+                alt="company logo"
+                width={1000}
+                height={1000}
+                className="max-h-full max-w-full object-contain"
+              />
+            </div>
           </div>
         ))}
       </div>
