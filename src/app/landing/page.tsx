@@ -4,6 +4,7 @@ import Image from "next/image";
 import { JourneyCards } from "./_components/journey-cards";
 import { OverwhelmingSection } from "./_components/overwhelming-section";
 import { CompaniesSection } from "./_components/companies-section";
+import { WorkSection } from "./_components/work-section";
 
 export default function Landing() {
   return (
@@ -45,6 +46,7 @@ export default function Landing() {
       <OverwhelmingSection />
       <JourneyCards />
       <CompaniesSection />
+      <WorkSection />
     </main>
   );
 }

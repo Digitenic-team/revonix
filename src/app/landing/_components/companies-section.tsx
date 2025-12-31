@@ -30,7 +30,7 @@ export function CompaniesSection() {
         {IMAGES.map((url: string) => (
           <div
             key={url}
-            className="flex h-[9.25rem] w-[9.25rem] flex-col items-center justify-center gap-2.5 rounded-[1rem] border border-[#EEE] bg-[#F5F7F9] p-6"
+            className="flex h-37 w-37 flex-col items-center justify-center gap-2.5 rounded-3xl border border-[#EEE] bg-[#F5F7F9] p-6"
           >
             <div className="flex h-full w-full items-center justify-center">
               <Image
