@@ -56,7 +56,7 @@ export function WorkSection() {
           src="/assets/images/main-vector-2.png"
           width={1000}
           height={500}
-          className="absolute top-7 right-[1.01rem]"
+          className="absolute top-7 right-[1.1rem]"
           alt="main vector blue 1"
         />
 
