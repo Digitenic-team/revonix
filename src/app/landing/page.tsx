@@ -6,6 +6,7 @@ import { OverwhelmingSection } from "./_components/overwhelming-section";
 import { CompaniesSection } from "./_components/companies-section";
 import { WorkSection } from "./_components/work-section";
 import { TechnologySection } from "./_components/technology-section";
+import { FeaturesSection } from "./_components/features-section";
 
 export default function Landing() {
   return (
@@ -49,6 +50,7 @@ export default function Landing() {
       <CompaniesSection />
       <WorkSection />
       <TechnologySection />
+      <FeaturesSection />
     </main>
   );
 }
