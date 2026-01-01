@@ -5,6 +5,7 @@ import { JourneyCards } from "./_components/journey-cards";
 import { OverwhelmingSection } from "./_components/overwhelming-section";
 import { CompaniesSection } from "./_components/companies-section";
 import { WorkSection } from "./_components/work-section";
+import { TechnologySection } from "./_components/technology-section";
 
 export default function Landing() {
   return (
@@ -47,6 +48,7 @@ export default function Landing() {
       <JourneyCards />
       <CompaniesSection />
       <WorkSection />
+      <TechnologySection />
     </main>
   );
 }
