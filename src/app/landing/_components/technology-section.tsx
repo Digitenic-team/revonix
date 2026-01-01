@@ -36,7 +36,14 @@ const CARDS: Cards[] = [
 
 export function TechnologySection() {
   return (
-    <section className="relative mx-auto mt-30 flex max-w-456 items-center justify-between gap-50 rounded-[2.5rem] bg-[linear-gradient(180deg,rgba(1,1,1,1)_0%,#3558DA_100%),url('/assets/images/technology-background.png')] bg-cover bg-center p-[6.25rem_5rem] shadow-[0_51px_51px_rgba(54,89,218,0.09),0_13px_28px_rgba(54,89,218,0.1)]">
+    <section className="relative mx-auto mt-30 flex max-w-456 items-center justify-between gap-50 rounded-[2.5rem] bg-[linear-gradient(180deg,rgba(1,1,1,1)_0%,#3558DA_100%)] bg-cover bg-center p-[6.25rem_5rem] shadow-[0_51px_51px_rgba(54,89,218,0.09),0_13px_28px_rgba(54,89,218,0.1)]">
+      <Image
+        src="/assets/images/technology-background.png"
+        alt="Background"
+        fill
+        className="absolute inset-0 object-cover mix-blend-color-burn"
+        priority
+      />
       <div className="flex max-w-130 flex-1 flex-col items-start gap-6 self-stretch">
         <div className="flex flex-1 flex-col items-start gap-4 self-stretch">
           <h1 className="text-[3.5rem] leading-normal font-medium tracking-[-0.035rem] text-white">

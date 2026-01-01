@@ -7,6 +7,7 @@ import { CompaniesSection } from "./_components/companies-section";
 import { WorkSection } from "./_components/work-section";
 import { TechnologySection } from "./_components/technology-section";
 import { FeaturesSection } from "./_components/features-section";
+import { Footer } from "./_components/footer";
 
 export default function Landing() {
   return (
@@ -51,6 +52,7 @@ export default function Landing() {
       <WorkSection />
       <TechnologySection />
       <FeaturesSection />
+      <Footer />
     </main>
   );
 }
