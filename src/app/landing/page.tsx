@@ -14,8 +14,8 @@ export default function Landing() {
       <HeroSection />
       <OverwhelmingSection />
       <JourneyCards />
-      {/*
       <CompaniesSection />
+      {/*
       <WorkSection />
       <TechnologySection />
       <FeaturesSection />
