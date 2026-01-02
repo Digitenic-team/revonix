@@ -1,6 +1,4 @@
-import { Navbar } from "./_components/navbar";
 import { HeroSection } from "./_components/hero-section";
-import Image from "next/image";
 import { JourneyCards } from "./_components/journey-cards";
 import { OverwhelmingSection } from "./_components/overwhelming-section";
 import { CompaniesSection } from "./_components/companies-section";
@@ -15,8 +13,8 @@ export default function Landing() {
     <main className="min-h-screen w-full">
       <HeroSection />
       <OverwhelmingSection />
-      {/*
       <JourneyCards />
+      {/*
       <CompaniesSection />
       <WorkSection />
       <TechnologySection />
