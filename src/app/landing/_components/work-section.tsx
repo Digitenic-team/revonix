@@ -37,26 +37,26 @@ const CARDS: Cards[] = [
 export function WorkSection() {
   return (
     <section className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem] self-stretch">
-      <h1 className="font-neue bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,#010101_0%,#3558DA_100%)] bg-clip-text text-center text-[3.5rem] leading-normal font-medium tracking-[-0.035rem] text-transparent">
+      <h1 className="font-neue bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,#010101_0%,#3558DA_100%)] bg-clip-text text-center text-4xl leading-normal font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">
         How we{" "}
-        <span className="font-neue text-[3.5rem] leading-normal font-medium tracking-[-0.035rem] text-[#3558DA]">
+        <span className="font-neue leading-normal font-medium tracking-[-0.035rem] text-[#3558DA]">
           work
         </span>
       </h1>
 
-      <div className="relative flex w-229.5 flex-col items-start gap-8">
+      <div className="relative flex w-full max-w-229.5 flex-col flex-wrap items-start gap-8 px-4 lg:flex-nowrap">
         <Image
           src="/assets/images/main-vector-1.png"
           width={520}
           height={426}
-          className="absolute -top-7 -left-26"
+          className="absolute -top-7 -left-26 hidden xl:block"
           alt="main vector blue 1"
         />
         <Image
           src="/assets/images/main-vector-2.png"
           width={1000}
           height={500}
-          className="absolute top-7 right-[1.1rem]"
+          className="absolute top-7 right-[1.1rem] hidden xl:block"
           alt="main vector blue 1"
         />
 
@@ -68,7 +68,7 @@ export function WorkSection() {
                 ? "border border-[rgba(53,88,218,0.10)] bg-white shadow-[0_275px_77px_rgba(55,90,217,0),0_176px_70px_rgba(55,90,217,0.01),0_99px_59px_rgba(55,90,217,0.05),0_44px_44px_rgba(55,90,217,0.09),0_11px_24px_rgba(55,90,217,0.10)]"
                 : "border border-[#EEE] bg-[#F5F7F9]",
               idx === 1 || idx === 3 ? "self-end" : "self-start",
-              "flex w-md flex-col items-start justify-center gap-5 rounded-3xl p-8",
+              "flex max-w-md flex-col items-start justify-center gap-5 rounded-3xl p-8",
             )}
           >
             <div
@@ -87,11 +87,11 @@ export function WorkSection() {
               />
             </div>
 
-            <h1 className="font-neue text-[1.75rem] leading-normal font-medium tracking-[-0.0175rem] text-[#010101]">
+            <h1 className="font-neue text-2xl leading-normal font-medium tracking-[-0.0175rem] text-[#010101] md:text-[1.75rem]">
               {card.heading}
             </h1>
 
-            <p className="font-neue text-[1.125rem] leading-normal font-normal tracking-[-0.01125rem] text-[#010101]">
+            <p className="font-neue text-md leading-normal font-normal tracking-[-0.01125rem] text-[#010101] md:text-[1.125rem]">
               {card.description}
             </p>
           </div>
