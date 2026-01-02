@@ -11,26 +11,30 @@ interface Icons {
 const ICONS: Icons[] = [
   {
     url: "/assets/images/flag.png",
-    class: "-top-10 -left-50 text-right",
+    class:
+      "top-2 left-2 sm:-top-6 sm:-left-14 md:-left-18 lg:-top-10 lg:-left-35 xl:-left-50 text-right",
     textTop: "No clear",
     textBottom: "starting point",
   },
   {
     url: "/assets/images/timer.png",
-    class: "-top-10 -right-40",
+    class:
+      "top-2 right-2 sm:-top-6 sm:-right-15 md:-right-18 lg:-top-10 lg:-right-30 xl:-right-40",
     textTop: "No time to",
     textBottom: "experiment",
   },
   {
     url: "/assets/images/workflow.png",
-    class: "-bottom-8 -left-56 text-right",
-    textTop: "Too many tools, ",
+    class:
+      "bottom-2 left-2 sm:-bottom-4 sm:-left-20 md:-left-24 lg:-bottom-8 lg:-left-38 xl:-left-56 text-right",
+    textTop: "Too many tools,",
     textBottom: "no direction",
   },
   {
     url: "/assets/images/automation.png",
-    class: "-bottom-6 -right-65",
-    textTop: "Automations that ",
+    class:
+      "bottom-2 right-2 sm:-bottom-4 sm:-right-26 md:-right-30 lg:-bottom-6 lg:-right-40 xl:-right-65",
+    textTop: "Automations that",
     textBottom: "never ship or break",
   },
 ];
@@ -39,44 +43,45 @@ export function OverwhelmingSection() {
   return (
     <section className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem]">
       {/* Heading */}
-      <h1 className="bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[2.5rem] leading-[normal] font-medium tracking-[-0.025rem] text-transparent">
-        AI can be{" "}
-        <span className="text-[2.5rem] leading-[normal] font-medium tracking-[-0.025rem] text-[#3558DA]">
-          overwhelming
-        </span>
+      <h1 className="bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[2rem] font-medium tracking-[-0.025rem] text-transparent sm:text-[2.25rem] lg:text-[2.5rem]">
+        AI can be <span className="text-[#3558DA]">overwhelming</span>
       </h1>
 
       {/* Concentric shapes container */}
-      <div className="flex h-92.25 w-full items-center justify-center">
-        <div className="relative flex h-[19.21994rem] w-[45.59913rem] items-center justify-center rounded-[50.89463rem] border-[6.521px] border-[#576CBC] bg-[linear-gradient(180deg,rgba(87,108,188,0.05)_0%,rgba(53,88,218,0.05)_100%)] shadow-[0_0_0_1.63px_#FFF]">
-          {/* Icons Circles */}
-          {ICONS.map((icon: Icons, idx: number) => (
+      <div className="flex w-full items-center justify-center md:h-92.25">
+        <div className="relative flex h-56 w-[90%] items-center justify-center rounded-full border-[6.521px] border-[#576CBC] bg-[linear-gradient(180deg,rgba(87,108,188,0.05)_0%,rgba(53,88,218,0.05)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:w-[65%] lg:w-[60%] lg:max-w-[45.59913rem] xl:h-[19.21994rem] xl:w-[95%]">
+          {/* Icons */}
+          {ICONS.map((icon, idx) => (
             <div
               key={icon.url}
-              className={`${icon.class} absolute flex ${idx === 1 || idx === 3 ? "flex-row-reverse" : "flex-row"} items-center gap-5`}
+              className={`absolute flex items-center gap-4 ${
+                idx === 1 || idx === 3 ? "flex-row-reverse" : ""
+              } ${icon.class}`}
             >
-              <h2 className="text-[1.67325rem] leading-[1.63025rem] font-medium tracking-[-0.01675rem] text-[#010101]">
+              {/* Text hidden below sm */}
+              <h2 className="hidden text-sm leading-tight font-medium tracking-[-0.01675rem] text-[#010101] sm:block md:text-base lg:text-xl lg:leading-[1.63025rem] xl:text-[1.67325rem]">
                 {icon.textTop}
                 <br />
                 {icon.textBottom}
               </h2>
 
-              <StyledCircle>
+              <StyledCircle className="h-20 w-20 lg:h-25 lg:w-25">
                 <Image
                   src={icon.url}
-                  alt="My Image"
-                  width={60}
-                  height={60}
-                  className="aspect-square shrink-0"
+                  alt=""
+                  width={28}
+                  height={28}
+                  className="lg:h-10 lg:w-10 xl:h-15 xl:w-15"
                 />
               </StyledCircle>
             </div>
           ))}
 
-          <div className="flex h-[16.49113rem] w-[41.87806rem] items-center justify-center rounded-[50.89463rem] border-[6.521px] border-[#576CBC] bg-[linear-gradient(180deg,rgba(87,108,188,0.20)_0%,rgba(53,88,218,0.20)_100%)] shadow-[0_0_0_1.63px_#FFF]">
-            <div className="flex h-[13.7645rem] w-[37.91075rem] items-center justify-center rounded-[50.89463rem] border-[6.521px] border-[#576CBC] bg-[linear-gradient(180deg,rgba(87,108,188,0.40)_0%,rgba(53,88,218,0.40)_100%)] shadow-[0_0_0_1.63px_#FFF]">
-              <div className="flex h-[11.44325rem] w-[34.49913rem] items-center justify-center rounded-[50.89463rem] border-[3.261px] border-[#FFF] bg-[linear-gradient(180deg,#576CBC_0%,#3558DA_100%)]">
-                <h2 className="text-center text-[2.95481rem] leading-[normal] font-medium tracking-[-0.02956rem] text-white">
+          {/* Inner rings */}
+          <div className="flex h-42 w-[88%] items-center justify-center rounded-[50.89463rem] border-[6.521px] border-[#576CBC] bg-[linear-gradient(180deg,rgba(87,108,188,0.20)_0%,rgba(53,88,218,0.20)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:w-[78%] lg:w-[90%] xl:h-[16.49113rem] xl:w-[41.87806rem]">
+            <div className="flex h-35 w-[86%] items-center justify-center rounded-full border-[6.521px] border-[#576CBC] bg-[linear-gradient(180deg,rgba(87,108,188,0.40)_0%,rgba(53,88,218,0.40)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:w-[82%] md:rounded-[50.89463rem] xl:h-[13.7645rem] xl:w-[37.91075rem]">
+              <div className="flex h-27 w-[84%] items-center justify-center rounded-full border-[3.261px] border-[#FFF] bg-[linear-gradient(180deg,#576CBC_0%,#3558DA_100%)] p-3 sm:w-[80%] md:rounded-[50.89463rem] md:p-0 lg:w-[90%] xl:h-[11.44325rem] xl:w-[34.49913rem]">
+                <h2 className="text-center text-base font-medium tracking-[-0.02956rem] text-white sm:text-lg md:text-xl lg:text-3xl xl:text-[2.95481rem]">
                   We cut through that.
                 </h2>
               </div>
