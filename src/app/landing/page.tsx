@@ -16,9 +16,9 @@ export default function Landing() {
       <JourneyCards />
       <CompaniesSection />
       <WorkSection />
-      {/*
       <TechnologySection />
       <FeaturesSection />
+      {/*
       <TestimonialsSection />
       <Footer />
       */}

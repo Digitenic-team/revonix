@@ -65,7 +65,7 @@ export function HeroSection() {
       <Navbar />
 
       <div className="flex flex-col items-center gap-18 self-stretch pt-18">
-        <div className="mx-auto flex max-w-360 flex-col items-center gap-10">
+        <div className="mx-auto flex max-w-360 flex-col items-center gap-10 px-4">
           <div className="flex flex-col items-center gap-4 px-5 md:px-0">
             <h1 className="justify-between bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-4xl font-medium text-transparent sm:text-5xl md:text-[3.625rem]">
               Your competitor isn’t smarter —
