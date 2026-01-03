@@ -18,8 +18,8 @@ export default function Landing() {
       <WorkSection />
       <TechnologySection />
       <FeaturesSection />
-      {/*
       <TestimonialsSection />
+      {/*
       <Footer />
       */}
     </main>
