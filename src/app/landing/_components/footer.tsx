@@ -30,7 +30,7 @@ const footerSections: FooterSection[] = [
 
 export function Footer() {
   return (
-    <footer className="mx-auto mt-30 flex max-w-360 flex-col items-start gap-[4.38rem] self-stretch">
+    <footer className="mx-auto mt-30 flex max-w-360 flex-col items-start gap-[4.38rem] self-stretch px-4">
       <section className="relative flex items-center justify-center gap-25 self-stretch overflow-hidden rounded-[1.875rem] bg-[linear-gradient(180deg,#010101_3.79%,#3558DA_100%)] p-20 shadow-[0_51px_51px_0_rgba(54,89,218,0.09),0_13px_28px_0_rgba(54,89,218,0.10)]">
         <Image
           src="/assets/images/footer-background.png"
@@ -58,23 +58,23 @@ export function Footer() {
 
         <div className="flex flex-1 flex-col items-center justify-center gap-8 self-stretch">
           <div className="flex flex-col items-center gap-4 self-stretch">
-            <h1 className="max-w-156 text-center text-[3.5rem] font-medium tracking-[-0.035rem] text-white">
+            <h1 className="max-w-156 text-center text-4xl font-medium tracking-[-0.035rem] text-white sm:text-5xl md:text-[3.5rem]">
               Let’s Simplify Your Work With Technology
             </h1>
 
-            <p className="max-w-115 text-center text-[1.125rem] font-normal tracking-[-0.01125rem] text-white">
+            <p className="max-w-115 text-center font-normal tracking-[-0.01125rem] text-white sm:text-[1.125rem]">
               If your operations feel slow, manual, or fragmented—let’s talk
               about what’s actually possible.
             </p>
           </div>
-          <StyledButtonLight className="py-6">
+          <StyledButtonLight className="relative py-6 text-sm">
             Book a Strategy Call
           </StyledButtonLight>
         </div>
       </section>
       <section className="flex flex-col items-start gap-15.5 self-stretch pb-5">
         {/* Top Section */}
-        <div className="flex flex-col items-start justify-between gap-12 self-stretch py-4 md:flex-row md:items-start">
+        <div className="flex flex-col flex-wrap items-start justify-between gap-12 self-stretch py-4 md:items-start lg:flex-row">
           {/* Left Side */}
           <div className="flex flex-col items-start gap-4 md:gap-12.5">
             <Image
@@ -84,7 +84,7 @@ export function Footer() {
               alt="Footer logo"
             />
             <div className="flex flex-col items-start gap-4">
-              <p className="max-w-sm text-[1.25rem] font-normal tracking-[-0.0125rem] text-[#010101] opacity-60">
+              <p className="max-w-sm font-normal tracking-[-0.0125rem] text-[#010101] opacity-60 sm:text-[1.25rem]">
                 We help teams cut through AI noise and turn automation into
                 real, working systems.
               </p>
@@ -118,14 +118,14 @@ export function Footer() {
         {/* Bottom Section */}
         <div className="mt-6 flex flex-col items-start gap-2.5 self-stretch border-t-2 border-gray-200 pt-4">
           <div className="flex w-full flex-col items-center justify-between gap-4 md:flex-row">
-            <p className="text-center text-[1rem] font-normal tracking-[-0.01rem] text-[#010101] opacity-60">
+            <p className="text-center text-sm font-normal tracking-[-0.01rem] text-[#010101] opacity-60 sm:text-[1rem]">
               © Revonix 2025. All rights reserved.
             </p>
             <div className="flex items-center gap-8">
-              <p className="text-center text-[1rem] font-normal tracking-[-0.01rem] text-[#010101] opacity-60">
+              <p className="text-center text-sm font-normal tracking-[-0.01rem] text-[#010101] opacity-60 sm:text-[1rem]">
                 Privacy Policy
               </p>
-              <p className="text-center text-[1rem] font-normal tracking-[-0.01rem] text-[#010101] opacity-60">
+              <p className="text-center text-sm font-normal tracking-[-0.01rem] text-[#010101] opacity-60 sm:text-[1rem]">
                 Terms of Service
               </p>
             </div>

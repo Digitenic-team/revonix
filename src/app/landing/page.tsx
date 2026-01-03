@@ -19,9 +19,7 @@ export default function Landing() {
       <TechnologySection />
       <FeaturesSection />
       <TestimonialsSection />
-      {/*
       <Footer />
-      */}
     </main>
   );
 }
