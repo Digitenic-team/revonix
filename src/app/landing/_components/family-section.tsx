@@ -46,7 +46,7 @@ const CARDS: Card[] = [
   },
 ];
 
-export function FmailSection() {
+export function FamilySection() {
   return (
     <section className="mt-30 flex w-full flex-col gap-[4.38rem]">
       {/* Header */}
