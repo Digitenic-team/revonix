@@ -44,12 +44,12 @@ export function OverwhelmingSection() {
     <section className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem]">
       {/* Heading */}
       <h1 className="bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[2rem] font-medium tracking-[-0.025rem] text-transparent sm:text-[2.25rem] lg:text-[2.5rem]">
-        AI can be <span className="text-[#3558DA]">overwhelming</span>
+        AI can be <span className="text-primary">overwhelming</span>
       </h1>
 
       {/* Concentric shapes container */}
       <div className="flex w-full items-center justify-center md:h-92.25">
-        <div className="relative flex h-56 w-[90%] items-center justify-center rounded-full border-[6.521px] border-[#576CBC] bg-[linear-gradient(180deg,rgba(87,108,188,0.05)_0%,rgba(53,88,218,0.05)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:w-[65%] lg:w-[60%] lg:max-w-[45.59913rem] xl:h-[19.21994rem] xl:w-[95%]">
+        <div className="border-primary relative flex h-56 w-[90%] items-center justify-center rounded-full border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.05)_0%,rgba(53,88,218,0.05)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:w-[65%] lg:w-[60%] lg:max-w-[45.59913rem] xl:h-[19.21994rem] xl:w-[95%]">
           {/* Icons */}
           {ICONS.map((icon, idx) => (
             <div
@@ -59,7 +59,7 @@ export function OverwhelmingSection() {
               } ${icon.class}`}
             >
               {/* Text hidden below sm */}
-              <h2 className="hidden text-sm leading-tight font-medium tracking-[-0.01675rem] text-[#010101] sm:block md:text-base lg:text-xl lg:leading-[1.63025rem] xl:text-[1.67325rem]">
+              <h2 className="text-secondary hidden text-sm leading-tight font-medium tracking-[-0.01675rem] sm:block md:text-base lg:text-xl lg:leading-[1.63025rem] xl:text-[1.67325rem]">
                 {icon.textTop}
                 <br />
                 {icon.textBottom}
@@ -78,8 +78,8 @@ export function OverwhelmingSection() {
           ))}
 
           {/* Inner rings */}
-          <div className="flex h-42 w-[88%] items-center justify-center rounded-[50.89463rem] border-[6.521px] border-[#576CBC] bg-[linear-gradient(180deg,rgba(87,108,188,0.20)_0%,rgba(53,88,218,0.20)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:w-[78%] lg:w-[90%] xl:h-[16.49113rem] xl:w-[41.87806rem]">
-            <div className="flex h-35 w-[86%] items-center justify-center rounded-full border-[6.521px] border-[#576CBC] bg-[linear-gradient(180deg,rgba(87,108,188,0.40)_0%,rgba(53,88,218,0.40)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:w-[82%] md:rounded-[50.89463rem] xl:h-[13.7645rem] xl:w-[37.91075rem]">
+          <div className="border-primary flex h-42 w-[88%] items-center justify-center rounded-[50.89463rem] border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.20)_0%,rgba(53,88,218,0.20)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:w-[78%] lg:w-[90%] xl:h-[16.49113rem] xl:w-[41.87806rem]">
+            <div className="border-primary flex h-35 w-[86%] items-center justify-center rounded-full border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.40)_0%,rgba(53,88,218,0.40)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:w-[82%] md:rounded-[50.89463rem] xl:h-[13.7645rem] xl:w-[37.91075rem]">
               <div className="flex h-27 w-[84%] items-center justify-center rounded-full border-[3.261px] border-[#FFF] bg-[linear-gradient(180deg,#576CBC_0%,#3558DA_100%)] p-3 sm:w-[80%] md:rounded-[50.89463rem] md:p-0 lg:w-[90%] xl:h-[11.44325rem] xl:w-[34.49913rem]">
                 <h2 className="text-center text-base font-medium tracking-[-0.02956rem] text-white sm:text-lg md:text-xl lg:text-3xl xl:text-[2.95481rem]">
                   We cut through that.

@@ -51,30 +51,30 @@ export function JourneyCards() {
           className="absolute -top-4 right-[0.56rem] z-10 hidden xl:block"
         />
 
-        {CARDS_DATA.map((card, idx) => (
+        {CARDS_DATA.map((card: CardData, idx: number) => (
           <div
             key={card.desc}
             className={cn(
               "flex w-full flex-col items-start justify-center gap-2.5 rounded-3xl border p-6 md:w-[48%] lg:w-1/3",
               idx === 0
-                ? "border-[#EEEEEE] bg-white shadow-[0_275px_77px_0_rgba(55,90,217,0),0_176px_70px_0_rgba(55,90,217,0.01),0_99px_59px_0_rgba(55,90,217,0.05),0_44px_44px_0_rgba(55,90,217,0.09),0_11px_24px_0_rgba(55,90,217,0.1)]"
-                : "border-[#EEEEEE] bg-[#F5F7F9]",
+                ? "border-secondary-foreground bg-white shadow-[0_275px_77px_0_rgba(55,90,217,0),0_176px_70px_0_rgba(55,90,217,0.01),0_99px_59px_0_rgba(55,90,217,0.05),0_44px_44px_0_rgba(55,90,217,0.09),0_11px_24px_0_rgba(55,90,217,0.1)]"
+                : "border-secondary-foreground bg-primary-foreground",
               // second card margin-bottom for mobile stacking
               idx === 1 ? "mt-0 md:mt-0" : "mt-0",
             )}
           >
             <div className="h-70 space-y-[0.62rem] self-stretch">
-              <h2 className="text-sm text-[#010101] uppercase opacity-60">
+              <h2 className="text-secondary text-sm uppercase opacity-60">
                 {card.heading}
               </h2>
-              <h3 className="text-[1.75rem] font-medium tracking-[-0.0175rem] text-[#010101]">
+              <h3 className="text-secondary text-[1.75rem] font-medium tracking-[-0.0175rem]">
                 {card.subHeading}
               </h3>
             </div>
 
             <p
               className={cn(
-                "text-[1.125rem] tracking-[-0.01125rem] text-[#010101]",
+                "text-secondary text-[1.125rem] tracking-[-0.01125rem]",
                 idx !== 0 && "opacity-60",
               )}
             >

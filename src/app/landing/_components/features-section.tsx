@@ -30,7 +30,7 @@ export function FeaturesSection() {
     <section className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem] self-stretch px-4">
       <h1 className="bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-4xl font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">
         Why teams choose{" "}
-        <span className="font-medium tracking-[-0.035rem] text-[#3558DA]">
+        <span className="text-primary font-medium tracking-[-0.035rem]">
           Revonix
         </span>
       </h1>
@@ -41,8 +41,8 @@ export function FeaturesSection() {
             key={card.heading}
             className={cn(
               idx === 0
-                ? "border border-dashed border-[#EEE] bg-white shadow-[0_11px_24px_0_rgba(55,90,217,0.10)]"
-                : "bg-[#F5F7F9]",
+                ? "border-secondary-foreground border border-dashed bg-white shadow-[0_11px_24px_0_rgba(55,90,217,0.10)]"
+                : "bg-primary-foreground",
               "relative flex min-w-74 flex-1 flex-col items-start gap-6.5 rounded-4xl p-6",
             )}
           >
@@ -55,11 +55,11 @@ export function FeaturesSection() {
                 alt="Side Border Image"
               />
             )}
-            <h1 className="text-[1rem] leading-5.75 font-normal text-[#010101] uppercase opacity-60">
+            <h1 className="text-secondary text-[1rem] leading-5.75 font-normal uppercase opacity-60">
               {card.heading}
             </h1>
 
-            <h3 className="text-[1.375rem] font-medium tracking-[-0.01375re] text-ellipsis text-[#010101]">
+            <h3 className="text-secondary text-[1.375rem] font-medium tracking-[-0.01375re] text-ellipsis">
               {card.description}
             </h3>
           </div>

@@ -21,7 +21,7 @@ export function CompaniesSection() {
         We don’t just work together
         <br />
         —we{" "}
-        <span className="leading-snug font-medium tracking-[-0.02rem] text-[#3558DA]">
+        <span className="text-primary leading-snug font-medium tracking-[-0.02rem]">
           grow{" "}
         </span>
         together.
@@ -32,7 +32,7 @@ export function CompaniesSection() {
         {IMAGES.map((url: string) => (
           <div
             key={url}
-            className="flex h-28 w-28 flex-col items-center justify-center gap-2.5 rounded-3xl border border-[#EEE] bg-[#F5F7F9] p-4 sm:h-32 sm:w-32 sm:p-5 md:h-37 md:w-37 md:p-6"
+            className="border-secondary-foreground bg-primary-foreground flex h-28 w-28 flex-col items-center justify-center gap-2.5 rounded-3xl border p-4 sm:h-32 sm:w-32 sm:p-5 md:h-37 md:w-37 md:p-6"
           >
             <div className="flex h-full w-full items-center justify-center">
               <Image

@@ -53,9 +53,9 @@ export function FamilySection() {
       <div className="flex flex-col items-center gap-8">
         <div className="flex flex-col items-center gap-4">
           <h1 className="font-neue bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,#010101_0%,#3558DA_100%)] bg-clip-text text-center text-4xl font-medium text-transparent sm:text-5xl md:text-[3.5rem]">
-            Meet the <span className="text-[#3558DA]">Family</span>
+            Meet the <span className="text-primary">Family</span>
           </h1>
-          <p className="text-center text-[1.125rem] text-[#010101]">
+          <p className="text-secondary text-center text-[1.125rem]">
             We’re not a typical agency. We’re a small group of people who
             genuinely care about solving real problems.
           </p>
@@ -81,7 +81,7 @@ export function FamilySection() {
                   src={card.image}
                   width={400}
                   height={432}
-                  className="rounded-3xl border border-[#EEE]"
+                  className="border-secondary-foreground rounded-3xl border"
                   alt={card.heading}
                 />
                 <div className="flex flex-col gap-1.5">

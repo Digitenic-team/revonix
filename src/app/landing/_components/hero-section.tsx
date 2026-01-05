@@ -73,7 +73,7 @@ export function HeroSection() {
               Their team just has AI doing the work.
             </h1>
 
-            <p className="text-md text-center font-normal tracking-[-0.01125rem] text-[#010101] sm:text-lg md:text-[1.125rem]">
+            <p className="text-md text-secondary text-center font-normal tracking-[-0.01125rem] sm:text-lg md:text-[1.125rem]">
               We help teams cut through AI noise and turn automation into real,
               working systems.
             </p>
@@ -101,7 +101,7 @@ export function HeroSection() {
                       : index === IMAGES.length - 1
                         ? "lg:rounded-r-0 rounded-4xl"
                         : "rounded-4xl",
-                    "relative h-full w-full overflow-hidden border border-[#EEE]",
+                    "border-secondary-foreground relative h-full w-full overflow-hidden border",
                   )}
                 >
                   <Image

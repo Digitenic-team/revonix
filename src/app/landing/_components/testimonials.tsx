@@ -34,7 +34,7 @@ export function TestimonialsSection() {
     <section className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem] self-stretch px-4">
       <h1 className="bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-4xl font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">
         Don’t take our{" "}
-        <span className="font-medium tracking-[-0.035rem] text-[#3558DA]">
+        <span className="text-primary font-medium tracking-[-0.035rem]">
           word for it
         </span>
       </h1>
@@ -63,10 +63,10 @@ export function TestimonialsSection() {
               alt="Profile Image"
             />
             <div className="flex flex-1 flex-col">
-              <h3 className="text-[1.25rem] font-medium tracking-[-0.0125rem] text-[#010101]">
+              <h3 className="text-secondary text-[1.25rem] font-medium tracking-[-0.0125rem]">
                 Navid Nathoo
               </h3>
-              <p className="text-[0.875rem] font-normal text-[#010101] uppercase opacity-60">
+              <p className="text-secondary text-[0.875rem] font-normal uppercase opacity-60">
                 founder
               </p>
             </div>
@@ -79,10 +79,10 @@ export function TestimonialsSection() {
           <div
             key={card.text}
             className={cn(
-              "flex min-h-90 flex-1 flex-col items-start justify-between rounded-4xl bg-[#F5F7F9] p-6 sm:min-w-80",
+              "bg-primary-foreground flex min-h-90 flex-1 flex-col items-start justify-between rounded-4xl p-6 sm:min-w-80",
             )}
           >
-            <p className="font-medium tracking-[-0.01375rem] text-[#010101] md:text-[1.375rem]">
+            <p className="text-secondary font-medium tracking-[-0.01375rem] md:text-[1.375rem]">
               {card.text}
             </p>
 
@@ -94,10 +94,10 @@ export function TestimonialsSection() {
                 alt="founder images"
               />
               <div className="align-start flex flex-1 flex-col gap-1">
-                <h1 className="font-medium tracking-[-0.0125rem] text-[#010101] sm:text-[1.25rem]">
+                <h1 className="text-secondary font-medium tracking-[-0.0125rem] sm:text-[1.25rem]">
                   {card.name}
                 </h1>
-                <h3 className="text-[0.875rem] font-normal text-[#010101] uppercase opacity-60">
+                <h3 className="text-secondary text-[0.875rem] font-normal uppercase opacity-60">
                   {card.position}
                 </h3>
               </div>

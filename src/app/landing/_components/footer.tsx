@@ -87,7 +87,7 @@ export function Footer() {
               />
             </Link>
             <div className="flex flex-col items-start gap-4">
-              <p className="max-w-sm font-normal tracking-[-0.0125rem] text-[#010101] opacity-60 sm:text-[1.25rem]">
+              <p className="text-secondary max-w-sm font-normal tracking-[-0.0125rem] opacity-60 sm:text-[1.25rem]">
                 We help teams cut through AI noise and turn automation into
                 real, working systems.
               </p>
@@ -102,13 +102,13 @@ export function Footer() {
                 key={section.title}
                 className="flex flex-col items-start gap-2.5"
               >
-                <h2 className="text-center text-[1.125rem] font-medium tracking-[-0.01125rem] text-[#010101]">
+                <h2 className="text-secondary text-center text-[1.125rem] font-medium tracking-[-0.01125rem]">
                   {section.title}
                 </h2>
                 {section.links.map((link) => (
                   <p
                     key={link}
-                    className="text-center text-[1rem] font-normal tracking-[-0.01rem] text-[#010101] opacity-60"
+                    className="text-secondary text-center text-[1rem] font-normal tracking-[-0.01rem] opacity-60"
                   >
                     {link}
                   </p>
@@ -121,14 +121,14 @@ export function Footer() {
         {/* Bottom Section */}
         <div className="mt-6 flex flex-col items-start gap-2.5 self-stretch border-t-2 border-gray-200 pt-4">
           <div className="flex w-full flex-col items-center justify-between gap-4 md:flex-row">
-            <p className="text-center text-sm font-normal tracking-[-0.01rem] text-[#010101] opacity-60 sm:text-[1rem]">
+            <p className="text-secondary text-center text-sm font-normal tracking-[-0.01rem] opacity-60 sm:text-[1rem]">
               © Revonix 2025. All rights reserved.
             </p>
             <div className="flex items-center gap-8">
-              <p className="text-center text-sm font-normal tracking-[-0.01rem] text-[#010101] opacity-60 sm:text-[1rem]">
+              <p className="text-secondary text-center text-sm font-normal tracking-[-0.01rem] opacity-60 sm:text-[1rem]">
                 Privacy Policy
               </p>
-              <p className="text-center text-sm font-normal tracking-[-0.01rem] text-[#010101] opacity-60 sm:text-[1rem]">
+              <p className="text-secondary text-center text-sm font-normal tracking-[-0.01rem] opacity-60 sm:text-[1rem]">
                 Terms of Service
               </p>
             </div>

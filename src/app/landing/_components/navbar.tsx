@@ -12,7 +12,7 @@ export function Navbar() {
 
   return (
     <section className="relative mx-auto flex max-w-360 items-center justify-center gap-8 px-6 pt-2.5">
-      <nav className="flex w-full items-center justify-between gap-6 rounded-full border-b border-[#EEE] bg-white px-4 py-3 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] md:w-auto">
+      <nav className="border-secondary-foreground flex w-full items-center justify-between gap-6 rounded-full border-b bg-white px-4 py-3 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] md:w-auto">
         {/* Logo */}
         <Image
           src="/assets/images/revonix-logo.png"
@@ -28,7 +28,7 @@ export function Navbar() {
             <Link
               key={link}
               href="/#"
-              className="text-base font-medium tracking-[-0.01rem] text-[#010101]"
+              className="text-secondary text-base font-medium tracking-[-0.01rem]"
             >
               {link}
             </Link>
@@ -69,12 +69,12 @@ export function Navbar() {
 
       {/* Mobile dropdown */}
       {isOpen && (
-        <div className="absolute top-full left-0 z-50 w-full rounded-b-3xl border border-[#EEE] bg-white p-6 shadow-lg md:hidden">
+        <div className="border-secondary-foreground absolute top-full left-0 z-50 w-full rounded-b-3xl border bg-white p-6 shadow-lg md:hidden">
           {LINKS.map((link) => (
             <Link
               key={link}
               href="/#"
-              className="block w-full py-2 text-center text-base font-medium text-[#010101]"
+              className="text-secondary block w-full py-2 text-center text-base font-medium"
               onClick={() => setIsOpen(false)}
             >
               {link}
