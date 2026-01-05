@@ -1,3 +1,6 @@
+"use client";
+
+import Lenis from "lenis";
 import { HeroSection } from "./_components/hero-section";
 import { JourneyCards } from "./_components/journey-cards";
 import { OverwhelmingSection } from "./_components/overwhelming-section";
@@ -10,6 +13,13 @@ import { TestimonialsSection } from "./_components/testimonials";
 import { FmailSection } from "./_components/family-section";
 
 export default function Landing() {
+  const lenis = new Lenis({
+    autoRaf: true,
+  });
+
+  lenis.on("scroll", (e: Lenis): void => {
+    console.log(e);
+  });
   return (
     <main className="min-h-screen w-full overflow-x-hidden">
       <HeroSection />
