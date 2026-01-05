@@ -54,7 +54,7 @@ export function TechnologySection() {
               Systems that replace manual work and actually get used.
             </p>
           </div>
-          <StyledButtonLight className="py-6 text-sm">
+          <StyledButtonLight className="relative py-6 text-sm">
             Book a Strategy Call
           </StyledButtonLight>
         </div>

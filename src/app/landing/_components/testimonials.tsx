@@ -39,12 +39,47 @@ export function TestimonialsSection() {
         </span>
       </h1>
 
+      <div className="flex min-h-110 self-stretch">
+        <div className="relative flex-1">
+          <Image src="/assets/images/slider1.png" fill alt="Slider Image" />
+        </div>
+        <div className="flex flex-1 flex-col justify-between self-stretch rounded-3xl bg-white p-12">
+          <Image
+            src="/assets/images/quotes.png"
+            width={21}
+            height={18}
+            alt="Quotes Image"
+          />
+          <h1 className="bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-[2.25rem] leading-normal font-medium tracking-[-0.0225rem] text-transparent">
+            They move with impressive speed and are incredibly easy to
+            collaborate with, making the entire process smooth and efficient.
+          </h1>
+
+          <div className="flex items-center gap-3.75 self-stretch">
+            <Image
+              src="/assets/images/profile1.png"
+              width={48}
+              height={48}
+              alt="Profile Image"
+            />
+            <div className="flex flex-1 flex-col">
+              <h3 className="text-[1.25rem] font-medium tracking-[-0.0125rem] text-[#010101]">
+                Navid Nathoo
+              </h3>
+              <p className="text-[0.875rem] font-normal text-[#010101] uppercase opacity-60">
+                founder
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <section className="slef-stretch flex flex-wrap items-start gap-5">
         {CARDS.map((card: Card) => (
           <div
             key={card.text}
             className={cn(
-              "flex min-h-70 flex-1 flex-col items-start justify-between rounded-4xl bg-[#F5F7F9] p-6 sm:min-w-80",
+              "flex min-h-90 flex-1 flex-col items-start justify-between rounded-4xl bg-[#F5F7F9] p-6 sm:min-w-80",
             )}
           >
             <p className="font-medium tracking-[-0.01375rem] text-[#010101] md:text-[1.375rem]">

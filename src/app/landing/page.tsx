@@ -7,10 +7,11 @@ import { TechnologySection } from "./_components/technology-section";
 import { FeaturesSection } from "./_components/features-section";
 import { Footer } from "./_components/footer";
 import { TestimonialsSection } from "./_components/testimonials";
+import { FmailSection } from "./_components/family-section";
 
 export default function Landing() {
   return (
-    <main className="min-h-screen w-full">
+    <main className="min-h-screen w-full overflow-x-hidden">
       <HeroSection />
       <OverwhelmingSection />
       <JourneyCards />
@@ -19,6 +20,7 @@ export default function Landing() {
       <TechnologySection />
       <FeaturesSection />
       <TestimonialsSection />
+      <FmailSection />
       <Footer />
     </main>
   );

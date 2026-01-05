@@ -1,6 +1,7 @@
 import { StyledButton } from "@/components/styled-button";
 import { StyledButtonLight } from "@/components/styled-button-light";
 import Image from "next/image";
+import Link from "next/link";
 
 interface FooterSection {
   title: string;
@@ -77,12 +78,14 @@ export function Footer() {
         <div className="flex flex-col flex-wrap items-start justify-between gap-12 self-stretch py-4 md:items-start lg:flex-row">
           {/* Left Side */}
           <div className="flex flex-col items-start gap-4 md:gap-12.5">
-            <Image
-              src="/assets/images/footer-logo.png"
-              width={180}
-              height={38}
-              alt="Footer logo"
-            />
+            <Link href="/landing">
+              <Image
+                src="/assets/images/footer-logo.png"
+                width={180}
+                height={38}
+                alt="Footer logo"
+              />
+            </Link>
             <div className="flex flex-col items-start gap-4">
               <p className="max-w-sm font-normal tracking-[-0.0125rem] text-[#010101] opacity-60 sm:text-[1.25rem]">
                 We help teams cut through AI noise and turn automation into

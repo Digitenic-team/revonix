@@ -44,19 +44,19 @@ export function WorkSection() {
         </span>
       </h1>
 
-      <div className="relative flex w-full max-w-229.5 flex-col flex-wrap items-start gap-8 px-4 lg:flex-nowrap">
+      <div className="relative flex w-full max-w-229.5 flex-col flex-wrap items-start gap-10 px-4 lg:flex-nowrap">
         <Image
           src="/assets/images/main-vector-1.png"
           width={520}
           height={426}
-          className="absolute -top-7 -left-26 hidden xl:block"
+          className="absolute -top-10 -left-22 hidden xl:block"
           alt="main vector blue 1"
         />
         <Image
           src="/assets/images/main-vector-2.png"
           width={1000}
           height={500}
-          className="absolute top-7 right-[1.1rem] hidden xl:block"
+          className="absolute top-3 right-[2.5] hidden xl:block"
           alt="main vector blue 1"
         />
 
