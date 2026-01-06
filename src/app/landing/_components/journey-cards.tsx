@@ -55,12 +55,12 @@ export function JourneyCards() {
           <div
             key={card.desc}
             className={cn(
-              "flex w-full flex-col items-start justify-center gap-2.5 rounded-3xl border p-6 md:w-[48%] lg:w-1/3",
+              "flex max-h-90 w-full flex-col items-start justify-center gap-2.5 rounded-3xl border p-6 md:w-[48%]",
               idx === 0
                 ? "border-secondary-foreground bg-white shadow-[0_275px_77px_0_rgba(55,90,217,0),0_176px_70px_0_rgba(55,90,217,0.01),0_99px_59px_0_rgba(55,90,217,0.05),0_44px_44px_0_rgba(55,90,217,0.09),0_11px_24px_0_rgba(55,90,217,0.1)]"
                 : "border-secondary-foreground bg-primary-foreground",
               // second card margin-bottom for mobile stacking
-              idx === 1 ? "mt-0 md:mt-0" : "mt-0",
+              idx === 1 ? "mt-0 md:mt-25" : "mt-0",
             )}
           >
             <div className="h-70 space-y-[0.62rem] self-stretch">

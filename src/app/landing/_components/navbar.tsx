@@ -19,6 +19,7 @@ export function Navbar() {
           width={124}
           height={26}
           className="cursor-pointer"
+          priority
           alt="Revonix Logo"
         />
 
