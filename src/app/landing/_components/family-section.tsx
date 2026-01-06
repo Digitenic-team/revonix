@@ -64,19 +64,30 @@ export function FamilySection() {
       </div>
 
       {/* Swiper Cards */}
-      <div className="w-full ps-60">
+      <div className="w-full px-4 sm:px-8 lg:ps-60">
         <Swiper
-          slidesPerView="auto"
           spaceBetween={30}
-          freeMode={true}
-          grabCursor={true}
+          freeMode
+          grabCursor
+          breakpoints={{
+            0: {
+              slidesPerView: 1.1,
+            },
+            640: {
+              slidesPerView: 2.1,
+            },
+            1024: {
+              slidesPerView: 3.1,
+            },
+            1280: {
+              slidesPerView: 4.5,
+            },
+          }}
         >
           {CARDS.map((card: Card) => (
-            <SwiperSlide
-              key={card.heading}
-              style={{ width: "calc((100% - 30px * 4) / 4.5)" }}
-            >
+            <SwiperSlide key={card.heading}>
               <div className="flex flex-col gap-5">
+                {/* Image (natural height preserved) */}
                 <Image
                   src={card.image}
                   width={400}
@@ -84,13 +95,21 @@ export function FamilySection() {
                   className="border-secondary-foreground rounded-3xl border"
                   alt={card.heading}
                 />
+
+                {/* Name & Role */}
                 <div className="flex flex-col gap-1.5">
-                  <h1 className="font-neue text-2xl font-medium">
+                  <h1 className="font-neue text-xl font-medium sm:text-2xl">
                     {card.heading}
                   </h1>
-                  <h3 className="text-sm uppercase opacity-60">{card.role}</h3>
+                  <h3 className="text-xs uppercase opacity-60 sm:text-sm">
+                    {card.role}
+                  </h3>
                 </div>
-                <p className="w-60 text-[1rem]">{card.description}</p>
+
+                {/* Description */}
+                <p className="max-w-[15rem] text-sm sm:text-base">
+                  {card.description}
+                </p>
               </div>
             </SwiperSlide>
           ))}
