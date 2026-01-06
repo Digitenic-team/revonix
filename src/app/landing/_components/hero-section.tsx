@@ -97,9 +97,9 @@ export function HeroSection() {
                 <div
                   className={cn(
                     index === 0
-                      ? "lg:rounded-l-0 rounded-4xl"
+                      ? "rounded-4xl lg:rounded-l-none"
                       : index === IMAGES.length - 1
-                        ? "lg:rounded-r-0 rounded-4xl"
+                        ? "rounded-4xl lg:rounded-r-none"
                         : "rounded-4xl",
                     "border-secondary-foreground relative h-full w-full overflow-hidden border",
                   )}
