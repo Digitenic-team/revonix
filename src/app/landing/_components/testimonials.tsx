@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { cn } from "@/lib/utils";
 
 interface Card {
@@ -6,6 +9,12 @@ interface Card {
   imageUrl: string;
   name: string;
   position: string;
+}
+
+interface Testimonial {
+  text: string;
+  name: string;
+  role: string;
 }
 
 const CARDS: Card[] = [
@@ -29,6 +38,24 @@ const CARDS: Card[] = [
   },
 ];
 
+const testimonials: Testimonial[] = [
+  {
+    text: "They move with impressive speed and are incredibly easy to collaborate with.",
+    name: "Navid Nathoo",
+    role: "Founder",
+  },
+  {
+    text: "Their attention to detail and commitment to quality exceeded our expectations.",
+    name: "Sarah Johnson",
+    role: "CEO",
+  },
+  {
+    text: "Working with this team was seamless from start to finish.",
+    name: "Michael Lee",
+    role: "Product Manager",
+  },
+];
+
 export function TestimonialsSection() {
   return (
     <section className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem] self-stretch px-4">
@@ -39,40 +66,55 @@ export function TestimonialsSection() {
         </span>
       </h1>
 
-      <div className="flex min-h-110 self-stretch">
-        <div className="relative flex-1">
-          <Image src="/assets/images/slider1.png" fill alt="Slider Image" />
-        </div>
-        <div className="flex flex-1 flex-col justify-between self-stretch rounded-3xl bg-white p-12">
-          <Image
-            src="/assets/images/quotes.png"
-            width={21}
-            height={18}
-            alt="Quotes Image"
-          />
-          <h1 className="bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-[2.25rem] leading-normal font-medium tracking-[-0.0225rem] text-transparent">
-            They move with impressive speed and are incredibly easy to
-            collaborate with, making the entire process smooth and efficient.
-          </h1>
+      <Swiper className="w-full" loop spaceBetween={24}>
+        {testimonials.map((item) => (
+          <SwiperSlide key={item.role}>
+            <div className="flex min-h-110 self-stretch">
+              {/* Left Image */}
+              <div className="relative flex-1">
+                <Image
+                  src="/assets/images/slider1.png"
+                  fill
+                  alt="Slider Image"
+                  className="rounded-3xl object-cover"
+                />
+              </div>
 
-          <div className="flex items-center gap-3.75 self-stretch">
-            <Image
-              src="/assets/images/profile1.png"
-              width={48}
-              height={48}
-              alt="Profile Image"
-            />
-            <div className="flex flex-1 flex-col">
-              <h3 className="text-secondary text-[1.25rem] font-medium tracking-[-0.0125rem]">
-                Navid Nathoo
-              </h3>
-              <p className="text-secondary text-[0.875rem] font-normal uppercase opacity-60">
-                founder
-              </p>
+              {/* Right Content */}
+              <div className="flex flex-1 flex-col justify-between self-stretch rounded-3xl bg-white p-12">
+                <Image
+                  src="/assets/images/quotes.png"
+                  width={21}
+                  height={18}
+                  alt="Quotes Image"
+                />
+
+                <h1 className="bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-[2.25rem] leading-normal font-medium tracking-[-0.0225rem] text-transparent">
+                  {item.text}
+                </h1>
+
+                <div className="flex items-center gap-3.75 self-stretch">
+                  <Image
+                    src="/assets/images/profile1.png"
+                    width={48}
+                    height={48}
+                    alt="Profile Image"
+                  />
+
+                  <div className="flex flex-1 flex-col">
+                    <h3 className="text-secondary text-[1.25rem] font-medium tracking-[-0.0125rem]">
+                      {item.name}
+                    </h3>
+                    <p className="text-secondary text-[0.875rem] font-normal uppercase opacity-60">
+                      {item.role}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
       <section className="slef-stretch flex flex-wrap items-start gap-5">
         {CARDS.map((card: Card) => (
