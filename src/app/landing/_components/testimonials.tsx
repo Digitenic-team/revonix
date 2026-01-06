@@ -69,19 +69,21 @@ export function TestimonialsSection() {
       <Swiper className="w-full" loop spaceBetween={24}>
         {testimonials.map((item) => (
           <SwiperSlide key={item.role}>
-            <div className="flex min-h-110 self-stretch">
+            <div className="flex min-h-112 w-full cursor-pointer flex-col gap-4 active:cursor-grab md:h-auto md:flex-row md:gap-0">
               {/* Left Image */}
-              <div className="relative flex-1">
+              <div className="relative min-h-100 w-full lg:h-auto lg:flex-1">
                 <Image
                   src="/assets/images/slider1.png"
                   fill
                   alt="Slider Image"
-                  className="rounded-3xl object-cover"
+                  className="rounded-2xl object-cover lg:rounded-3xl"
+                  priority
                 />
               </div>
 
               {/* Right Content */}
-              <div className="flex flex-1 flex-col justify-between self-stretch rounded-3xl bg-white p-12">
+              <div className="flex w-full flex-col justify-between rounded-2xl bg-white p-6 sm:p-8 lg:flex-1 lg:rounded-3xl lg:p-12">
+                {/* Quote Icon */}
                 <Image
                   src="/assets/images/quotes.png"
                   width={21}
@@ -89,11 +91,13 @@ export function TestimonialsSection() {
                   alt="Quotes Image"
                 />
 
-                <h1 className="bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-[2.25rem] leading-normal font-medium tracking-[-0.0225rem] text-transparent">
+                {/* Text */}
+                <h1 className="my-4 bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-lg leading-normal font-medium tracking-[-0.0225rem] text-transparent sm:text-xl md:text-2xl lg:text-[2.25rem]">
                   {item.text}
                 </h1>
 
-                <div className="flex items-center gap-3.75 self-stretch">
+                {/* Author */}
+                <div className="flex items-center gap-3">
                   <Image
                     src="/assets/images/profile1.png"
                     width={48}
@@ -101,11 +105,11 @@ export function TestimonialsSection() {
                     alt="Profile Image"
                   />
 
-                  <div className="flex flex-1 flex-col">
-                    <h3 className="text-secondary text-[1.25rem] font-medium tracking-[-0.0125rem]">
+                  <div className="flex flex-col">
+                    <h3 className="text-secondary text-base font-medium sm:text-lg">
                       {item.name}
                     </h3>
-                    <p className="text-secondary text-[0.875rem] font-normal uppercase opacity-60">
+                    <p className="text-secondary text-xs uppercase opacity-60 sm:text-sm">
                       {item.role}
                     </p>
                   </div>
@@ -116,7 +120,7 @@ export function TestimonialsSection() {
         ))}
       </Swiper>
 
-      <section className="slef-stretch flex flex-wrap items-start gap-5">
+      <section className="slef-stretch flex flex-col flex-wrap items-start gap-5 sm:flex-row">
         {CARDS.map((card: Card) => (
           <div
             key={card.text}
