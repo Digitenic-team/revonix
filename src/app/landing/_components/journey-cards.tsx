@@ -37,14 +37,14 @@ export function JourneyCards() {
       <div className="relative flex w-full flex-wrap justify-center gap-6 lg:flex-nowrap lg:justify-start lg:gap-5">
         {/* Decorative images — ONLY xl+ */}
         <Image
-          src="/assets/images/card-vector-1.png"
+          src="/assets/images/card-vector-1.svg"
           width={500}
           height={161}
           alt="Card Vector 1"
           className="absolute -top-4 -left-14.5 hidden xl:block"
         />
         <Image
-          src="/assets/images/card-vector-2.png"
+          src="/assets/images/card-vector-2.svg"
           width={1476}
           height={316}
           alt="Card Vector 2"
