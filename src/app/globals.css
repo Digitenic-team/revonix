@@ -246,3 +246,42 @@
   border-color: rgba(53, 88, 218, 0.2);
   box-shadow: 0 44px 44px rgba(55, 90, 217, 0.09);
 }
+
+/* Work Section Cards */
+.work-card {
+  background-color: #f5f7f9;
+  border: 1px solid rgb(235, 235, 235);
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.work-card.is-active {
+  background-color: #ffffff;
+  border-color: rgba(53, 88, 218, 0.2);
+  box-shadow:
+    0 275px 77px rgba(55, 90, 217, 0),
+    0 176px 70px rgba(55, 90, 217, 0.01),
+    0 99px 59px rgba(55, 90, 217, 0.05),
+    0 44px 44px rgba(55, 90, 217, 0.09),
+    0 11px 24px rgba(55, 90, 217, 0.1);
+}
+
+/* Icon wrapper default */
+.work-card .icon-wrapper {
+  background-color: #ffffff;
+  border: 1px solid rgb(0, 0, 0);
+  color: #010101;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Active card icon */
+.work-card.is-active .icon-wrapper {
+  background-color: #3558da;
+  border-color: #3558da;
+  color: #ffffff;
+}
