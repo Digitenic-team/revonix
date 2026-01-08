@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState, useRef, useLayoutEffect } from "react";
+import { useRef } from "react";
 import { StyledButton } from "@/components/styled-button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Navbar } from "./navbar";
-import { motion } from "framer-motion";
 import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
 
 interface IMAGE {
@@ -27,20 +27,14 @@ const IMAGES: IMAGE[] = [
 gsap.registerPlugin(ScrollTrigger);
 
 export function HeroSection() {
-  const [windowObj, setWindowOjb] = useState<Window | null>(null);
-
   const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const textRef = useRef<HTMLParagraphElement>(null);
-  const buttonRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement[]>([]);
 
-  useLayoutEffect((): (() => void) => {
-    const ctx = gsap.context((): void => {
-      gsap.set(cardsRef.current, {
-        opacity: 0,
-        y: 24,
-        x: 0,
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+
+      gsap.set([".hero-heading", ".hero-text", ".hero-button", ".hero-card"], {
+        willChange: "transform, opacity",
       });
 
       const intro = gsap.timeline({
@@ -48,43 +42,43 @@ export function HeroSection() {
       });
 
       intro
-        .from(headingRef.current, {
-          y: 28,
+        .from(".hero-heading", {
+          y: 32,
           opacity: 0,
-          duration: 0.7,
+          duration: 0.8,
         })
         .from(
-          textRef.current,
+          ".hero-text",
           {
             y: 18,
             opacity: 0,
             duration: 0.55,
           },
-          "-=0.35",
+          "-=0.4",
         )
         .from(
-          buttonRef.current,
+          ".hero-button",
           {
             scale: 0.95,
             opacity: 0,
             duration: 0.45,
           },
-          "-=0.3",
+          "-=0.35",
         )
-        .to(
-          cardsRef.current,
+        .from(
+          ".hero-card",
           {
-            opacity: 1,
-            y: 0,
+            y: 24,
+            opacity: 0,
             duration: 0.6,
             stagger: 0.08,
           },
-          "-=0.2",
+          "-=0.25",
         );
 
-      cardsRef.current.forEach((card: HTMLDivElement, index: number): void => {
-        gsap.to(card, {
-          x: 80 + index * 40,
+      mm.add("(min-width: 1024px)", () => {
+        gsap.to(".hero-card", {
+          x: (i) => 80 + i * 40,
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -94,108 +88,82 @@ export function HeroSection() {
           },
         });
       });
-    }, sectionRef);
 
-    return (): void => ctx.revert();
-  }, []);
+      return () => mm.revert();
+    },
+    { scope: sectionRef },
+  );
 
-  useEffect((): void => {
-    setWindowOjb(window);
-  }, []);
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-[url('/assets/images/background.svg')] bg-cover bg-no-repeat"
+      className="relative w-full bg-[url('/assets/images/background.svg')] bg-cover bg-center bg-no-repeat"
     >
-      {windowObj && windowObj.innerWidth > 990 && (
-        <>
-          <Image
-            src="/assets/images/vector1.svg"
-            width={218}
-            height={218}
-            className="absolute top-95"
-            alt="vector 1"
-          />
-          <Image
-            src="/assets/images/vector2.svg"
-            width={160}
-            height={160}
-            className="absolute top-115 left-130"
-            alt="vector 2"
-          />
-          <Image
-            src="/assets/images/vector3.svg"
-            width={218}
-            height={218}
-            className="absolute top-95 right-80"
-            alt="vector 3"
-          />
-          <Image
-            src="/assets/images/vector4.svg"
-            width={160}
-            height={160}
-            className="absolute right-22"
-            alt="vector 4"
-          />
-        </>
-      )}
+      <Image
+        src="/assets/images/vector1.svg"
+        width={218}
+        height={218}
+        className="pointer-events-none absolute top-80 hidden lg:block"
+        alt=""
+      />
+      <Image
+        src="/assets/images/vector2.svg"
+        width={160}
+        height={160}
+        className="pointer-events-none absolute top-90 left-130 hidden lg:block"
+        alt=""
+      />
+      <Image
+        src="/assets/images/vector3.svg"
+        width={218}
+        height={218}
+        className="pointer-events-none absolute top-75 right-85 hidden lg:block"
+        alt=""
+      />
+      <Image
+        src="/assets/images/vector4.svg"
+        width={160}
+        height={160}
+        className="pointer-events-none absolute right-38 hidden lg:block"
+        alt=""
+      />
+
       {/* Navbar */}
       <Navbar />
 
       <div className="flex flex-col items-center gap-18 self-stretch pt-18">
-        <motion.div
-          className="mx-auto flex max-w-360 flex-col items-center gap-10 px-4"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0, y: 24 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
-            },
-          }}
-        >
+        <div className="mx-auto flex max-w-360 flex-col items-center gap-10 px-4">
           <div className="flex flex-col items-center gap-4 px-5 md:px-0">
-            <h1
-              className="justify-between bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-4xl font-medium text-transparent sm:text-5xl md:text-[3.625rem]"
-              ref={headingRef}
-            >
+            <h1 className="hero-heading justify-between bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-4xl font-medium text-transparent sm:text-5xl md:text-[3.625rem]">
               Your competitor isn’t smarter —
               <br />
               Their team just has AI doing the work.
             </h1>
 
-            <p
-              className="text-md text-secondary text-center font-normal tracking-[-0.01125rem] sm:text-lg md:text-[1.125rem]"
-              ref={textRef}
-            >
+            <p className="hero-text text-md text-secondary text-center font-normal tracking-[-0.01125rem] sm:text-lg md:text-[1.125rem]">
               We help teams cut through AI noise and turn automation into real,
               working systems.
             </p>
           </div>
 
-          <div ref={buttonRef}>
+          <div className="hero-button">
             <StyledButton className="py-6">Book a Strategy Call</StyledButton>
           </div>
-        </motion.div>
+        </div>
 
         <section className="flex w-full flex-col flex-wrap items-center justify-center gap-5 overflow-hidden sm:flex-row md:items-start lg:flex-nowrap lg:justify-between lg:gap-5">
           {IMAGES.map((img: IMAGE, index: number) => {
             return (
-              <motion.div
+              <div
                 key={img.alt}
-                ref={(el: HTMLDivElement | null): void => {
-                  if (el) cardsRef.current[index] = el;
-                }}
                 className={cn(
-                  "relative h-60 sm:h-80 md:h-115",
+                  "hero-card relative h-60 sm:h-80 md:h-115",
                   index === 0 || index === IMAGES.length - 1
                     ? "md:100 w-65 sm:w-85.5 lg:w-81.5"
                     : "md:100 w-65 sm:w-85.5 lg:w-162.5",
                 )}
               >
-                <motion.div
+                <div
                   className={cn(
                     index === 0
                       ? "rounded-4xl lg:rounded-l-none"
@@ -204,8 +172,6 @@ export function HeroSection() {
                         : "rounded-4xl",
                     "border-secondary-foreground relative h-full w-full overflow-hidden border",
                   )}
-                  whileHover={{ boxShadow: "0 22px 50px rgba(53,88,218,0.18)" }}
-                  transition={{ duration: 0.35 }}
                 >
                   <Image
                     src={img.src}
@@ -215,8 +181,8 @@ export function HeroSection() {
                     className="object-cover"
                   />
                   <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(270deg,rgba(53,88,218,0)_42.94%,#3558DA_49.26%)] mix-blend-hue" />
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
             );
           })}
         </section>
