@@ -41,7 +41,7 @@ const CARDS: Card[] = [
   {
     image: "/assets/images/person1.png",
     heading: "João",
-    role: "The Builder",
+    role: "The Builder Guy",
     description: "Obsessed with systems that work. Thinks three steps ahead.",
   },
 ];
@@ -60,7 +60,9 @@ export function FamilySection() {
             genuinely care about solving real problems.
           </p>
         </div>
-        <StyledButton className="py-6">Join our Team</StyledButton>
+        <div>
+          <StyledButton className="py-6">Join our Team</StyledButton>
+        </div>
       </div>
 
       {/* Swiper Cards */}
@@ -85,7 +87,7 @@ export function FamilySection() {
           }}
         >
           {CARDS.map((card: Card) => (
-            <SwiperSlide key={card.heading}>
+            <SwiperSlide key={card.role}>
               <div className="flex flex-col gap-5">
                 {/* Image (natural height preserved) */}
                 <Image
@@ -107,7 +109,7 @@ export function FamilySection() {
                 </div>
 
                 {/* Description */}
-                <p className="max-w-[15rem] text-sm sm:text-base">
+                <p className="max-w-60 text-sm sm:text-base">
                   {card.description}
                 </p>
               </div>
