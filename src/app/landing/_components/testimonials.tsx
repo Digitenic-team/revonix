@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { cn } from "@/lib/utils";
 
@@ -57,6 +58,9 @@ const testimonials: Testimonial[] = [
 ];
 
 export function TestimonialsSection() {
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const totalSlides = testimonials.length;
+
   return (
     <section className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem] self-stretch px-4">
       <h1 className="bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-4xl font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">
@@ -66,7 +70,14 @@ export function TestimonialsSection() {
         </span>
       </h1>
 
-      <Swiper className="w-full" loop spaceBetween={24}>
+      <Swiper
+        className="w-full"
+        loop
+        spaceBetween={24}
+        onSlideChange={(swiper) => {
+          setActiveIndex(swiper.realIndex);
+        }}
+      >
         {testimonials.map((item) => (
           <SwiperSlide key={item.role}>
             <div className="flex min-h-112 w-full cursor-pointer flex-col gap-4 active:cursor-grab md:h-auto md:flex-row md:gap-0">
@@ -119,6 +130,27 @@ export function TestimonialsSection() {
           </SwiperSlide>
         ))}
       </Swiper>
+
+      <div className="flex w-full items-center gap-4">
+        {/* Progress line */}
+        <div className="bg-primary-foreground relative h-[2px] flex-1 overflow-hidden rounded-full">
+          <div
+            className="bg-primary absolute top-0 left-0 h-full transition-all duration-300 ease-out"
+            style={{
+              width: `${((activeIndex + 1) / totalSlides) * 100}%`,
+            }}
+          />
+        </div>
+
+        {/* Counter */}
+        <div className="text-secondary flex items-center gap-1 text-sm tracking-widest">
+          <span>{String(activeIndex + 1).padStart(2, "0")}</span>
+          <span className="opacity-40">/</span>
+          <span className="opacity-40">
+            {String(totalSlides).padStart(2, "0")}
+          </span>
+        </div>
+      </div>
 
       <section className="slef-stretch flex flex-col flex-wrap items-start gap-5 sm:flex-row">
         {CARDS.map((card: Card) => (
