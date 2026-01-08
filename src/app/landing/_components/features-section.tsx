@@ -1,5 +1,12 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useRef, useLayoutEffect, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Card {
   heading: string;
@@ -26,8 +33,45 @@ const CARDS: Card[] = [
 ];
 
 export function FeaturesSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useLayoutEffect(() => {
+    if (!sectionRef.current) return;
+
+    const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
+    if (!cards.length) return;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top top",
+        end: `+=${cards.length * 300}`,
+        pin: true,
+        scrub: true,
+      },
+    });
+
+    cards.forEach((_, index) => {
+      tl.to(
+        {},
+        {
+          duration: 1,
+          onUpdate: () => setActiveIndex(index),
+        },
+      );
+    });
+
+    setActiveIndex(0);
+
+    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+  }, []);
   return (
-    <section className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem] self-stretch px-4">
+    <section
+      ref={sectionRef}
+      className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem] self-stretch px-4"
+    >
       <h1 className="bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-4xl font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">
         Why teams choose{" "}
         <span className="text-primary font-medium tracking-[-0.035rem]">
@@ -39,8 +83,11 @@ export function FeaturesSection() {
         {CARDS.map((card: Card, idx: number) => (
           <div
             key={card.heading}
+            ref={(el) => {
+              if (el) cardRefs.current[idx] = el;
+            }}
             className={cn(
-              idx === 0
+              idx === activeIndex
                 ? "border-secondary-foreground border border-dashed bg-white shadow-[0_11px_24px_0_rgba(55,90,217,0.10)]"
                 : "bg-primary-foreground",
               "relative flex min-w-74 flex-1 flex-col items-start gap-6.5 rounded-4xl p-6",
