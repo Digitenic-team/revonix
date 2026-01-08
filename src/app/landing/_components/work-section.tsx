@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { gsap } from "gsap";
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
 import { IconWrapper } from "@/components/icon-wrapper";
 import { JarIcon, TerminalIcon, UsersIcon, ReloadIcon } from "./icons";
@@ -44,50 +45,54 @@ const CARDS: Cards[] = [
 ];
 
 export function WorkSection() {
-  const [activeCardIndex, setActiveCardIndex] = useState<number>(0);
-
   const sectionRef = useRef<HTMLElement>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  useEffect((): (() => void) | undefined => {
-    const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
-    if (!sectionRef.current || cards.length === 0) return;
+  useGSAP(
+    () => {
+      const cards = gsap.utils.toArray<HTMLElement>(".work-card");
 
-    cards.forEach((card: HTMLDivElement, index: number): void => {
-      ScrollTrigger.create({
-        trigger: card,
-        start: "top center",
-        end: "bottom center",
+      // Reset
+      cards.forEach((c) => c.classList.remove("is-active"));
+      cards[0]?.classList.add("is-active");
 
-        onEnter: (): void => setActive(index),
-        onEnterBack: (): void => setActive(index),
+      // Heading animation
+      gsap.from(".work-heading", {
+        y: 24,
+        opacity: 0,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          once: true,
+        },
       });
-    });
 
-    function setActive(index: number): void {
-      setActiveCardIndex(index);
-
-      cards.forEach((c: HTMLDivElement, i: number): void => {
-        gsap.to(c, {
-          backgroundColor: i === index ? "#fff" : "#f5f7f9",
-          borderColor:
-            i === index ? "rgba(53,88,218,0.10)" : "rgb(235,235,235)",
-          boxShadow: i === index ? "0 44px 44px rgba(55,90,217,0.09)" : "none",
-          duration: 0.35,
-          overwrite: "auto",
+      // Card activation on scroll (NO PIN)
+      cards.forEach((card, index) => {
+        ScrollTrigger.create({
+          trigger: card,
+          start: "top center+=100",
+          end: "bottom center",
+          onEnter: () => setActive(index),
+          onEnterBack: () => setActive(index),
         });
       });
-    }
 
-    return (): void => ScrollTrigger.getAll().forEach((t): void => t.kill());
-  }, []);
+      function setActive(index: number) {
+        cards.forEach((c) => c.classList.remove("is-active"));
+        cards[index]?.classList.add("is-active");
+      }
+    },
+    { scope: sectionRef },
+  );
 
   return (
     <section
       ref={sectionRef}
       className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem] self-stretch"
     >
-      <h1 className="font-neue bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,#010101_0%,#3558DA_100%)] bg-clip-text text-center text-4xl leading-normal font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">
+      <h1 className="work-heading font-neue bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,#010101_0%,#3558DA_100%)] bg-clip-text text-center text-4xl leading-normal font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">
         How we{" "}
         <span className="font-neue text-pirmary leading-normal font-medium tracking-[-0.035rem]">
           work
@@ -116,19 +121,13 @@ export function WorkSection() {
           return (
             <div
               key={card.heading}
-              ref={(el: HTMLDivElement | null): void => {
-                cardRefs.current[idx] = el;
-              }}
               className={cn(
-                activeCardIndex === idx
-                  ? "border border-[rgba(53,88,218,0.10)] bg-white shadow-[0_275px_77px_rgba(55,90,217,0),0_176px_70px_rgba(55,90,217,0.01),0_99px_59px_rgba(55,90,217,0.05),0_44px_44px_rgba(55,90,217,0.09),0_11px_24px_rgba(55,90,217,0.10)]"
-                  : "border-secondary-foreground bg-primary-foreground border",
+                "work-card flex max-w-md flex-col items-start justify-center gap-5 rounded-3xl p-8",
                 idx === 1 || idx === 3 ? "self-end" : "self-start",
-                "flex max-w-md flex-col items-start justify-center gap-5 rounded-3xl p-8",
               )}
             >
               <div className="">
-                <IconWrapper active={activeCardIndex === idx}>
+                <IconWrapper>
                   <Icon className="h-7 w-7" />
                 </IconWrapper>
               </div>

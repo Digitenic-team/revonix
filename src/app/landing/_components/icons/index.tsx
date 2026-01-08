@@ -52,27 +52,27 @@ export const TerminalIcon = memo(({ className }: IconProps) => (
 ));
 
 export const UsersIcon = memo(({ className }: IconProps) => (
-  <svg aria-hidden="true" className={className}>
+  <svg viewBox="0 0 28 28" fill="none" aria-hidden="true" className={className}>
     <path
       d="M15.1667 12.8334C15.1667 11.5957 14.675 10.4088 13.7998 9.53358C12.9247 8.65841 11.7377 8.16675 10.5 8.16675C9.26233 8.16675 8.07535 8.65841 7.20018 9.53358C6.32501 10.4088 5.83334 11.5957 5.83334 12.8334C5.83334 14.0711 6.32501 15.2581 7.20018 16.1332C8.07535 17.0084 9.26233 17.5001 10.5 17.5001C11.7377 17.5001 12.9247 17.0084 13.7998 16.1332C14.675 15.2581 15.1667 14.0711 15.1667 12.8334Z"
       stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      stroke-width="1.75"
+      stroke-linecap="round"
+      stroke-linejoin="round"
     />
     <path
       d="M12.8788 8.81779C12.7316 7.77067 12.9444 6.7046 13.4823 5.79423C14.0202 4.88385 14.8513 4.18314 15.8395 3.80688C16.8278 3.43063 17.9145 3.40114 18.9216 3.72325C19.9288 4.04536 20.7967 4.69997 21.3832 5.57984C21.9696 6.45971 22.2399 7.51267 22.1497 8.56623C22.0595 9.6198 21.6142 10.6115 20.8867 11.3789C20.1591 12.1462 19.1926 12.6438 18.1453 12.79C17.0981 12.9362 16.0322 12.7224 15.1223 12.1836M17.5 24.5001C17.5 22.6436 16.7625 20.8631 15.4497 19.5504C14.137 18.2376 12.3565 17.5001 10.5 17.5001C8.64348 17.5001 6.86301 18.2376 5.55025 19.5504C4.2375 20.8631 3.5 22.6436 3.5 24.5001"
       stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      stroke-width="1.75"
+      stroke-linecap="round"
+      stroke-linejoin="round"
     />
     <path
       d="M24.5 19.8333C24.5 17.9767 23.7625 16.1963 22.4497 14.8835C21.137 13.5708 19.3565 12.8333 17.5 12.8333"
       stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      stroke-width="1.75"
+      stroke-linecap="round"
+      stroke-linejoin="round"
     />
   </svg>
 ));
