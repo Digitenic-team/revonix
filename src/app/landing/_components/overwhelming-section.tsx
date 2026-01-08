@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useLayoutEffect } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import { StyledCircle } from "@/components/styled-circle";
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 interface Icons {
@@ -44,44 +45,75 @@ const ICONS: Icons[] = [
 ];
 
 export function OverwhelmingSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const mainContainerRef = useRef<HTMLDivElement>(null);
-  const iconRefs = useRef<HTMLDivElement[]>([]);
-  const innerTextRef = useRef<HTMLHeadingElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  useLayoutEffect((): (() => void) => {
-    const ctx = gsap.context((): void => {
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+
+      gsap.set(
+        [".over-heading", ".over-container", ".over-icon", ".over-inner-text"],
+        {
+          willChange: "transform, opacity",
+        },
+      );
+
       const tl = gsap.timeline({
+        defaults: { ease: "power3.out" },
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play reverse play reverse",
         },
-        defaults: { ease: "power3.out" },
       });
 
-      tl.from(headingRef.current, { y: 20, opacity: 0, duration: 0.6 })
+      tl.from(".over-heading", {
+        y: 32,
+        opacity: 0,
+        duration: 0.8,
+      })
         .from(
-          mainContainerRef.current,
-          { scale: 0.94, opacity: 0, duration: 0.65 },
-          "-=0.3",
+          ".over-container",
+          {
+            scale: 0.94,
+            opacity: 0,
+            duration: 0.55,
+          },
+          "-=0.35",
         )
         .from(
-          iconRefs.current,
-          { opacity: 0, scale: 0.85, duration: 0.45, stagger: 0.1 },
+          ".over-icon",
+          {
+            opacity: 0,
+            scale: 0.85,
+            duration: 0.45,
+            stagger: 0.1,
+          },
           "-=0.4",
         )
         .from(
-          innerTextRef.current,
-          { y: 8, opacity: 0, duration: 0.5 },
+          ".over-inner-text",
+          {
+            y: 12,
+            opacity: 0,
+            duration: 0.45,
+          },
           "-=0.3",
         );
-    }, sectionRef);
 
-    return (): void => ctx.revert();
-  }, []);
+      mm.add("(min-width: 1024px)", () => {
+        gsap.from(".over-icon", {
+          scale: 0.9,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: "power2.out",
+        });
+      });
+
+      return () => mm.revert();
+    },
+    { scope: sectionRef },
+  );
 
   return (
     <section
@@ -89,27 +121,18 @@ export function OverwhelmingSection() {
       className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem]"
     >
       {/* Heading */}
-      <h1
-        ref={headingRef}
-        className="bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[2rem] font-medium tracking-[-0.025rem] text-transparent sm:text-[2.25rem] lg:text-[2.5rem]"
-      >
+      <h1 className="over-heading bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[2rem] font-medium tracking-[-0.025rem] text-transparent sm:text-[2.25rem] lg:text-[2.5rem]">
         AI can be <span className="text-primary">overwhelming</span>
       </h1>
 
       {/* Concentric shapes container */}
       <div className="flex w-full items-center justify-center md:h-92.25">
-        <div
-          ref={mainContainerRef}
-          className="border-primary relative flex h-56 w-[80%] items-center justify-center rounded-full border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.05)_0%,rgba(53,88,218,0.05)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:w-[65%] lg:w-[60%] lg:max-w-[45.59913rem] xl:h-[19.21994rem] xl:w-[95%]"
-        >
+        <div className="over-container border-primary relative flex h-56 w-[80%] items-center justify-center rounded-full border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.05)_0%,rgba(53,88,218,0.05)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:w-[65%] lg:w-[60%] lg:max-w-[45.59913rem] xl:h-[19.21994rem] xl:w-[95%]">
           {/* Icons */}
           {ICONS.map((icon, idx) => (
             <div
               key={icon.url}
-              ref={(el: HTMLDivElement | null): void => {
-                if (el) iconRefs.current[idx] = el;
-              }}
-              className={`absolute z-20 flex items-center gap-4 ${
+              className={`over-icon absolute z-20 flex items-center gap-4 ${
                 idx === 1 || idx === 3 ? "flex-row-reverse" : ""
               } ${icon.class}`}
             >
@@ -136,10 +159,7 @@ export function OverwhelmingSection() {
           <div className="border-primary flex h-42 w-[88%] items-center justify-center rounded-[50.89463rem] border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.20)_0%,rgba(53,88,218,0.20)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:w-[78%] lg:w-[90%] xl:h-[16.49113rem] xl:w-[41.87806rem]">
             <div className="border-primary flex h-30 w-[76%] items-center justify-center rounded-full border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.40)_0%,rgba(53,88,218,0.40)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:w-[82%] md:rounded-[50.89463rem] xl:h-[13.7645rem] xl:w-[37.91075rem]">
               <div className="flex h-22 w-[80%] items-center justify-center rounded-full border-[3.261px] border-[#FFF] bg-[linear-gradient(180deg,#576CBC_0%,#3558DA_100%)] p-3 sm:w-[80%] md:rounded-[50.89463rem] md:p-0 lg:w-[90%] xl:h-[11.44325rem] xl:w-[34.49913rem]">
-                <h2
-                  ref={innerTextRef}
-                  className="text-center text-base font-medium tracking-[-0.02956rem] text-white sm:text-lg md:text-xl lg:text-3xl xl:text-[2.95481rem]"
-                >
+                <h2 className="over-inner-text text-center text-base font-medium tracking-[-0.02956rem] text-white sm:text-lg md:text-xl lg:text-3xl xl:text-[2.95481rem]">
                   We cut through that.
                 </h2>
               </div>
