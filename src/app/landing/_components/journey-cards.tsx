@@ -1,5 +1,13 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface CardData {
   heading: string;
@@ -26,11 +34,69 @@ const CARDS_DATA: CardData[] = [
 ];
 
 export function JourneyCards() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const cards = gsap.utils.toArray<HTMLElement>(".journey-card");
+
+      gsap.set(cards, { willChange: "transform, opacity" });
+
+      gsap.from(".journey-heading", {
+        y: 24,
+        opacity: 0,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          once: true,
+        },
+      });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "center center",
+          end: `+=${cards.length * 300}`,
+          pin: true,
+          scrub: true,
+        },
+      });
+
+      cards.forEach((card, i) => {
+        tl.to(
+          card,
+          {
+            onStart: () => {
+              cards.forEach((c) => c.classList.remove("is-active"));
+              card.classList.add("is-active");
+            },
+            onReverseComplete: () => {
+              cards.forEach((c) => c.classList.remove("is-active"));
+              cards[Math.max(i - 1, 0)]?.classList.add("is-active");
+            },
+            duration: 1,
+          },
+          i,
+        );
+      });
+
+      cards[0]?.classList.add("is-active");
+    },
+    { scope: sectionRef },
+  );
   return (
-    <section className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem] self-stretch px-4">
+    <section
+      ref={sectionRef}
+      className="relative mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem] self-stretch px-4"
+    >
       {/* Heading */}
-      <h1 className="bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-4xl font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">
-        Where are you in the AI journey?
+      <h1 className="journey-heading bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-4xl font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">
+        Where are you in the{" "}
+        <span className="text-primary font-medium tracking-[-0.035rem]">
+          AI journey?
+        </span>
       </h1>
 
       {/* Cards container */}
@@ -41,7 +107,7 @@ export function JourneyCards() {
           width={500}
           height={161}
           alt="Card Vector 1"
-          className="absolute -top-4 -left-14.5 hidden xl:block"
+          className="absolute -top-4 -left-14.5 z-10 hidden xl:block"
         />
         <Image
           src="/assets/images/card-vector-2.svg"
@@ -55,12 +121,10 @@ export function JourneyCards() {
           <div
             key={card.desc}
             className={cn(
-              "flex max-h-90 w-full flex-col items-start justify-center gap-2.5 rounded-3xl border p-6 md:w-[48%]",
-              idx === 0
-                ? "border-secondary-foreground bg-white shadow-[0_275px_77px_0_rgba(55,90,217,0),0_176px_70px_0_rgba(55,90,217,0.01),0_99px_59px_0_rgba(55,90,217,0.05),0_44px_44px_0_rgba(55,90,217,0.09),0_11px_24px_0_rgba(55,90,217,0.1)]"
-                : "border-secondary-foreground bg-primary-foreground",
-              // second card margin-bottom for mobile stacking
-              idx === 1 ? "mt-0 md:mt-25" : "mt-0",
+              "journey-card flex max-h-60 w-full flex-col gap-2.5 rounded-3xl border p-6 transition-all duration-300 md:max-h-90 md:w-[48%]",
+              "bg-primary-foreground border-secondary-foreground",
+              "is-active:bg-white is-active:border-primary is-active:shadow-[0_44px_44px_rgba(55,90,217,0.09)]",
+              idx === 1 ? "md:mt-25" : "",
             )}
           >
             <div className="h-70 space-y-[0.62rem] self-stretch">
@@ -72,12 +136,7 @@ export function JourneyCards() {
               </h3>
             </div>
 
-            <p
-              className={cn(
-                "text-secondary text-[1.125rem] tracking-[-0.01125rem]",
-                idx !== 0 && "opacity-60",
-              )}
-            >
+            <p className="text-secondary text-[1.125rem] opacity-60">
               {card.desc}
             </p>
           </div>

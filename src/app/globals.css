@@ -232,3 +232,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+.journey-card {
+  background-color: var(--card-bg, #f5f7f9);
+  border-color: rgb(235, 235, 235);
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.journey-card.is-active {
+  background-color: #ffffff;
+  border-color: rgba(53, 88, 218, 0.2);
+  box-shadow: 0 44px 44px rgba(55, 90, 217, 0.09);
+}
