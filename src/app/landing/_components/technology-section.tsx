@@ -1,7 +1,15 @@
+"use client";
+
 import { StyledButtonLight } from "@/components/styled-button-light";
+import { useState, useRef, useLayoutEffect } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { StyledButton } from "@/components/styled-button";
+import { ScrollTrigger } from "gsap/all";
+import { CardIconWrapper } from "@/components/card-icon-wrapper";
+import gsap from "gsap";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Cards {
   icon: string;
@@ -16,27 +24,93 @@ const CARDS: Cards[] = [
     heading: "AI & Intelligent Automation",
     description:
       "Decision systems, workflow automation, and AI agents embedded directly into your operations",
-    icons: ["openai-icon.png", "claude-icon.png", "vectorai-icon.png"],
+    icons: ["chatgpt.svg", "claude.svg", "vector-ai.svg"],
   },
   {
     icon: "code-icon.png",
     heading: "Low-Code Development",
     description:
       "Bubble.io and rapid prototyping to validate ideas fast—without technical debt.",
-    icons: ["bubble-icon.png", "quickbase-icon.png", "group-icon.png"],
+    icons: ["bubble.svg", "quick-base.svg", "group-icon.png"],
   },
   {
     icon: "custom-code.png",
     heading: "Custom Web & Mobile Apps",
     description:
       "Purpose-built applications that make your AI systems usable by your team and customers.",
-    icons: ["danjo.png", "aws.png", "react.png"],
+    icons: ["danjo.svg", "aws.svg", "react.svg"],
   },
 ];
 
 export function TechnologySection() {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [activeCardIndex, setActiveCardIndex] = useState(0);
+
+  useLayoutEffect(() => {
+    const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
+    if (!sectionRef.current || cards.length === 0) return;
+
+    const section = sectionRef.current;
+
+    // PIN the section while scrolling through cards
+    ScrollTrigger.create({
+      trigger: section,
+      start: "center center",
+      end: `+=${cards.length * 350}`,
+      pin: true,
+      pinSpacing: true,
+      scrub: 0.5,
+    });
+
+    // create triggers for each card
+    cards.forEach((card, index) => {
+      ScrollTrigger.create({
+        trigger: card,
+        start: "top center",
+        end: "bottom center",
+        onEnter: () => setActive(index),
+        onEnterBack: () => setActive(index),
+      });
+    });
+
+    // Set first card as active by default
+    setActive(0);
+
+    function setActive(index: number) {
+      setActiveCardIndex(index);
+      cards.forEach((card, i) => {
+        const isActive = i === index;
+
+        gsap.to(card, {
+          backgroundColor: isActive ? "#ffffff" : "rgba(255,255,255,0.1)",
+          borderColor: isActive
+            ? "rgba(53,88,218,0.10)"
+            : "rgba(255,255,255,0.3)",
+          boxShadow: isActive
+            ? "0 44px 44px rgba(55,90,217,0.09)"
+            : "0 11px 24px rgba(55,90,217,0.1)",
+          duration: 0.35,
+          overwrite: "auto",
+        });
+
+        // Update text color dynamically
+        const heading = card.querySelector("h1");
+        const desc = card.querySelector("p");
+
+        if (heading) heading.style.color = isActive ? "#000000" : "#ffffff";
+        if (desc) desc.style.color = isActive ? "rgba(0,0,0,0.6)" : "#ffffff";
+      });
+    }
+
+    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+  }, []);
+
   return (
-    <section className="mx-auto mt-30 flex w-full items-center justify-center lg:max-w-456">
+    <section
+      ref={sectionRef}
+      className="mx-auto mt-30 flex w-full items-center justify-center lg:max-w-456"
+    >
       <div className="relative mx-4 flex w-full flex-col items-center justify-between gap-30 rounded-[2.5rem] bg-[linear-gradient(180deg,rgba(1,1,1,1)_0%,#3558DA_100%)] bg-cover bg-center px-4 py-15 shadow-[0_51px_51px_rgba(54,89,218,0.09),0_13px_28px_rgba(54,89,218,0.1)] sm:p-[6.25rem_5rem] xl:flex-row xl:gap-50">
         <Image
           src="/assets/images/technology-background.png"
@@ -54,9 +128,11 @@ export function TechnologySection() {
               Systems that replace manual work and actually get used.
             </p>
           </div>
-          <StyledButtonLight className="relative py-6 text-sm">
-            Book a Strategy Call
-          </StyledButtonLight>
+          <div>
+            <StyledButtonLight className="relative py-6 text-sm">
+              Book a Strategy Call
+            </StyledButtonLight>
+          </div>
         </div>
 
         <div className="relative flex w-full flex-col items-center gap-5 xl:max-w-148.75 xl:shrink-0 xl:items-start">
@@ -77,6 +153,9 @@ export function TechnologySection() {
           {CARDS.map((card: Cards, idx: number) => (
             <div
               key={card.icon}
+              ref={(el) => {
+                if (el) cardRefs.current[idx] = el;
+              }}
               className={cn(
                 idx === 1
                   ? "bg-white"
@@ -113,12 +192,12 @@ export function TechnologySection() {
               <div className="flex w-full flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
                   {card.icons.map((icon: string) => (
-                    <Image
+                    <CardIconWrapper
                       key={icon}
-                      src={`/assets/images/${icon}`}
-                      width={32}
-                      height={32}
-                      alt="icons"
+                      src={icon}
+                      alt={icon}
+                      active={activeCardIndex === idx}
+                      size={32}
                     />
                   ))}
                 </div>
