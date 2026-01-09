@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -39,18 +38,31 @@ export function JourneyCards() {
   useGSAP(
     () => {
       const cards = gsap.utils.toArray<HTMLElement>(".journey-card");
+      const path = document.querySelector("#journey-path") as SVGPathElement;
+
+      if (!path || !sectionRef.current) return;
+
+      const length = path.getTotalLength();
+
+      // IMPORTANT: always hard-reset first
+      gsap.set(path, {
+        strokeDasharray: length,
+        strokeDashoffset: length,
+      });
 
       gsap.set(cards, { willChange: "transform, opacity" });
 
-      gsap.from(".journey-heading", {
-        y: 24,
-        opacity: 0,
+      // Heading animation (unchanged)
+      gsap.to(".journey-heading", {
+        y: 0,
+        opacity: 1,
         duration: 0.7,
         ease: "power3.out",
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
-          once: true,
+          end: "top 60%",
+          toggleActions: "play reverse play reverse",
         },
       });
 
@@ -60,23 +72,39 @@ export function JourneyCards() {
           start: "center center",
           end: `+=${cards.length * 300}`,
           pin: true,
-          scrub: true,
+          scrub: 0.6,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
         },
       });
 
-      cards.forEach((card, i) => {
+      // SVG draw animation
+      tl.to(
+        path,
+        {
+          strokeDashoffset: 0,
+          ease: "none",
+          duration: cards.length,
+        },
+        0,
+      );
+
+      // Card activation logic
+      cards.forEach((_, i) => {
         tl.to(
-          card,
+          {},
           {
-            onStart: () => {
-              cards.forEach((c) => c.classList.remove("is-active"));
-              card.classList.add("is-active");
-            },
-            onReverseComplete: () => {
-              cards.forEach((c) => c.classList.remove("is-active"));
-              cards[Math.max(i - 1, 0)]?.classList.add("is-active");
-            },
             duration: 1,
+            onUpdate: () => {
+              const progress = tl.progress() * cards.length;
+              const activeIndex = Math.min(
+                cards.length - 1,
+                Math.floor(progress),
+              );
+
+              cards.forEach((c) => c.classList.remove("is-active"));
+              cards[activeIndex]?.classList.add("is-active");
+            },
           },
           i,
         );
@@ -86,6 +114,7 @@ export function JourneyCards() {
     },
     { scope: sectionRef },
   );
+
   return (
     <section
       ref={sectionRef}
@@ -101,40 +130,77 @@ export function JourneyCards() {
 
       {/* Cards container */}
       <div className="relative flex w-full flex-wrap justify-center gap-6 lg:flex-nowrap lg:justify-start lg:gap-5">
-        {/* Decorative images — ONLY xl+ */}
-        <Image
-          src="/assets/images/card-vector-1.svg"
-          width={500}
-          height={161}
-          alt="Card Vector 1"
-          className="absolute -top-4 -left-14.5 z-10 hidden xl:block"
-        />
-        <Image
-          src="/assets/images/card-vector-2.svg"
-          width={1476}
-          height={316}
-          alt="Card Vector 2"
-          className="absolute -top-4 right-[0.56rem] z-10 hidden xl:block"
-        />
-
-        {/*
-          I will add them later
-
-        <Image
-          src="/assets/images/journey-sm-vector-1.svg"
-          width={160}
-          height={161}
-          alt="Card Vector 1"
-          className="absolute top-3 right-4 z-10 block xl:hidden"
-        />
-        <Image
-          src="/assets/images/journey-sm-vector-2.svg"
-          width={320}
-          height={319}
-          alt="Card Vector 2"
-          className="absolute top-2.5 right-4 z-10 block xl:hidden"
-        />
-        */}
+        {/* Decorative images */}
+        <svg
+          width="1376"
+          height="318"
+          viewBox="0 0 1376 318"
+          fill="none"
+          aria-hidden="true"
+          className="absolute -top-5 -left-3 z-10"
+        >
+          <g>
+            <path
+              id="journey-path"
+              d="M0 0.75H384.542C407.041 0.75 418.29 0.75 426.176 6.47949C428.723 8.32988 430.962 10.5696 432.813 13.1164C438.542 21.0024 438.542 32.2516 438.542 54.75V210.67C438.542 219.552 438.542 223.992 439.767 228.147C440.173 229.523 440.677 230.868 441.275 232.171C443.081 236.108 445.999 239.456 451.835 246.151L497.077 298.058C504.126 306.145 507.651 310.189 512.16 312.725C513.649 313.563 515.208 314.271 516.818 314.844C521.693 316.577 527.057 316.577 537.785 316.577H813.202C832.336 316.577 841.902 316.577 849.192 312.028C851.562 310.549 853.714 308.746 855.586 306.671C861.341 300.291 863.017 290.872 866.368 272.034L881.599 186.407C884.95 167.569 886.626 158.15 892.381 151.77C894.253 149.695 896.405 147.892 898.775 146.413C906.065 141.864 915.631 141.864 934.765 141.864H1233.91C1247.43 141.864 1254.2 141.864 1259.56 144.005C1267.19 147.054 1273.24 153.102 1276.29 160.734C1278.43 166.093 1278.43 172.856 1278.43 186.382C1278.43 199.908 1278.43 206.671 1280.57 212.03C1283.62 219.663 1289.66 225.71 1297.3 228.759C1302.66 230.9 1309.42 230.9 1322.94 230.9H1375.86"
+              stroke="url(#paint0_linear_1_9)"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M0 0.75H384.542C407.041 0.75 418.29 0.75 426.176 6.47949C428.723 8.32988 430.962 10.5696 432.813 13.1164C438.542 21.0024 438.542 32.2516 438.542 54.75V210.67C438.542 219.552 438.542 223.992 439.767 228.147C440.173 229.523 440.677 230.868 441.275 232.171C443.081 236.108 445.999 239.456 451.835 246.151L497.077 298.058C504.126 306.145 507.651 310.189 512.16 312.725C513.649 313.563 515.208 314.271 516.818 314.844C521.693 316.577 527.057 316.577 537.785 316.577H813.202C832.336 316.577 841.902 316.577 849.192 312.028C851.562 310.549 853.714 308.746 855.586 306.671C861.341 300.291 863.017 290.872 866.368 272.034L881.599 186.407C884.95 167.569 886.626 158.15 892.381 151.77C894.253 149.695 896.405 147.892 898.775 146.413C906.065 141.864 915.631 141.864 934.765 141.864H1233.91C1247.43 141.864 1254.2 141.864 1259.56 144.005C1267.19 147.054 1273.24 153.102 1276.29 160.734C1278.43 166.093 1278.43 172.856 1278.43 186.382C1278.43 199.908 1278.43 206.671 1280.57 212.03C1283.62 219.663 1289.66 225.71 1297.3 228.759C1302.66 230.9 1309.42 230.9 1322.94 230.9H1375.86"
+              stroke="url(#paint1_linear_1_9)"
+              strokeWidth="1.5"
+            />
+          </g>
+          <defs>
+            <linearGradient
+              id="paint0_linear_1_9"
+              x1="687.931"
+              y1="0.75"
+              x2="687.931"
+              y2="316.577"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#576CBC" />
+              <stop offset="1" stopColor="#3558DA" />
+            </linearGradient>
+            <linearGradient
+              id="paint1_linear_1_9"
+              x1="0"
+              y1="158.663"
+              x2="1375.86"
+              y2="158.663"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="white" />
+              <stop offset="0.129884" stopColor="white" stopOpacity="0" />
+              <stop offset="0.886587" stopColor="white" stopOpacity="0" />
+              <stop offset="1" stopColor="white" />
+            </linearGradient>
+            <linearGradient
+              id="paint2_linear_1_9"
+              x1="687.931"
+              y1="0"
+              x2="687.931"
+              y2="315.827"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#576CBC" />
+              <stop offset="0.501613" stopColor="#3558DA" />
+            </linearGradient>
+            <linearGradient
+              id="paint3_linear_1_9"
+              x1="427.542"
+              y1="80.3016"
+              x2="0"
+              y2="80.3016"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0.644798" stopColor="white" stopOpacity="0" />
+              <stop offset="1" stopColor="white" />
+            </linearGradient>
+          </defs>
+        </svg>
 
         {CARDS_DATA.map((card: CardData, idx: number) => (
           <div
