@@ -28,28 +28,23 @@ export function CompaniesSection() {
     () => {
       const logos = gsap.utils.toArray<HTMLElement>(".company-card");
 
-      gsap.set(logos, {
-        opacity: 0,
-        y: 24,
-        scale: 0.96,
-      });
+      gsap.set(".companies-heading", { opacity: 0, y: 50 });
+      gsap.set(logos, { opacity: 0, y: 30, scale: 0.95 });
 
       const tl = gsap.timeline({
+        defaults: { ease: "power3.out" },
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 75%",
+          start: "top 80%",
           toggleActions: "play reverse play reverse",
         },
-        defaults: { ease: "power3.out" },
       });
 
-      tl.from(".companies-heading", {
-        y: 32,
-        opacity: 0,
+      tl.to(".companies-heading", {
+        y: 0,
+        opacity: 1,
         duration: 0.8,
-      });
-
-      tl.to(
+      }).to(
         logos,
         {
           opacity: 1,
@@ -73,7 +68,7 @@ export function CompaniesSection() {
       className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem] self-stretch px-4"
     >
       {/* Heading */}
-      <h1 className="companies-heading bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-4xl leading-snug font-medium tracking-[-0.02rem] text-transparent sm:text-5xl md:text-[3.5rem]">
+      <h1 className="companies-heading gsap-init bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[32px] leading-snug font-medium tracking-[-0.02rem] text-transparent sm:text-5xl md:text-[3.5rem]">
         We don’t just work together
         <br />
         —we{" "}
@@ -88,7 +83,7 @@ export function CompaniesSection() {
         {IMAGES.map((url: string) => (
           <div
             key={url}
-            className="company-card border-secondary-foreground bg-primary-foreground flex h-28 w-28 flex-col items-center justify-center gap-2.5 rounded-3xl border p-4 sm:h-32 sm:w-32 sm:p-5 md:h-37 md:w-37 md:p-6"
+            className="company-card gsap-init border-secondary-foreground bg-primary-foreground flex h-28 w-28 flex-col items-center justify-center gap-2.5 rounded-3xl border p-4 sm:h-32 sm:w-32 sm:p-5 md:h-37 md:w-37 md:p-6"
           >
             <div className="flex h-full w-full items-center justify-center">
               <Image
