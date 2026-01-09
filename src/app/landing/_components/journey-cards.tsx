@@ -117,18 +117,37 @@ export function JourneyCards() {
           className="absolute -top-4 right-[0.56rem] z-10 hidden xl:block"
         />
 
+        {/*
+          I will add them later
+
+        <Image
+          src="/assets/images/journey-sm-vector-1.svg"
+          width={160}
+          height={161}
+          alt="Card Vector 1"
+          className="absolute top-3 right-4 z-10 block xl:hidden"
+        />
+        <Image
+          src="/assets/images/journey-sm-vector-2.svg"
+          width={320}
+          height={319}
+          alt="Card Vector 2"
+          className="absolute top-2.5 right-4 z-10 block xl:hidden"
+        />
+        */}
+
         {CARDS_DATA.map((card: CardData, idx: number) => (
           <div
             key={card.desc}
             className={cn(
-              "journey-card flex max-h-60 w-full flex-col gap-2.5 rounded-3xl border p-6 transition-all duration-300 md:max-h-90 md:w-[48%]",
+              "journey-card flex max-h-70 w-full flex-col gap-2.5 rounded-3xl border p-6 transition-all duration-300 md:max-h-90 md:w-[48%]",
               "bg-primary-foreground border-secondary-foreground",
               "is-active:bg-white is-active:border-primary is-active:shadow-[0_44px_44px_rgba(55,90,217,0.09)]",
-              idx === 1 ? "md:mt-25" : "",
+              idx === 1 ? "lg:mt-25" : "",
             )}
           >
             <div className="h-70 space-y-[0.62rem] self-stretch">
-              <h2 className="text-secondary text-sm uppercase opacity-60">
+              <h2 className="text-secondary text-[16px] uppercase opacity-60">
                 {card.heading}
               </h2>
               <h3 className="text-secondary text-[1.75rem] font-medium tracking-[-0.0175rem]">
