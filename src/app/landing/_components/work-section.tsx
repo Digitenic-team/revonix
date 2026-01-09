@@ -118,6 +118,7 @@ export function WorkSection() {
   return (
     <section
       ref={sectionRef}
+      id="process"
       className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem] self-stretch"
     >
       <h1 className="work-heading font-neue bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,#010101_0%,#3558DA_100%)] bg-clip-text text-center text-[32px] leading-normal font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">

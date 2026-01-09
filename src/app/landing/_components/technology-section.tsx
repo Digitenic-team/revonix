@@ -4,7 +4,6 @@ import { StyledButtonLight } from "@/components/styled-button-light";
 import { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { StyledButton } from "@/components/styled-button";
 import { ScrollTrigger } from "gsap/all";
 import { CardIconWrapper } from "@/components/card-icon-wrapper";
 import gsap from "gsap";
@@ -117,6 +116,7 @@ export function TechnologySection() {
   return (
     <section
       ref={sectionRef}
+      id="services"
       className="mx-auto mt-30 flex w-full items-center justify-center lg:max-w-456"
     >
       <div className="relative mx-4 flex w-full flex-col items-center justify-between gap-30 rounded-[2.5rem] bg-[linear-gradient(180deg,rgba(1,1,1,1)_0%,#3558DA_100%)] bg-cover bg-center px-4 py-15 shadow-[0_51px_51px_rgba(54,89,218,0.09),0_13px_28px_rgba(54,89,218,0.1)] sm:p-[6.25rem_5rem] xl:flex-row xl:gap-50">
@@ -253,12 +253,6 @@ export function TechnologySection() {
                     />
                   ))}
                 </div>
-
-                {idx === 1 && (
-                  <StyledButton className="px-10 py-5.5">
-                    Learn More
-                  </StyledButton>
-                )}
               </div>
             </div>
           ))}

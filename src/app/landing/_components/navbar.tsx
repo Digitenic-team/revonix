@@ -7,7 +7,25 @@ import { StyledButton } from "@/components/styled-button";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-const LINKS: string[] = ["Services", "Projects", "Process", "Reviews"];
+type NavLink = {
+  title: string;
+  link: string;
+};
+
+const LINKS: NavLink[] = [
+  {
+    title: "Services",
+    link: "#services",
+  },
+  {
+    title: "Process",
+    link: "#process",
+  },
+  {
+    title: "Reviews",
+    link: "#reviews",
+  },
+];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,10 +33,10 @@ export function Navbar() {
   const navRef = useRef<HTMLElement>(null);
 
   useGSAP(
-    () => {
+    (): (() => void) => {
       const mm = gsap.matchMedia();
 
-      mm.add("(min-width: 768px)", () => {
+      mm.add("(min-width: 768px)", (): void => {
         gsap
           .timeline({
             defaults: {
@@ -51,7 +69,7 @@ export function Navbar() {
         <div className="md:hidden">
           <button
             type="button"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={(): void => setIsOpen(!isOpen)}
             className="relative flex h-10 w-10 flex-col items-center justify-center gap-1.5"
           >
             <span
@@ -84,13 +102,13 @@ export function Navbar() {
 
         {/* Links - desktop */}
         <div className="hidden items-center gap-8 md:flex">
-          {LINKS.map((link) => (
+          {LINKS.map((link: NavLink) => (
             <Link
-              key={link}
-              href="#"
+              key={link.link}
+              href={link.link}
               className="nav-link gsap-init text-secondary text-base font-medium tracking-[-0.01rem]"
             >
-              {link}
+              {link.title}
             </Link>
           ))}
         </div>
@@ -104,14 +122,14 @@ export function Navbar() {
       {/* Mobile dropdown */}
       {isOpen && (
         <div className="absolute top-full left-0 z-50 w-full rounded-b-3xl border border-[#EEE] bg-white p-6 shadow-lg md:hidden">
-          {LINKS.map((link) => (
+          {LINKS.map((link: NavLink) => (
             <Link
-              key={link}
-              href="/#"
+              key={link.title}
+              href={link.link}
               className="block w-full py-2 text-center text-base font-medium text-[#010101]"
-              onClick={() => setIsOpen(false)}
+              onClick={(): void => setIsOpen(false)}
             >
-              {link}
+              {link.title}
             </Link>
           ))}
           <StyledButton className="mt-4 w-full py-3">Get Started</StyledButton>
