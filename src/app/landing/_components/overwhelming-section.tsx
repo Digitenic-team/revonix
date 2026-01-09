@@ -17,28 +17,28 @@ const ICONS: Icons[] = [
   {
     url: "/assets/images/flag.png",
     class:
-      "top-2 left-2 sm:-top-6 sm:-left-12 md:-left-14 lg:-top-10 lg:-left-35 xl:-left-50 text-right",
+      "top-2 left-2 sm:-top-6 sm:-left-12 md:-left-14 lg:-top-10 lg:-left-35 xl:-left-30 xl:-top-7 text-right",
     textTop: "No clear",
     textBottom: "starting point",
   },
   {
     url: "/assets/images/timer.png",
     class:
-      "top-2 right-2 sm:-top-6 sm:-right-13 md:-right-14 lg:-top-10 lg:-right-30 xl:-right-40",
+      "top-2 right-2 sm:-top-6 sm:-right-13 md:-right-14 lg:-top-10 lg:-right-30 xl:-right-26 xl:-top-7",
     textTop: "No time to",
     textBottom: "experiment",
   },
   {
     url: "/assets/images/workflow.png",
     class:
-      "bottom-2 left-2 sm:-bottom-8 sm:-left-10 md:-left-16 lg:-bottom-8 lg:-left-38 xl:-left-56 text-right",
+      "bottom-2 left-2 sm:-bottom-8 sm:-left-10 md:-left-16 lg:-bottom-8 lg:-left-38 xl:-left-35 text-right xl:-bottom-7",
     textTop: "Too many tools,",
     textBottom: "no direction",
   },
   {
     url: "/assets/images/automation.png",
     class:
-      "bottom-2 right-2 sm:-bottom-8 sm:-right-14 md:-right-16 lg:-bottom-6 lg:-right-40 xl:-right-65",
+      "bottom-2 right-2 sm:-bottom-8 sm:-right-14 md:-right-16 lg:-bottom-6 lg:-right-40 xl:-right-45 xl:-bottom-5",
     textTop: "Automations that",
     textBottom: "never ship or break",
   },
@@ -49,49 +49,60 @@ export function OverwhelmingSection() {
 
   useGSAP(
     () => {
-      const mm = gsap.matchMedia();
-
-      gsap.set(
-        [".over-heading", ".over-container", ".over-icon", ".over-inner-text"],
-        { willChange: "transform, opacity" },
-      );
-
       const tl = gsap.timeline({
         defaults: { ease: "power3.out" },
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
+          end: "bottom 20%",
           toggleActions: "play reverse play reverse",
         },
       });
 
-      tl.from(".over-heading", { y: 32, opacity: 0, duration: 0.8 })
-        .from(
+      tl.to(".over-heading", {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+      })
+        .to(
           ".over-container",
-          { scale: 0.94, opacity: 0, duration: 0.55 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.55,
+          },
           "-=0.35",
         )
-        .from(
+        .to(
           ".over-icon",
-          { opacity: 0, scale: 0.85, duration: 0.45, stagger: 0.1 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.45,
+            stagger: 0.1,
+          },
           "-=0.4",
         )
-        .from(
+        .to(
           ".over-inner-text",
-          { y: 12, opacity: 0, duration: 0.45 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.45,
+          },
           "-=0.3",
-        );
-
-      mm.add("(min-width: 1024px)", () => {
-        gsap.from(".over-icon", {
-          scale: 0.9,
-          duration: 0.6,
-          stagger: 0.08,
-          ease: "power2.out",
+        )
+        .add(() => {
+          gsap.set(
+            [
+              ".over-heading",
+              ".over-container",
+              ".over-icon",
+              ".over-inner-text",
+            ],
+            { clearProps: "willChange" },
+          );
         });
-      });
-
-      return () => mm.revert();
     },
     { scope: sectionRef },
   );
@@ -102,18 +113,18 @@ export function OverwhelmingSection() {
       className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem] px-4"
     >
       {/* Heading */}
-      <h1 className="over-heading bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[2rem] font-medium tracking-[-0.025rem] text-transparent sm:text-[2.25rem] lg:text-[2.5rem]">
+      <h1 className="over-heading gsap-init bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[2rem] font-medium tracking-[-0.025rem] text-transparent sm:text-[2.25rem] lg:text-[2.5rem]">
         AI can be <span className="text-primary">overwhelming</span>
       </h1>
 
       {/* Concentric shapes container */}
       <div className="flex w-full items-center justify-center md:h-92.25">
-        <div className="over-container border-primary relative flex h-160 w-full items-center justify-center rounded-full border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.05)_0%,rgba(53,88,218,0.05)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:h-60 sm:w-[85%] lg:h-[20rem] lg:w-[60%] lg:max-w-[45.59913rem] xl:h-[19.21994rem] xl:w-[95%]">
+        <div className="over-container gsap-init border-primary relative flex h-160 w-full items-center justify-center rounded-full border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.05)_0%,rgba(53,88,218,0.05)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:h-60 sm:w-[85%] lg:h-80 lg:w-[60%] lg:max-w-[45.59913rem] xl:h-72 xl:w-full">
           {/* Icons */}
           {ICONS.map((icon, idx) => (
             <div
               key={icon.url}
-              className={`over-icon absolute z-20 flex items-center gap-4 ${
+              className={`over-icon gsap-init absolute z-20 flex items-center gap-4 ${
                 idx === 1 || idx === 3 ? "flex-row-reverse" : ""
               } ${icon.class}`}
             >
@@ -121,11 +132,11 @@ export function OverwhelmingSection() {
                 <Image
                   src={icon.url}
                   alt=""
-                  width={26}
-                  height={26}
-                  className="lg:h-10 lg:w-10 xl:h-15 xl:w-15"
+                  width={40}
+                  height={40}
+                  className=""
                 />
-                <h2 className="text-secondary hidden text-sm leading-tight font-medium tracking-[-0.01675rem] md:text-base lg:text-xl lg:leading-[1.63025rem] xl:text-[1.67325rem] [@media(min-width:490px)]:block">
+                <h2 className="text-secondary hidden text-sm leading-tight font-medium tracking-[-0.01675rem] md:text-base lg:text-xl lg:leading-[1.63025rem] xl:text-xl [@media(min-width:490px)]:block">
                   {icon.textTop}
                   <br />
                   {icon.textBottom}
@@ -135,10 +146,10 @@ export function OverwhelmingSection() {
           ))}
 
           {/* Inner rings */}
-          <div className="border-primary flex h-[90%] w-[90%] items-center justify-center rounded-[50.89463rem] border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.20)_0%,rgba(53,88,218,0.20)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:h-[86%] sm:w-[92%] lg:h-[88%] lg:w-[92%] xl:h-[16.49113rem] xl:w-[41.87806rem]">
-            <div className="border-primary flex h-[88%] w-[88%] items-center justify-center rounded-full border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.40)_0%,rgba(53,88,218,0.40)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:h-[82%] sm:w-[90%] lg:h-[86%] lg:w-[90%] xl:h-[13.7645rem] xl:w-[37.91075rem]">
-              <div className="flex h-[90%] w-[85%] items-center justify-center rounded-full border-[3.261px] border-[#FFF] bg-[linear-gradient(180deg,#576CBC_0%,#3558DA_100%)] p-3 sm:h-[80%] sm:w-[90%] md:rounded-[50.89463rem] md:p-0 lg:h-[85%] lg:w-[90%] xl:h-[11.44325rem] xl:w-[34.49913rem]">
-                <h2 className="over-inner-text text-center text-[38px] font-medium tracking-[-0.02956rem] text-white xl:text-[2.95481rem]">
+          <div className="border-primary flex h-[90%] w-[90%] items-center justify-center rounded-[50.89463rem] border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.20)_0%,rgba(53,88,218,0.20)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:h-[86%] sm:w-[92%] lg:h-[88%] lg:w-[92%] xl:h-[90%] xl:w-[95%]">
+            <div className="border-primary flex h-[88%] w-[88%] items-center justify-center rounded-full border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.40)_0%,rgba(53,88,218,0.40)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:h-[82%] sm:w-[90%] lg:h-[86%] lg:w-[90%] xl:h-[80%] xl:w-[95%]">
+              <div className="flex h-[90%] w-[85%] items-center justify-center rounded-full border-[3.261px] border-[#FFF] bg-[linear-gradient(180deg,#576CBC_0%,#3558DA_100%)] p-3 sm:h-[80%] sm:w-[90%] md:rounded-[50.89463rem] md:p-0 lg:h-[85%] lg:w-[80%] xl:h-[80%] xl:w-[94%]">
+                <h2 className="over-inner-text gsap-init text-center text-[38px] font-medium tracking-[-0.02956rem] text-white xl:text-[2.95481rem]">
                   We cut through that.
                 </h2>
               </div>
