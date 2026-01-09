@@ -19,43 +19,21 @@ export function Navbar() {
       const mm = gsap.matchMedia();
 
       mm.add("(min-width: 768px)", () => {
-        gsap.set([".nav-logo", ".nav-link", ".nav-button"], {
-          opacity: 0,
-          y: -12,
-          willChange: "transform, opacity",
-        });
-
         gsap
-          .timeline({ defaults: { ease: "power3.out" } })
-          .from(navRef.current, {
-            y: -28,
-            opacity: 0,
+          .timeline({
+            defaults: {
+              ease: "power3.out",
+              duration: 0.35,
+            },
+          })
+          .to(navRef.current, {
+            y: 0,
+            opacity: 1,
             duration: 0.6,
           })
-          .to(".nav-logo", {
-            opacity: 1,
-            y: 0,
-            duration: 0.35,
-          })
-          .to(
-            ".nav-link",
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.3,
-              stagger: 0.08,
-            },
-            "-=0.15",
-          )
-          .to(
-            ".nav-button",
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.3,
-            },
-            "-=0.1",
-          );
+          .to(".nav-logo", { opacity: 1, y: 0 }, "-=0.3")
+          .to(".nav-link", { opacity: 1, y: 0, stagger: 0.08 }, "-=0.25")
+          .to(".nav-button", { opacity: 1, y: 0 }, "-=0.2");
       });
 
       return () => mm.revert();
@@ -67,7 +45,7 @@ export function Navbar() {
     <section className="relative mx-auto flex max-w-360 items-center justify-center gap-8 px-6 pt-2.5">
       <nav
         ref={navRef}
-        className="border-secondary-foreground flex w-full items-center justify-between gap-6 rounded-full border-b bg-white p-3 pl-6 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] md:w-auto"
+        className="border-secondary-foreground gsap-init flex w-full items-center justify-between gap-6 rounded-full border-b bg-white p-3 pl-6 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] md:w-auto"
       >
         {/* Hamburger - mobile */}
         <div className="md:hidden">
@@ -101,7 +79,7 @@ export function Navbar() {
           height={26}
           priority
           alt="Revonix Logo"
-          className="nav-logo ml-auto cursor-pointer md:block [@media(min-width:400px)]:ml-0"
+          className="nav-logo gsap-init ml-auto cursor-pointer md:block [@media(min-width:400px)]:ml-0"
         />
 
         {/* Links - desktop */}
@@ -110,7 +88,7 @@ export function Navbar() {
             <Link
               key={link}
               href="#"
-              className="nav-link text-secondary text-base font-medium tracking-[-0.01rem]"
+              className="nav-link gsap-init text-secondary text-base font-medium tracking-[-0.01rem]"
             >
               {link}
             </Link>
@@ -118,7 +96,7 @@ export function Navbar() {
         </div>
 
         {/* Button */}
-        <div className="nav-button hidden md:block [@media(min-width:400px)]:block">
+        <div className="nav-button gsap-init hidden md:block [@media(min-width:400px)]:block">
           <StyledButton className="py-6">Get Started</StyledButton>
         </div>
       </nav>

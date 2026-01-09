@@ -35,43 +35,39 @@ export function HeroSection() {
     () => {
       const mm = gsap.matchMedia();
 
-      gsap.set([".hero-heading", ".hero-text", ".hero-button", ".hero-card"], {
-        willChange: "transform, opacity",
-      });
-
       const intro = gsap.timeline({
         defaults: { ease: "power3.out" },
       });
 
       intro
-        .from(".hero-heading", {
-          y: 32,
-          opacity: 0,
+        .to(".hero-heading", {
+          y: 0,
+          opacity: 1,
           duration: 0.8,
         })
-        .from(
+        .to(
           ".hero-text",
           {
-            y: 18,
-            opacity: 0,
+            y: 0,
+            opacity: 1,
             duration: 0.55,
           },
           "-=0.4",
         )
-        .from(
+        .to(
           ".hero-button",
           {
-            scale: 0.95,
-            opacity: 0,
+            scale: 1,
+            opacity: 1,
             duration: 0.45,
           },
           "-=0.35",
         )
-        .from(
+        .to(
           ".hero-card",
           {
-            y: 24,
-            opacity: 0,
+            y: 0,
+            opacity: 1,
             duration: 0.6,
             stagger: 0.08,
           },
@@ -87,6 +83,7 @@ export function HeroSection() {
             start: "top top",
             end: "bottom top",
             scrub: true,
+            invalidateOnRefresh: true,
           },
         });
       });
@@ -136,19 +133,19 @@ export function HeroSection() {
       <div className="flex flex-col items-center gap-18 self-stretch pt-18">
         <div className="mx-auto flex max-w-360 flex-col items-center gap-10 px-4">
           <div className="flex flex-col items-center gap-4 px-5 md:px-0">
-            <h1 className="hero-heading justify-between bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[32px] leading-9 font-medium text-transparent sm:text-5xl sm:leading-16 md:text-[3.625rem]">
+            <h1 className="hero-heading gsap-init justify-between bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[32px] leading-9 font-medium text-transparent sm:text-5xl sm:leading-16 md:text-[3.625rem]">
               Your competitor isn’t smarter —
               <br />
               Their team just has AI doing the work.
             </h1>
 
-            <p className="hero-text text-secondary text-center text-base font-normal tracking-[-0.01125rem] sm:text-lg md:text-[1.125rem]">
+            <p className="hero-text gsap-init text-secondary text-center text-base font-normal tracking-[-0.01125rem] sm:text-lg md:text-[1.125rem]">
               We help teams cut through AI noise and turn automation into real,
               working systems.
             </p>
           </div>
 
-          <div className="hero-button">
+          <div className="hero-button gsap-init">
             <StyledButton className="py-6">Book a Strategy Call</StyledButton>
           </div>
         </div>
@@ -159,7 +156,7 @@ export function HeroSection() {
               <div
                 key={img.alt}
                 className={cn(
-                  "hero-card relative h-60 sm:h-80 md:h-115",
+                  "hero-card gsap-init relative h-60 sm:h-80 md:h-115",
                   index === 0 || index === IMAGES.length - 1
                     ? "md:100 w-65 sm:w-85.5 lg:w-81.5"
                     : "md:100 w-65 sm:w-85.5 lg:w-162.5",

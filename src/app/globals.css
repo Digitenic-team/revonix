@@ -285,3 +285,10 @@
   border-color: #3558da;
   color: #ffffff;
 }
+
+/* gsap animation elements initial styling */
+.gsap-init {
+  opacity: 0;
+  transform: translateY(12px);
+  will-change: transform, opacity;
+}
