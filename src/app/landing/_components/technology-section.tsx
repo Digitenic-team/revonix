@@ -49,7 +49,7 @@ export function TechnologySection() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useGSAP(
-    () => {
+    (): void => {
       const section = sectionRef.current;
       if (!section) return;
 
@@ -84,7 +84,7 @@ export function TechnologySection() {
         scrub: true,
         anticipatePin: 1,
 
-        onUpdate: (self) => {
+        onUpdate: (self): void => {
           const progress = self.progress;
           const index = Math.min(
             cards.length - 1,

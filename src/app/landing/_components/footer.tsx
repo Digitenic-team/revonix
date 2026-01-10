@@ -1,12 +1,20 @@
+"use client";
+
 import { StyledButton } from "@/components/styled-button";
 import { StyledButtonLight } from "@/components/styled-button-light";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
 
-interface FooterSection {
+gsap.registerPlugin(ScrollTrigger);
+
+type FooterSection = {
   title: string;
   links: string[];
-}
+};
 
 const footerSections: FooterSection[] = [
   {
@@ -30,9 +38,50 @@ const footerSections: FooterSection[] = [
 ];
 
 export function Footer() {
+  const heroRef = useRef<HTMLElement>(null);
+  const linksRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    (): (() => void) => {
+      if (heroRef.current) {
+        gsap.from(heroRef.current, {
+          y: 60,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top 90%",
+            toggleActions: "play reverse play reverse",
+          },
+        });
+      }
+
+      if (linksRef.current) {
+        gsap.from(linksRef.current, {
+          y: 40,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: linksRef.current,
+            start: "top 90%",
+            toggleActions: "play reverse play reverse",
+          },
+        });
+      }
+
+      return (): void => ScrollTrigger.getAll().forEach((t): void => t.kill());
+    },
+    { scope: heroRef },
+  );
+
   return (
-    <footer className="mx-auto mt-30 flex max-w-360 flex-col items-start gap-[4.38rem] self-stretch px-4">
-      <section className="relative flex items-center justify-center gap-25 self-stretch overflow-hidden rounded-[1.875rem] bg-[linear-gradient(180deg,#010101_3.79%,#3558DA_100%)] p-20 shadow-[0_51px_51px_0_rgba(54,89,218,0.09),0_13px_28px_0_rgba(54,89,218,0.10)]">
+    <footer className="mx-auto mt-30 flex max-w-360 flex-col items-start gap-[4.38rem] self-stretch overflow-hidden px-4">
+      <section
+        ref={heroRef}
+        className="relative flex items-center justify-center gap-25 self-stretch overflow-hidden rounded-[1.875rem] bg-[linear-gradient(180deg,#010101_3.79%,#3558DA_100%)] p-20 shadow-[0_51px_51px_0_rgba(54,89,218,0.09),0_13px_28px_0_rgba(54,89,218,0.10)]"
+      >
         <Image
           src="/assets/images/footer-background.png"
           alt="Background"
@@ -73,7 +122,10 @@ export function Footer() {
           </StyledButtonLight>
         </div>
       </section>
-      <section className="flex flex-col items-start gap-15.5 self-stretch pb-5">
+      <section
+        ref={linksRef}
+        className="flex flex-col items-start gap-15.5 self-stretch pb-5"
+      >
         {/* Top Section */}
         <div className="flex flex-col flex-wrap items-start justify-between gap-12 self-stretch py-4 md:items-start lg:flex-row">
           {/* Left Side */}
@@ -97,7 +149,7 @@ export function Footer() {
 
           {/* Right Side - Footer Links */}
           <div className="mt-6 flex flex-col items-start gap-18 sm:mt-0 sm:flex-row sm:items-start">
-            {footerSections.map((section) => (
+            {footerSections.map((section: FooterSection) => (
               <div
                 key={section.title}
                 className="flex flex-col items-start gap-2.5"
@@ -105,7 +157,7 @@ export function Footer() {
                 <h2 className="text-secondary text-center text-[1.125rem] font-medium tracking-[-0.01125rem]">
                   {section.title}
                 </h2>
-                {section.links.map((link) => (
+                {section.links.map((link: string) => (
                   <p
                     key={link}
                     className="text-secondary text-center text-[1rem] font-normal tracking-[-0.01rem] opacity-60"

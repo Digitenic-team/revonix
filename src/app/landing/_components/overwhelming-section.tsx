@@ -6,12 +6,12 @@ import { StyledCircle } from "@/components/styled-circle";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
-interface Icons {
+type Icons = {
   url: string;
   class: string;
   textTop: string;
   textBottom: string;
-}
+};
 
 const ICONS: Icons[] = [
   {
@@ -48,12 +48,12 @@ export function OverwhelmingSection() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(
-    () => {
+    (): void => {
       const tl = gsap.timeline({
         defaults: { ease: "power3.out" },
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 80%",
+          start: "top 70%",
           end: "bottom 20%",
           toggleActions: "play reverse play reverse",
         },
@@ -62,7 +62,7 @@ export function OverwhelmingSection() {
       tl.to(".over-heading", {
         y: 0,
         opacity: 1,
-        duration: 0.8,
+        duration: 1,
       })
         .to(
           ".over-container",
@@ -92,7 +92,7 @@ export function OverwhelmingSection() {
           },
           "-=0.3",
         )
-        .add(() => {
+        .add((): void => {
           gsap.set(
             [
               ".over-heading",
@@ -121,7 +121,7 @@ export function OverwhelmingSection() {
       <div className="flex w-full items-center justify-center md:h-92.25">
         <div className="over-container gsap-init border-primary relative flex h-160 w-full items-center justify-center rounded-full border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.05)_0%,rgba(53,88,218,0.05)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:h-60 sm:w-[85%] lg:h-80 lg:w-[60%] lg:max-w-[45.59913rem] xl:h-72 xl:w-full">
           {/* Icons */}
-          {ICONS.map((icon, idx) => (
+          {ICONS.map((icon: Icons, idx: number) => (
             <div
               key={icon.url}
               className={`over-icon gsap-init absolute z-20 flex items-center gap-4 ${

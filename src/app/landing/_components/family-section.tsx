@@ -1,17 +1,20 @@
 "use client";
 
 import { StyledButton } from "@/components/styled-button";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 
-interface Card {
+type Card = {
   image: string;
   heading: string;
   role: string;
   description: string;
-}
+};
 
 const CARDS: Card[] = [
   {
@@ -47,20 +50,72 @@ const CARDS: Card[] = [
 ];
 
 export function FamilySection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    (): (() => void) | undefined => {
+      if (!sectionRef.current) return;
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play reverse play reverse",
+          invalidateOnRefresh: true,
+        },
+      });
+
+      tl.to(".family-heading", {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+
+      tl.to(
+        ".family-subheading",
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: "power3.out",
+        },
+        "-=0.4",
+      );
+
+      tl.to(
+        ".family-button",
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: "power3.out",
+        },
+        "-=0.3",
+      );
+
+      return (): void => gsap.killTweensOf("*");
+    },
+    { scope: sectionRef },
+  );
+
   return (
-    <section className="mt-30 flex w-full flex-col gap-[4.38rem]">
+    <section
+      ref={sectionRef}
+      className="mt-30 flex w-full flex-col gap-[4.38rem]"
+    >
       {/* Header */}
       <div className="flex flex-col items-center gap-8">
         <div className="flex flex-col items-center gap-4">
-          <h1 className="font-neue bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,#010101_0%,#3558DA_100%)] bg-clip-text text-center text-4xl font-medium text-transparent sm:text-5xl md:text-[3.5rem]">
+          <h1 className="family-heading gsap-init font-neue bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,#010101_0%,#3558DA_100%)] bg-clip-text text-center text-4xl font-medium text-transparent sm:text-5xl md:text-[3.5rem]">
             Meet the <span className="text-primary">Family</span>
           </h1>
-          <p className="text-secondary text-center text-[1.125rem]">
+          <p className="family-subheading gsap-init text-secondary text-center text-[1.125rem]">
             We’re not a typical agency. We’re a small group of people who
             genuinely care about solving real problems.
           </p>
         </div>
-        <div>
+        <div className="gsap-init family-button">
           <StyledButton className="py-6">Join our Team</StyledButton>
         </div>
       </div>

@@ -11,10 +11,10 @@ import { ScrollTrigger } from "gsap/all";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 
-interface IMAGE {
+type IMAGE = {
   src: string;
   alt: string;
-}
+};
 
 const IMAGES: IMAGE[] = [
   { src: "/assets/images/phone-image.png", alt: "Phone UI" },
@@ -32,7 +32,7 @@ export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(
-    () => {
+    (): (() => void) => {
       const mm = gsap.matchMedia();
 
       const intro = gsap.timeline({
@@ -74,9 +74,9 @@ export function HeroSection() {
           "-=0.25",
         );
 
-      mm.add("(min-width: 1024px)", () => {
+      mm.add("(min-width: 1024px)", (): void => {
         gsap.to(".hero-card", {
-          x: (i) => 80 + i * 40,
+          x: (i: number): number => 80 + i * 40,
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -88,7 +88,7 @@ export function HeroSection() {
         });
       });
 
-      return () => mm.revert();
+      return (): void => mm.revert();
     },
     { scope: sectionRef },
   );

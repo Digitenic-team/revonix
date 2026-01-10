@@ -28,7 +28,7 @@ const LINKS: NavLink[] = [
 ];
 
 export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const navRef = useRef<HTMLElement>(null);
 
@@ -54,7 +54,7 @@ export function Navbar() {
           .to(".nav-button", { opacity: 1, y: 0 }, "-=0.2");
       });
 
-      return () => mm.revert();
+      return (): void => mm.revert();
     },
     { scope: navRef },
   );

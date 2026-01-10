@@ -25,17 +25,15 @@ export function CompaniesSection() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useGSAP(
-    () => {
+    (): void => {
       const logos = gsap.utils.toArray<HTMLElement>(".company-card");
-
-      gsap.set(".companies-heading", { opacity: 0, y: 50 });
-      gsap.set(logos, { opacity: 0, y: 30, scale: 0.95 });
 
       const tl = gsap.timeline({
         defaults: { ease: "power3.out" },
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 80%",
+          start: "top center",
+          end: "bottom 20%",
           toggleActions: "play reverse play reverse",
         },
       });

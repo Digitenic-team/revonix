@@ -1,22 +1,24 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { cn } from "@/lib/utils";
 
-interface Card {
+type Card = {
   text: string;
   imageUrl: string;
   name: string;
   position: string;
-}
+};
 
-interface Testimonial {
+type Testimonial = {
   text: string;
   name: string;
   role: string;
-}
+};
 
 const CARDS: Card[] = [
   {
@@ -61,12 +63,60 @@ export function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const totalSlides = testimonials.length;
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const founderCardsRef = useRef<HTMLElement>(null);
+  const founderCardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useGSAP(
+    (): (() => void) => {
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            toggleActions: "play reverse play reverse",
+          },
+        })
+        .to(".testimonial-heading", {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+        });
+
+      const founderCards = founderCardRefs.current.filter(
+        Boolean,
+      ) as HTMLDivElement[];
+      if (founderCards.length && founderCardsRef.current) {
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: founderCardsRef.current,
+              start: "top 85%",
+              toggleActions: "play reverse play reverse",
+            },
+          })
+          .to(founderCards, {
+            y: 0,
+            opacity: 1,
+            stagger: 0.15,
+            duration: 0.6,
+            ease: "power3.out",
+          });
+      }
+
+      return (): void => ScrollTrigger.getAll().forEach((t): void => t.kill());
+    },
+    { scope: sectionRef },
+  );
+
   return (
     <section
+      ref={sectionRef}
       id="reviews"
       className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem] self-stretch px-4"
     >
-      <h1 className="bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-4xl font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">
+      <h1 className="testimonial-heading gsap-init bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-4xl font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">
         Don’t take our{" "}
         <span className="text-primary font-medium tracking-[-0.035rem]">
           word for it
@@ -77,11 +127,11 @@ export function TestimonialsSection() {
         className="w-full"
         loop
         spaceBetween={24}
-        onSlideChange={(swiper) => {
+        onSlideChange={(swiper): void => {
           setActiveIndex(swiper.realIndex);
         }}
       >
-        {testimonials.map((item) => (
+        {testimonials.map((item: Testimonial) => (
           <SwiperSlide key={item.role}>
             <div className="flex min-h-112 w-full cursor-pointer flex-col gap-4 active:cursor-grab md:h-auto md:flex-row md:gap-0">
               {/* Left Image */}
@@ -155,12 +205,18 @@ export function TestimonialsSection() {
         </div>
       </div>
 
-      <section className="slef-stretch flex flex-col flex-wrap items-start gap-5 sm:flex-row">
-        {CARDS.map((card: Card) => (
+      <section
+        ref={founderCardsRef}
+        className="flex flex-col flex-wrap items-start gap-5 self-stretch sm:flex-row"
+      >
+        {CARDS.map((card: Card, idx: number) => (
           <div
             key={card.text}
+            ref={(el: HTMLDivElement | null): void => {
+              if (el) founderCardRefs.current[idx] = el;
+            }}
             className={cn(
-              "bg-primary-foreground flex min-h-90 flex-1 flex-col items-start justify-between rounded-4xl p-6 sm:min-w-80",
+              "gsap-init bg-primary-foreground flex min-h-90 flex-1 flex-col items-start justify-between rounded-4xl p-6 sm:min-w-80",
             )}
           >
             <p className="text-secondary font-medium tracking-[-0.01375rem] md:text-[1.375rem]">

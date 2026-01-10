@@ -10,11 +10,11 @@ import { JarIcon, TerminalIcon, UsersIcon, ReloadIcon } from "./icons";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface Cards {
+type Cards = {
   icon: React.ComponentType<{ className?: string }>;
   heading: string;
   description: string;
-}
+};
 
 const CARDS: Cards[] = [
   {
@@ -92,16 +92,20 @@ export function WorkSection() {
       );
 
       // Animate each card’s active state
-      cards.forEach((card, i) => {
+      cards.forEach((card: HTMLElement, i: number): void => {
         tl.to(
           card,
           {
-            onStart: () => {
-              cards.forEach((c) => c.classList.remove("is-active"));
+            onStart: (): void => {
+              cards.forEach((c: HTMLElement): void =>
+                c.classList.remove("is-active"),
+              );
               card.classList.add("is-active");
             },
-            onReverseComplete: () => {
-              cards.forEach((c) => c.classList.remove("is-active"));
+            onReverseComplete: (): void => {
+              cards.forEach((c: HTMLElement): void =>
+                c.classList.remove("is-active"),
+              );
               cards[Math.max(i - 1, 0)]?.classList.add("is-active");
             },
             duration: 1,
