@@ -138,7 +138,7 @@ export function WorkSection() {
           height="1477"
           viewBox="0 0 907 1477"
           fill="none"
-          className="absolute -top-5 z-10"
+          className="absolute -top-5 z-10 hidden md:block"
           aria-hidden="true"
         >
           <g>

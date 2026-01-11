@@ -137,7 +137,7 @@ export function JourneyCards() {
           viewBox="0 0 1376 318"
           fill="none"
           aria-hidden="true"
-          className="absolute -top-5 -left-3 z-10"
+          className="absolute -top-5 -left-3 z-10 hidden lg:block"
         >
           <g>
             <path
