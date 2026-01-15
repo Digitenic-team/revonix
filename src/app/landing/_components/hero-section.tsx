@@ -31,22 +31,34 @@ gsap.registerPlugin(ScrollTrigger);
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
 
+  gsap.registerPlugin(useGSAP);
+
   useGSAP(
     (): (() => void) => {
       const mm = gsap.matchMedia();
 
-      const intro = gsap.timeline({
+      const tl = gsap.timeline({
         defaults: { ease: "power3.out" },
       });
 
-      intro
-        .to(".hero-heading", {
+      tl.fromTo(
+        ".hero-heading",
+        {
+          y: 60,
+          opacity: 0,
+        },
+        {
           y: 0,
           opacity: 1,
           duration: 0.8,
-        })
-        .to(
+        },
+      )
+        .fromTo(
           ".hero-text",
+          {
+            y: 30,
+            opacity: 0,
+          },
           {
             y: 0,
             opacity: 1,
@@ -54,8 +66,12 @@ export function HeroSection() {
           },
           "-=0.4",
         )
-        .to(
+        .fromTo(
           ".hero-button",
+          {
+            scale: 0.7,
+            opacity: 0,
+          },
           {
             scale: 1,
             opacity: 1,
@@ -83,7 +99,6 @@ export function HeroSection() {
             start: "top top",
             end: "bottom top",
             scrub: true,
-            invalidateOnRefresh: true,
           },
         });
       });
