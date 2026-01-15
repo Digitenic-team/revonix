@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
+import { ScrollTrigger } from "gsap/all";
 
 type Card = {
   image: string;
@@ -52,49 +53,54 @@ const CARDS: Card[] = [
 export function FamilySection() {
   const sectionRef = useRef<HTMLElement>(null);
 
+  gsap.registerPlugin(useGSAP);
+  gsap.registerPlugin(ScrollTrigger);
+
   useGSAP(
-    (): (() => void) | undefined => {
-      if (!sectionRef.current) return;
+    () => {
+      const section = sectionRef.current;
+      if (!section) return;
+
+      const cards = gsap.utils.toArray<HTMLElement>(".family-card");
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: sectionRef.current,
+          trigger: section,
           start: "top 80%",
-          toggleActions: "play reverse play reverse",
-          invalidateOnRefresh: true,
+          end: "bottom: 20%",
         },
       });
 
-      tl.to(".family-heading", {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power3.out",
-      });
-
-      tl.to(
-        ".family-subheading",
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power3.out",
-        },
-        "-=0.4",
-      );
-
-      tl.to(
-        ".family-button",
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power3.out",
-        },
-        "-=0.3",
-      );
-
-      return (): void => gsap.killTweensOf("*");
+      tl.fromTo(
+        ".family-heading",
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+      )
+        .fromTo(
+          ".family-subheading",
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
+          "-=0.5",
+        )
+        .fromTo(
+          ".family-button",
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
+          "-=0.4",
+        )
+        .fromTo(
+          cards,
+          { y: 30, opacity: 0, scale: 0.97 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            ease: "power3.out",
+            stagger: 0.15,
+          },
+          "-=0.3",
+        );
     },
     { scope: sectionRef },
   );
@@ -107,21 +113,22 @@ export function FamilySection() {
       {/* Header */}
       <div className="flex flex-col items-center gap-8">
         <div className="flex flex-col items-center gap-4">
-          <h1 className="family-heading gsap-init font-neue bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,#010101_0%,#3558DA_100%)] bg-clip-text text-center text-4xl font-medium text-transparent sm:text-5xl md:text-[3.5rem]">
+          <h1 className="family-heading font-neue bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,#010101_0%,#3558DA_100%)] bg-clip-text text-center text-4xl font-medium text-transparent sm:text-5xl md:text-[3.5rem]">
             Meet the <span className="text-primary">Family</span>
           </h1>
-          <p className="family-subheading gsap-init text-secondary text-center text-[1.125rem]">
+          <p className="family-subheading text-secondary text-center text-[1.125rem]">
             We’re not a typical agency. We’re a small group of people who
             genuinely care about solving real problems.
           </p>
         </div>
-        <div className="gsap-init family-button">
+        <div className="family-button">
           <StyledButton className="py-6">Join our Team</StyledButton>
         </div>
       </div>
 
       {/* Swiper Cards */}
-      <div className="w-full px-4 sm:px-8 lg:ps-60">
+
+      <div className="w-full overflow-x-hidden px-4">
         <Swiper
           spaceBetween={30}
           freeMode
@@ -143,7 +150,7 @@ export function FamilySection() {
         >
           {CARDS.map((card: Card) => (
             <SwiperSlide key={card.role}>
-              <div className="flex flex-col gap-5">
+              <div className="family-card flex flex-col gap-5">
                 {/* Image (natural height preserved) */}
                 <Image
                   src={card.image}
