@@ -9,8 +9,6 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
 
-gsap.registerPlugin(ScrollTrigger);
-
 type FooterSection = {
   title: string;
   links: string[];
@@ -41,37 +39,44 @@ export function Footer() {
   const heroRef = useRef<HTMLElement>(null);
   const linksRef = useRef<HTMLElement>(null);
 
+  gsap.registerPlugin(useGSAP);
+  gsap.registerPlugin(ScrollTrigger);
+
   useGSAP(
-    (): (() => void) => {
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top 85%",
+          scrub: true,
+        },
+      });
+
       if (heroRef.current) {
-        gsap.from(heroRef.current, {
+        tl.from(heroRef.current, {
           y: 60,
           opacity: 0,
           duration: 1,
           ease: "power3.out",
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: "top 90%",
-            toggleActions: "play reverse play reverse",
-          },
         });
       }
 
       if (linksRef.current) {
-        gsap.from(linksRef.current, {
-          y: 40,
+        const linkBlocks = linksRef.current.querySelectorAll(
+          "div.flex-col > h2, div.flex-col > p",
+        );
+        gsap.from(linkBlocks, {
+          y: 30,
           opacity: 0,
-          duration: 1,
+          duration: 0.6,
+          stagger: 0.1,
           ease: "power3.out",
           scrollTrigger: {
             trigger: linksRef.current,
             start: "top 90%",
-            toggleActions: "play reverse play reverse",
           },
         });
       }
-
-      return (): void => ScrollTrigger.getAll().forEach((t): void => t.kill());
     },
     { scope: heroRef },
   );
@@ -108,7 +113,7 @@ export function Footer() {
 
         <div className="flex flex-1 flex-col items-center justify-center gap-8 self-stretch">
           <div className="flex flex-col items-center gap-4 self-stretch">
-            <h1 className="max-w-156 text-center text-4xl font-medium tracking-[-0.035rem] text-white sm:text-5xl md:text-[3.5rem]">
+            <h1 className="max-w-156 text-center text-4xl leading-18 font-medium tracking-[-0.035rem] text-white sm:text-5xl md:text-[3.5rem]">
               Let’s Simplify Your Work With Technology
             </h1>
 
