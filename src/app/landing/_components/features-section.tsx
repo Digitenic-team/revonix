@@ -2,12 +2,10 @@
 
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface Card {
   heading: string;
@@ -37,37 +35,51 @@ export function FeaturesSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  gsap.registerPlugin(useGSAP);
+  gsap.registerPlugin(ScrollTrigger);
+
   useGSAP(
     (): (() => void) | undefined => {
       const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
       if (!cards.length || !sectionRef.current) return;
 
-      // Simple timeline: heading + staggered cards
       gsap
         .timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 80%", // animate when section is in viewport
-            toggleActions: "play reverse play reverse",
+            start: "top 80%",
+            end: "bottom 20%",
+            scrub: true,
           },
         })
-        // Heading animation (already gsap-init)
-        .to(".feature-heading", {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
-        })
-        // Cards stagger animation
-        .to(cards, {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.15,
-          ease: "power3.out",
-        });
 
-      return (): void => ScrollTrigger.getAll().forEach((t): void => t.kill());
+        .fromTo(
+          ".feature-heading",
+          {
+            y: 30,
+            opacity: 0,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+          },
+        )
+        .fromTo(
+          cards,
+          {
+            y: 40,
+            opacity: 0,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            stagger: 0.15,
+            ease: "power3.out",
+          },
+        );
     },
     { scope: sectionRef },
   );
@@ -77,7 +89,7 @@ export function FeaturesSection() {
       ref={sectionRef}
       className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem] self-stretch px-4"
     >
-      <h1 className="feature-heading gsap-init bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-4xl font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">
+      <h1 className="feature-heading bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-4xl font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">
         Why teams choose{" "}
         <span className="text-primary font-medium tracking-[-0.035rem]">
           Revonix
@@ -95,7 +107,7 @@ export function FeaturesSection() {
               idx === 0
                 ? "border-secondary-foreground border border-dashed bg-white shadow-[0_11px_24px_0_rgba(55,90,217,0.10)]"
                 : "bg-primary-foreground",
-              "gsap-init relative flex min-w-74 flex-1 flex-col items-start gap-6.5 rounded-4xl p-6",
+              "relative flex min-w-74 flex-1 flex-col items-start gap-6.5 rounded-4xl p-6",
             )}
           >
             {idx === 0 && (
