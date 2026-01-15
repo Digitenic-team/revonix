@@ -9,8 +9,6 @@ import { CardIconWrapper } from "@/components/card-icon-wrapper";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger);
-
 interface Cards {
   icon: string;
   heading: string;
@@ -47,6 +45,9 @@ export function TechnologySection() {
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  gsap.registerPlugin(useGSAP);
+  gsap.registerPlugin(ScrollTrigger);
 
   useGSAP(
     (): void => {
@@ -109,6 +110,55 @@ export function TechnologySection() {
           });
         },
       });
+
+      const introTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 90%",
+          end: "top 20%",
+          scrub: true,
+        },
+      });
+
+      introTl
+        .fromTo(
+          ".tech-container",
+          {
+            opacity: 0,
+            scale: 0.96,
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            ease: "power3.out",
+          },
+        )
+        .fromTo(
+          ".tech-heading",
+          {
+            opacity: 0,
+            y: 40,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            ease: "power3.out",
+          },
+          0.1,
+        )
+        .fromTo(
+          ".tech-text",
+          {
+            opacity: 0,
+            y: 40,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            ease: "power3.out",
+          },
+          0.2,
+        );
     },
     { scope: sectionRef },
   );
@@ -119,7 +169,7 @@ export function TechnologySection() {
       id="services"
       className="mx-auto mt-30 flex w-full items-center justify-center lg:max-w-456"
     >
-      <div className="relative mx-4 flex w-full flex-col items-center justify-between gap-30 rounded-[2.5rem] bg-[linear-gradient(180deg,rgba(1,1,1,1)_0%,#3558DA_100%)] bg-cover bg-center px-4 py-15 shadow-[0_51px_51px_rgba(54,89,218,0.09),0_13px_28px_rgba(54,89,218,0.1)] sm:p-[6.25rem_5rem] xl:flex-row xl:gap-50">
+      <div className="tech-container relative mx-4 flex w-full flex-col items-center justify-between gap-30 rounded-[2.5rem] bg-[linear-gradient(180deg,rgba(1,1,1,1)_0%,#3558DA_100%)] bg-cover bg-center px-4 py-15 shadow-[0_51px_51px_rgba(54,89,218,0.09),0_13px_28px_rgba(54,89,218,0.1)] sm:p-[6.25rem_5rem] xl:flex-row xl:gap-50">
         <Image
           src="/assets/images/technology-background.png"
           alt="Background"
@@ -127,20 +177,18 @@ export function TechnologySection() {
           className="absolute inset-0 object-cover mix-blend-color-burn"
           priority
         />
-        <div className="mx-auto flex w-full flex-1 flex-col gap-6 self-stretch px-6 lg:max-w-200 lg:px-0 xl:mx-0 xl:max-w-130 xl:shrink-0 xl:items-start">
+        <div className="tech-left mx-auto flex w-full flex-1 flex-col gap-6 self-stretch px-6 lg:max-w-200 lg:px-0 xl:mx-0 xl:max-w-130 xl:shrink-0 xl:items-start">
           <div className="flex flex-1 flex-col gap-4 self-stretch xl:items-start">
-            <h1 className="text-[32px] font-medium tracking-[-0.035rem] text-white sm:text-5xl md:text-[3.5rem] lg:leading-16 xl:text-left">
+            <h1 className="tech-heading text-[32px] font-medium tracking-[-0.035rem] text-white sm:text-5xl md:text-[3.5rem] lg:leading-16 xl:text-left">
               Technology that quietly does the work for your team
             </h1>
-            <p className="text-[16px] leading-normal font-normal tracking-[-0.01125rem] text-white sm:text-lg md:text-[1.125rem]">
+            <p className="tech-text text-[16px] leading-normal font-normal tracking-[-0.01125rem] text-white sm:text-lg md:text-[1.125rem]">
               Systems that replace manual work and actually get used.
             </p>
           </div>
-          <div>
-            <StyledButtonLight className="relative py-6">
-              Book a Strategy Call
-            </StyledButtonLight>
-          </div>
+          <StyledButtonLight className="relative py-6">
+            Book a Strategy Call
+          </StyledButtonLight>
         </div>
 
         <div className="relative flex w-full flex-col items-center gap-5 xl:max-w-148.75 xl:shrink-0 xl:items-start">
