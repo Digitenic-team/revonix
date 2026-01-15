@@ -6,8 +6,6 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
 
-gsap.registerPlugin(ScrollTrigger);
-
 type CardData = {
   heading: string;
   subHeading: string;
@@ -32,8 +30,11 @@ const CARDS_DATA: CardData[] = [
   },
 ];
 
-export function JourneyCards() {
+export function JourneySection() {
   const sectionRef = useRef<HTMLElement>(null);
+
+  gsap.registerPlugin(useGSAP);
+  gsap.registerPlugin(ScrollTrigger);
 
   useGSAP(
     (): void => {
@@ -50,19 +51,44 @@ export function JourneyCards() {
         strokeDashoffset: length,
       });
 
-      gsap.set(cards, { willChange: "transform, opacity" });
-
-      gsap.to(".journey-heading", {
-        y: 0,
-        autoAlpha: 1,
-        duration: 0.8,
-        ease: "back.out(1.7)",
+      const ftl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 90%",
-          toggleActions: "play reverse play reverse",
+          start: "top 80%",
+          end: "bottom 50%",
+          scrub: true,
         },
       });
+
+      ftl
+        .fromTo(
+          ".journey-heading",
+          {
+            y: 30,
+            opacity: 0,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+          },
+        )
+        .fromTo(
+          cards,
+          {
+            scale: 0.8,
+            opacity: 0,
+          },
+          {
+            scale: 1,
+            opacity: 1,
+            stagger: 0.15,
+            duration: 0.8,
+            ease: "power3.out",
+          },
+          "-=0.3",
+        );
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -72,7 +98,6 @@ export function JourneyCards() {
           pin: true,
           scrub: 0.6,
           anticipatePin: 1,
-          invalidateOnRefresh: true,
         },
       });
 
@@ -121,7 +146,7 @@ export function JourneyCards() {
       className="relative mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem] self-stretch px-4"
     >
       {/* Heading */}
-      <h1 className="journey-heading gsap-init bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[32px] font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">
+      <h1 className="journey-heading bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[32px] font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">
         Where are you in the{" "}
         <span className="text-primary font-medium tracking-[-0.035rem]">
           AI journey?

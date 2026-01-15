@@ -1,5 +1,5 @@
 import { HeroSection } from "./_components/hero-section";
-import { JourneyCards } from "./_components/journey-cards";
+import { JourneySection } from "./_components/journey-section";
 import { OverwhelmingSection } from "./_components/overwhelming-section";
 import { CompaniesSection } from "./_components/companies-section";
 import { WorkSection } from "./_components/work-section";
@@ -14,7 +14,7 @@ export default function Landing() {
     <main className="min-h-screen w-full overflow-x-hidden">
       <HeroSection />
       <OverwhelmingSection />
-      <JourneyCards />
+      <JourneySection />
       <CompaniesSection />
       <WorkSection />
       <TechnologySection />
