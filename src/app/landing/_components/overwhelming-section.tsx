@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { StyledCircle } from "@/components/styled-circle";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
 import gsap from "gsap";
 
 type Icons = {
@@ -47,6 +48,9 @@ const ICONS: Icons[] = [
 export function OverwhelmingSection() {
   const sectionRef = useRef<HTMLElement>(null);
 
+  gsap.registerPlugin(useGSAP);
+  gsap.registerPlugin(ScrollTrigger);
+
   useGSAP(
     (): void => {
       const tl = gsap.timeline({
@@ -54,18 +58,29 @@ export function OverwhelmingSection() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 70%",
-          end: "bottom 20%",
-          toggleActions: "play reverse play reverse",
+          end: "bottom 50%",
+          scrub: true,
         },
       });
 
-      tl.to(".over-heading", {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-      })
-        .to(
+      tl.fromTo(
+        ".over-heading",
+        {
+          y: 30,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+        },
+      )
+        .fromTo(
           ".over-container",
+          {
+            scale: 0.8,
+            opacity: 0,
+          },
           {
             scale: 1,
             opacity: 1,
@@ -73,8 +88,12 @@ export function OverwhelmingSection() {
           },
           "-=0.35",
         )
-        .to(
+        .fromTo(
           ".over-icon",
+          {
+            opacity: 0,
+            scale: 0.8,
+          },
           {
             opacity: 1,
             scale: 1,
@@ -83,26 +102,18 @@ export function OverwhelmingSection() {
           },
           "-=0.4",
         )
-        .to(
+        .fromTo(
           ".over-inner-text",
+          {
+            y: 40,
+            opacity: 0,
+          },
           {
             y: 0,
             opacity: 1,
             duration: 0.45,
           },
-          "-=0.3",
-        )
-        .add((): void => {
-          gsap.set(
-            [
-              ".over-heading",
-              ".over-container",
-              ".over-icon",
-              ".over-inner-text",
-            ],
-            { clearProps: "willChange" },
-          );
-        });
+        );
     },
     { scope: sectionRef },
   );
@@ -113,18 +124,18 @@ export function OverwhelmingSection() {
       className="mx-auto mt-30 flex max-w-360 flex-col items-center gap-[4.38rem] px-4"
     >
       {/* Heading */}
-      <h1 className="over-heading gsap-init bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[2rem] font-medium tracking-[-0.025rem] text-transparent sm:text-[2.25rem] lg:text-[2.5rem]">
+      <h1 className="over-heading bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[2rem] font-medium tracking-[-0.025rem] text-transparent sm:text-[2.25rem] lg:text-[2.5rem]">
         AI can be <span className="text-primary">overwhelming</span>
       </h1>
 
       {/* Concentric shapes container */}
       <div className="flex w-full items-center justify-center md:h-92.25">
-        <div className="over-container gsap-init border-primary relative flex h-160 w-full items-center justify-center rounded-full border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.05)_0%,rgba(53,88,218,0.05)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:h-60 sm:w-[85%] lg:h-80 lg:w-[60%] lg:max-w-[45.59913rem] xl:h-72 xl:w-full">
+        <div className="over-container border-primary relative flex h-160 w-full items-center justify-center rounded-full border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.05)_0%,rgba(53,88,218,0.05)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:h-60 sm:w-[85%] lg:h-80 lg:w-[60%] lg:max-w-[45.59913rem] xl:h-72 xl:w-full">
           {/* Icons */}
           {ICONS.map((icon: Icons, idx: number) => (
             <div
               key={icon.url}
-              className={`over-icon gsap-init absolute z-20 flex items-center gap-4 ${
+              className={`over-icon absolute z-20 flex items-center gap-4 ${
                 idx === 1 || idx === 3 ? "flex-row-reverse" : ""
               } ${icon.class}`}
             >
@@ -149,7 +160,7 @@ export function OverwhelmingSection() {
           <div className="border-primary flex h-[90%] w-[90%] items-center justify-center rounded-[50.89463rem] border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.20)_0%,rgba(53,88,218,0.20)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:h-[86%] sm:w-[92%] lg:h-[88%] lg:w-[92%] xl:h-[90%] xl:w-[95%]">
             <div className="border-primary flex h-[88%] w-[88%] items-center justify-center rounded-full border-[6.521px] bg-[linear-gradient(180deg,rgba(87,108,188,0.40)_0%,rgba(53,88,218,0.40)_100%)] shadow-[0_0_0_1.63px_#FFF] sm:h-[82%] sm:w-[90%] lg:h-[86%] lg:w-[90%] xl:h-[80%] xl:w-[95%]">
               <div className="flex h-[90%] w-[85%] items-center justify-center rounded-full border-[3.261px] border-[#FFF] bg-[linear-gradient(180deg,#576CBC_0%,#3558DA_100%)] p-3 sm:h-[80%] sm:w-[90%] md:rounded-[50.89463rem] md:p-0 lg:h-[85%] lg:w-[80%] xl:h-[80%] xl:w-[94%]">
-                <h2 className="over-inner-text gsap-init text-center text-[38px] font-medium tracking-[-0.02956rem] text-white xl:text-[2.95481rem]">
+                <h2 className="over-inner-text text-center text-[38px] font-medium tracking-[-0.02956rem] text-white xl:text-[2.95481rem]">
                   We cut through that.
                 </h2>
               </div>
