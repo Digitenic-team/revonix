@@ -8,8 +8,6 @@ import { ScrollTrigger } from "gsap/all";
 import { IconWrapper } from "@/components/icon-wrapper";
 import { JarIcon, TerminalIcon, UsersIcon, ReloadIcon } from "./icons";
 
-gsap.registerPlugin(ScrollTrigger);
-
 type Cards = {
   icon: React.ComponentType<{ className?: string }>;
   heading: string;
@@ -46,6 +44,9 @@ const CARDS: Cards[] = [
 export function WorkSection() {
   const sectionRef = useRef<HTMLElement>(null);
 
+  gsap.registerPlugin(useGSAP);
+  gsap.registerPlugin(ScrollTrigger);
+
   useGSAP(
     () => {
       const cards = gsap.utils.toArray<HTMLElement>(".work-card");
@@ -59,59 +60,61 @@ export function WorkSection() {
       // Set SVG path initial styles
       gsap.set(path, {
         strokeDasharray: length,
-        strokeDashoffset: 0,
+        strokeDashoffset: length,
       });
-
-      // Cards setup
-      gsap.set(cards, { willChange: "transform, opacity" });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top top",
-          end: `+=${cards.length * 300}`,
+          start: "top center",
+          end: `bottom +=${cards.length * 300}`,
           scrub: true,
         },
       });
 
-      tl.to(".work-heading", {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-      });
-
-      // Animate path from 0 to full length (top → bottom)
-      tl.to(
-        path,
+      tl.fromTo(
+        ".work-heading",
         {
-          strokeDashoffset: length,
-          ease: "none",
-          duration: cards.length,
+          y: 30,
+          opacity: 0,
         },
-        0,
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+        },
       );
 
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top center",
+        end: () => {
+          const lastCard = cards[cards.length - 1];
+          return `bottom ${lastCard.offsetHeight}px`;
+        },
+        scrub: true,
+        onUpdate: (self) => {
+          gsap.set(path, {
+            strokeDashoffset: length * self.progress,
+          });
+        },
+      });
+
       // Animate each card’s active state
-      cards.forEach((card: HTMLElement, i: number): void => {
-        tl.to(
-          card,
-          {
-            onStart: (): void => {
-              cards.forEach((c: HTMLElement): void =>
-                c.classList.remove("is-active"),
-              );
-              card.classList.add("is-active");
-            },
-            onReverseComplete: (): void => {
-              cards.forEach((c: HTMLElement): void =>
-                c.classList.remove("is-active"),
-              );
-              cards[Math.max(i - 1, 0)]?.classList.add("is-active");
-            },
-            duration: 1,
+      cards.forEach((card: HTMLElement) => {
+        ScrollTrigger.create({
+          trigger: card,
+          start: "top center",
+          end: "bottom center",
+          onEnter: () => {
+            cards.forEach((c) => c.classList.remove("is-active"));
+            card.classList.add("is-active");
           },
-          i,
-        );
+          onEnterBack: () => {
+            cards.forEach((c) => c.classList.remove("is-active"));
+            card.classList.add("is-active");
+          },
+        });
       });
 
       cards[0]?.classList.add("is-active");
