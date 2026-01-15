@@ -32,26 +32,97 @@ export function Navbar() {
 
   const navRef = useRef<HTMLElement>(null);
 
+  gsap.registerPlugin(useGSAP);
+
   useGSAP(
-    () => {
+    (): void => {
       const mm = gsap.matchMedia();
       const q = gsap.utils.selector(navRef);
 
-      mm.add("(max-width: 767px)", () => {
-        gsap
-          .timeline({ defaults: { ease: "power3.out", duration: 0.35 } })
-          .to(q(".nav-logo"), { opacity: 1, y: 0 });
+      // MOBILE
+      mm.add("(max-width: 767px)", (): void => {
+        const tl = gsap.timeline({
+          defaults: {
+            duration: 0.8,
+            ease: "power3.out",
+          },
+        });
+
+        tl.fromTo(
+          navRef.current,
+          {
+            y: -80,
+            opacity: 0,
+          },
+          {
+            y: 0,
+            opacity: 1,
+          },
+        )
+          .from(
+            q(".nav-logo"),
+            {
+              y: 12,
+              opacity: 0,
+            },
+            "-=0.15",
+          )
+          .from(
+            q(".nav-button"),
+            {
+              y: 12,
+              opacity: 0,
+            },
+            "-=0.25",
+          );
       });
 
-      mm.add("(min-width: 768px)", () => {
-        gsap
-          .timeline({ defaults: { ease: "power3.out", duration: 0.35 } })
-          .to(q(".nav-logo"), { opacity: 1, y: 0 })
-          .to(q(".nav-link"), { opacity: 1, y: 0, stagger: 0.08 }, "-=0.25")
-          .to(q(".nav-button"), { opacity: 1, y: 0 }, "-=0.2");
-      });
+      // DESKTOP
+      mm.add("(min-width: 768px)", (): void => {
+        const tl = gsap.timeline({
+          defaults: {
+            ease: "power3.out",
+            duration: 0.8,
+          },
+        });
 
-      return () => mm.revert();
+        tl.fromTo(
+          navRef.current,
+          {
+            y: -80,
+            opacity: 0,
+          },
+          {
+            y: 0,
+            opacity: 1,
+          },
+        )
+          .from(
+            q(".nav-logo"),
+            {
+              y: 12,
+              opacity: 0,
+            },
+            "-=0.2",
+          )
+          .from(
+            q(".nav-link"),
+            {
+              y: 12,
+              opacity: 0,
+              stagger: 0.08,
+            },
+            "-=0.25",
+          )
+          .from(
+            q(".nav-button"),
+            {
+              y: 12,
+              opacity: 0,
+            },
+            "-=0.25",
+          );
+      });
     },
     { scope: navRef },
   );
@@ -60,7 +131,7 @@ export function Navbar() {
     <section className="relative mx-auto flex max-w-360 items-center justify-center gap-8 px-6 pt-2.5">
       <nav
         ref={navRef}
-        className="border-secondary-foreground md:gsap-init flex w-full items-center justify-between gap-6 rounded-full border-b bg-white p-3 pl-6 opacity-100 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] md:w-auto"
+        className="border-secondary-foreground gsap-init flex w-full items-center justify-between gap-6 rounded-full border-b bg-white p-3 pl-6 opacity-100 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] md:w-auto"
       >
         {/* Hamburger - mobile */}
         <div className="md:hidden">
@@ -94,7 +165,7 @@ export function Navbar() {
           height={26}
           priority
           alt="Revonix Logo"
-          className="nav-logo md:gsap-init ml-auto cursor-pointer md:block [@media(min-width:400px)]:ml-0"
+          className="nav-logo ml-auto cursor-pointer md:block [@media(min-width:400px)]:ml-0"
         />
 
         {/* Links - desktop */}
@@ -103,7 +174,7 @@ export function Navbar() {
             <Link
               key={link.link}
               href={link.link}
-              className="nav-link md:gsap-init text-secondary text-base font-medium tracking-[-0.01rem]"
+              className="nav-link text-secondary text-base font-medium tracking-[-0.01rem]"
             >
               {link.title}
             </Link>
@@ -111,7 +182,7 @@ export function Navbar() {
         </div>
 
         {/* Button */}
-        <div className="nav-button md:gsap-init hidden md:block [@media(min-width:400px)]:block">
+        <div className="nav-button hidden md:block [@media(min-width:400px)]:block">
           <StyledButton className="py-6">Get Started</StyledButton>
         </div>
       </nav>
