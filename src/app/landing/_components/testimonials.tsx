@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { cn } from "@/lib/utils";
 import { ScrollTrigger } from "gsap/all";
+import { Navigation } from "swiper/modules";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 type Card = {
   text: string;
@@ -62,11 +64,25 @@ const testimonials: Testimonial[] = [
 
 export function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [swiperInstance, setSwiperInstance] = useState<any>(null);
   const totalSlides = testimonials.length;
 
   const sectionRef = useRef<HTMLElement>(null);
   const founderCardsRef = useRef<HTMLElement>(null);
   const founderCardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const prevRef = useRef<HTMLButtonElement>(null);
+  const nextRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (swiperInstance && prevRef.current && nextRef.current) {
+      swiperInstance.params.navigation.prevEl = prevRef.current;
+      swiperInstance.params.navigation.nextEl = nextRef.current;
+      swiperInstance.navigation.destroy(); // destroy old navigation
+      swiperInstance.navigation.init(); // re-init
+      swiperInstance.navigation.update(); // update Swiper
+    }
+  }, [swiperInstance]);
 
   gsap.registerPlugin(useGSAP);
   gsap.registerPlugin(ScrollTrigger);
@@ -151,66 +167,86 @@ export function TestimonialsSection() {
         </span>
       </h1>
 
-      <Swiper
-        className="w-full"
-        loop
-        spaceBetween={24}
-        onSlideChange={(swiper): void => {
-          setActiveIndex(swiper.realIndex);
-        }}
-      >
-        {testimonials.map((item: Testimonial) => (
-          <SwiperSlide key={item.role}>
-            <div className="testimonial-slide-content flex min-h-112 w-full cursor-pointer flex-col gap-4 active:cursor-grab md:h-auto md:flex-row md:gap-0">
-              {/* Left Image */}
-              <div className="relative min-h-100 w-full lg:h-auto lg:flex-1">
-                <Image
-                  src="/assets/images/slider1.png"
-                  fill
-                  alt="Slider Image"
-                  className="rounded-2xl object-cover lg:rounded-3xl"
-                  priority
-                />
-              </div>
+      <div className="relative w-full">
+        <div className="mt-8 flex items-center gap-4">
+          <button
+            type="button"
+            ref={prevRef}
+            className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white/90 shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-white"
+          >
+            <ArrowLeft />
+          </button>
+          <Swiper
+            className="relative w-full"
+            loop
+            onSwiper={setSwiperInstance}
+            spaceBetween={24}
+            onSlideChange={(swiper): void => {
+              setActiveIndex(swiper.realIndex);
+            }}
+            modules={[Navigation]}
+          >
+            {testimonials.map((item: Testimonial) => (
+              <SwiperSlide key={item.role}>
+                <div className="testimonial-slide-content flex min-h-112 w-full cursor-pointer flex-col gap-4 active:cursor-grab md:h-auto md:flex-row md:gap-0">
+                  {/* Left Image */}
+                  <div className="relative min-h-100 w-full lg:h-auto lg:flex-1">
+                    <Image
+                      src="/assets/images/slider1.png"
+                      fill
+                      alt="Slider Image"
+                      className="rounded-2xl object-cover lg:rounded-3xl"
+                      priority
+                    />
+                  </div>
 
-              {/* Right Content */}
-              <div className="flex w-full flex-col justify-between rounded-2xl bg-white p-6 sm:p-8 lg:flex-1 lg:rounded-3xl lg:p-12">
-                {/* Quote Icon */}
-                <Image
-                  src="/assets/images/quotes.png"
-                  width={21}
-                  height={18}
-                  alt="Quotes Image"
-                />
+                  {/* Right Content */}
+                  <div className="flex w-full flex-col justify-between rounded-2xl bg-white p-6 sm:p-8 lg:flex-1 lg:rounded-3xl lg:p-12">
+                    {/* Quote Icon */}
+                    <Image
+                      src="/assets/images/quotes.png"
+                      width={21}
+                      height={18}
+                      alt="Quotes Image"
+                    />
 
-                {/* Text */}
-                <h1 className="my-4 bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-lg leading-normal font-medium tracking-[-0.0225rem] text-transparent sm:text-xl md:text-2xl lg:text-[2.25rem]">
-                  {item.text}
-                </h1>
+                    {/* Text */}
+                    <h1 className="my-4 bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-lg leading-normal font-medium tracking-[-0.0225rem] text-transparent sm:text-xl md:text-2xl lg:text-[2.25rem]">
+                      {item.text}
+                    </h1>
 
-                {/* Author */}
-                <div className="flex items-center gap-3">
-                  <Image
-                    src="/assets/images/profile1.png"
-                    width={48}
-                    height={48}
-                    alt="Profile Image"
-                  />
+                    {/* Author */}
+                    <div className="flex items-center gap-3">
+                      <Image
+                        src="/assets/images/profile1.png"
+                        width={48}
+                        height={48}
+                        alt="Profile Image"
+                      />
 
-                  <div className="flex flex-col">
-                    <h3 className="text-secondary text-base font-medium sm:text-lg">
-                      {item.name}
-                    </h3>
-                    <p className="text-secondary text-xs uppercase opacity-60 sm:text-sm">
-                      {item.role}
-                    </p>
+                      <div className="flex flex-col">
+                        <h3 className="text-secondary text-base font-medium sm:text-lg">
+                          {item.name}
+                        </h3>
+                        <p className="text-secondary text-xs uppercase opacity-60 sm:text-sm">
+                          {item.role}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <button
+            type="button"
+            ref={nextRef}
+            className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white/90 shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-white"
+          >
+            <ArrowRight />
+          </button>
+        </div>
+      </div>
 
       <div className="flex w-full items-center gap-4">
         {/* Progress line */}
