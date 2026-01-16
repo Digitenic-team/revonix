@@ -35,7 +35,7 @@ export function CompaniesSection() {
           trigger: sectionRef.current,
           start: "top 80%",
           end: "bottom 30%",
-          scrub: true,
+          toggleActions: "play reverse play reverse",
         },
       });
 

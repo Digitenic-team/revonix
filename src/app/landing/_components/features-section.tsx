@@ -49,7 +49,7 @@ export function FeaturesSection() {
             trigger: sectionRef.current,
             start: "top 80%",
             end: "bottom 20%",
-            scrub: true,
+            toggleActions: "play reverse play reverse",
           },
         })
 

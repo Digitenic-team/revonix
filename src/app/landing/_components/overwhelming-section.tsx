@@ -58,8 +58,8 @@ export function OverwhelmingSection() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 70%",
-          end: "bottom 50%",
-          scrub: true,
+          end: "bottom 20%",
+          toggleActions: "play reverse play reverse",
         },
       });
 
@@ -111,7 +111,7 @@ export function OverwhelmingSection() {
           {
             y: 0,
             opacity: 1,
-            duration: 0.45,
+            duration: 0.7,
           },
         );
     },
