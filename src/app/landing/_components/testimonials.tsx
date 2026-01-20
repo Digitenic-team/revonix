@@ -172,7 +172,7 @@ export function TestimonialsSection() {
           <button
             type="button"
             ref={prevRef}
-            className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white/90 shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-white"
+            className="hidden h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white/90 shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-white md:flex"
           >
             <ArrowLeft />
           </button>
@@ -241,7 +241,7 @@ export function TestimonialsSection() {
           <button
             type="button"
             ref={nextRef}
-            className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white/90 shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-white"
+            className="hidden h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white/90 shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-white md:flex"
           >
             <ArrowRight />
           </button>
