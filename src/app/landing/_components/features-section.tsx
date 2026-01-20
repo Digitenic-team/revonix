@@ -103,6 +103,12 @@ export function FeaturesSection() {
             ref={(el: HTMLDivElement | null): void => {
               if (el) cardRefs.current[idx] = el;
             }}
+            onMouseEnter={() =>
+              gsap.to(cardRefs.current[idx], { scale: 1.05, rotate: 2 })
+            }
+            onMouseLeave={() =>
+              gsap.to(cardRefs.current[idx], { scale: 1, rotate: 0 })
+            }
             className={cn(
               idx === 0
                 ? "border-secondary-foreground border border-dashed bg-white shadow-[0_11px_24px_0_rgba(55,90,217,0.10)]"
@@ -110,15 +116,13 @@ export function FeaturesSection() {
               "relative flex min-w-74 flex-1 flex-col items-start gap-6.5 rounded-4xl p-6",
             )}
           >
-            {idx === 0 && (
-              <Image
-                src="/assets/images/card-side-vector.png"
-                width={85}
-                height={89}
-                className="absolute top-0 right-0"
-                alt="Side Border Image"
-              />
-            )}
+            <Image
+              src="/assets/images/card-side-vector.png"
+              width={85}
+              height={89}
+              className="absolute top-0 right-0"
+              alt="Side Border Image"
+            />
             <h1 className="text-secondary text-[1rem] leading-5.75 font-normal uppercase opacity-60">
               {card.heading}
             </h1>
