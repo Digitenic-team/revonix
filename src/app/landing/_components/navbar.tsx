@@ -162,7 +162,7 @@ export function Navbar() {
         <Link href="/landing">
           <Image
             src="/assets/images/revonix-logo.png"
-            width={90}
+            width={130}
             height={26}
             priority
             alt="Revonix Logo"
