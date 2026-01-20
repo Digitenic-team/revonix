@@ -159,14 +159,16 @@ export function Navbar() {
         </div>
 
         {/* Logo */}
-        <Image
-          src="/assets/images/revonix-logo.png"
-          width={124}
-          height={26}
-          priority
-          alt="Revonix Logo"
-          className="nav-logo ml-auto cursor-pointer md:block [@media(min-width:400px)]:ml-0"
-        />
+        <Link href="/landing">
+          <Image
+            src="/assets/images/revonix-logo.png"
+            width={124}
+            height={26}
+            priority
+            alt="Revonix Logo"
+            className="nav-logo ml-auto cursor-pointer md:block [@media(min-width:400px)]:ml-0"
+          />
+        </Link>
 
         {/* Links - desktop */}
         <div className="hidden items-center gap-8 md:flex">
