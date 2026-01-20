@@ -57,7 +57,7 @@ export function OverwhelmingSection() {
         defaults: { ease: "power3.out" },
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 70%",
+          start: "top 90%",
           end: "bottom 20%",
           toggleActions: "play reverse play reverse",
         },
