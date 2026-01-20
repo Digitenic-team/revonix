@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import { StyledButton } from "@/components/styled-button";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Navbar } from "./navbar";
 import { gsap } from "gsap";
@@ -10,26 +9,14 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-
-type IMAGE = {
-  src: string;
-  alt: string;
-};
-
-const IMAGES: IMAGE[] = [
-  { src: "/assets/images/phone-image.png", alt: "Phone UI" },
-  { src: "/assets/images/dashboard-image.png", alt: "Dashboard UI" },
-  {
-    src: "/assets/images/sound-collection-image.png",
-    alt: "Sound Collection",
-  },
-  { src: "/assets/images/mobile-design-image.png", alt: "Mobile UI" },
-];
+import { projects } from "@/data/projects";
+import { ProjectModalDialog } from "@/app/projects/_components/project-modal-dialog";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const swiperContainerRef = useRef<HTMLElement>(null);
 
   gsap.registerPlugin(useGSAP);
 
@@ -37,70 +24,96 @@ export function HeroSection() {
     (): (() => void) => {
       const mm = gsap.matchMedia();
 
+      // Set initial state immediately to prevent flicker
+      gsap.set(".hero-card", {
+        opacity: 0,
+        y: 30,
+      });
+
       const tl = gsap.timeline({
-        defaults: { ease: "power3.out" },
+        defaults: { ease: "power2.out" },
       });
 
       tl.fromTo(
         ".hero-heading",
         {
-          y: 60,
+          y: 50,
           opacity: 0,
         },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          duration: 0.7,
         },
       )
         .fromTo(
           ".hero-text",
           {
-            y: 30,
+            y: 25,
             opacity: 0,
           },
           {
             y: 0,
             opacity: 1,
-            duration: 0.55,
+            duration: 0.5,
           },
-          "-=0.4",
+          "-=0.3",
         )
         .fromTo(
           ".hero-button",
           {
-            scale: 0.7,
+            scale: 0.9,
             opacity: 0,
           },
           {
             scale: 1,
             opacity: 1,
-            duration: 0.45,
+            duration: 0.4,
           },
-          "-=0.35",
+          "-=0.3",
         )
         .to(
           ".hero-card",
           {
             y: 0,
             opacity: 1,
-            duration: 0.6,
-            stagger: 0.08,
+            duration: 0.5,
+            stagger: 0.06,
+            ease: "power2.out",
           },
-          "-=0.25",
+          "-=0.2",
         );
 
+      // Parallax animation - target the swiper container wrapper to avoid conflicts
       mm.add("(min-width: 1024px)", (): void => {
-        gsap.to(".hero-card", {
-          x: (i: number): number => 80 + i * 40,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
+        if (swiperContainerRef.current) {
+          gsap.to(swiperContainerRef.current, {
+            y: -80,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top top",
+              end: "bottom top",
+              scrub: 1,
+            },
+          });
+        }
+      });
+
+      // For mobile/tablet, subtle parallax on container
+      mm.add("(max-width: 1023px)", (): void => {
+        if (swiperContainerRef.current) {
+          gsap.to(swiperContainerRef.current, {
+            y: -40,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top top",
+              end: "bottom top",
+              scrub: 1,
+            },
+          });
+        }
       });
 
       return (): void => mm.revert();
@@ -111,7 +124,7 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-[url('/assets/images/background.svg')] bg-cover bg-center bg-no-repeat"
+      className="relative w-full overflow-visible bg-[url('/assets/images/background.svg')] bg-cover bg-center bg-no-repeat"
     >
       <Image
         src="/assets/images/vector1.svg"
@@ -165,44 +178,11 @@ export function HeroSection() {
           </div>
         </div>
 
-        <section className="hidden w-full flex-col flex-wrap justify-center gap-5 overflow-hidden sm:flex-row md:items-start lg:flex lg:flex-nowrap lg:items-center lg:justify-between lg:gap-5">
-          {IMAGES.map((img: IMAGE, index: number) => {
-            return (
-              <div
-                key={img.alt}
-                className={cn(
-                  "hero-card gsap-init relative h-60 sm:h-80 md:h-115",
-                  index === 0 || index === IMAGES.length - 1
-                    ? "md:100 w-65 sm:w-85.5 lg:w-81.5"
-                    : "md:100 w-65 sm:w-85.5 lg:w-162.5",
-                )}
-              >
-                <div
-                  className={cn(
-                    index === 0
-                      ? "rounded-4xl lg:rounded-l-none"
-                      : index === IMAGES.length - 1
-                        ? "rounded-4xl lg:rounded-r-none"
-                        : "rounded-4xl",
-                    "border-secondary-foreground relative h-full w-full overflow-hidden border",
-                  )}
-                >
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    priority
-                    className="object-cover"
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(270deg,rgba(53,88,218,0)_42.94%,#3558DA_49.26%)] mix-blend-hue" />
-                </div>
-              </div>
-            );
-          })}
-        </section>
-
-        {/* MOBILE / TABLET ONLY – Swiper */}
-        <section className="block w-full overflow-hidden lg:hidden">
+        {/* Swiper for all screen sizes */}
+        <section
+          ref={swiperContainerRef}
+          className="hero-swiper-container w-full overflow-hidden"
+        >
           <Swiper
             modules={[Autoplay]}
             loop={true}
@@ -211,34 +191,36 @@ export function HeroSection() {
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
             }}
-            slidesPerView={1.15}
+            slidesPerView={1}
             centeredSlides={true}
             spaceBetween={16}
             grabCursor={true}
-            slidesOffsetBefore={16}
-            slidesOffsetAfter={16}
-            className="w-full"
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+                centeredSlides: true,
+              },
+              800: {
+                slidesPerView: 2,
+                spaceBetween: 24,
+                centeredSlides: true,
+              },
+              1024: {
+                slidesPerView: 3.2,
+                spaceBetween: 20,
+                centeredSlides: true,
+              },
+            }}
+            className="w-full overflow-visible"
           >
-            {IMAGES.map((img: IMAGE, index: number) => (
-              <SwiperSlide
-                key={img.alt}
-                className={cn(
-                  index === 0 || index === IMAGES.length - 1
-                    ? "w-65 sm:w-85.5"
-                    : "w-65 sm:w-85.5",
-                )}
-              >
-                <div className="relative h-60 sm:h-120">
-                  <div className="border-secondary-foreground relative h-full w-full overflow-hidden rounded-4xl border">
-                    <Image
-                      src={img.src}
-                      alt={img.alt}
-                      fill
-                      priority
-                      className="object-cover"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(270deg,rgba(53,88,218,0)_42.94%,#3558DA_49.26%)] mix-blend-hue" />
-                  </div>
+            {projects.map((project) => (
+              <SwiperSlide key={project.slug} className="active:cursor-grab">
+                <div className="relative h-60 w-full sm:h-80 md:h-115 lg:h-115">
+                  <ProjectModalDialog
+                    project={project}
+                    className="hero-card relative h-full w-full cursor-pointer overflow-hidden rounded-4xl opacity-0"
+                  />
                 </div>
               </SwiperSlide>
             ))}
