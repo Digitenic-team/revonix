@@ -16,7 +16,7 @@ const IMAGES: string[] = [
   "com-7.png",
   "com-8.png",
   "com-9.png",
-  "com-10.png",
+  "pixis.svg",
 ];
 
 export function CompaniesSection() {
