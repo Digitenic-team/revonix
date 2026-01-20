@@ -1,11 +1,13 @@
 "use client";
 
 import { StyledButton } from "@/components/styled-button";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import { ScrollTrigger } from "gsap/all";
@@ -52,6 +54,20 @@ const CARDS: Card[] = [
 
 export function FamilySection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [swiperInstance, setSwiperInstance] = useState<any>(null);
+
+  const prevRef = useRef<HTMLButtonElement>(null);
+  const nextRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (swiperInstance && prevRef.current && nextRef.current) {
+      swiperInstance.params.navigation.prevEl = prevRef.current;
+      swiperInstance.params.navigation.nextEl = nextRef.current;
+      swiperInstance.navigation.destroy();
+      swiperInstance.navigation.init();
+      swiperInstance.navigation.update();
+    }
+  }, [swiperInstance]);
 
   gsap.registerPlugin(useGSAP);
   gsap.registerPlugin(ScrollTrigger);
@@ -127,57 +143,75 @@ export function FamilySection() {
       </div>
 
       {/* Swiper Cards */}
+      <div className="relative w-full overflow-x-hidden px-4">
+        <div className="mt-8 flex items-center gap-4">
+          <button
+            type="button"
+            ref={prevRef}
+            className="hidden h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white/90 shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-white md:flex"
+          >
+            <ArrowLeft />
+          </button>
+          <Swiper
+            className="relative w-full"
+            spaceBetween={30}
+            freeMode
+            grabCursor
+            onSwiper={setSwiperInstance}
+            modules={[Navigation]}
+            breakpoints={{
+              0: {
+                slidesPerView: 1.1,
+              },
+              640: {
+                slidesPerView: 2.1,
+              },
+              1024: {
+                slidesPerView: 3.1,
+              },
+              1280: {
+                slidesPerView: 4.5,
+              },
+            }}
+          >
+            {CARDS.map((card: Card) => (
+              <SwiperSlide key={card.role}>
+                <div className="family-card flex flex-col gap-5">
+                  {/* Image (natural height preserved) */}
+                  <Image
+                    src={card.image}
+                    width={400}
+                    height={432}
+                    className="border-secondary-foreground rounded-3xl border"
+                    alt={card.heading}
+                  />
 
-      <div className="w-full overflow-x-hidden px-4">
-        <Swiper
-          spaceBetween={30}
-          freeMode
-          grabCursor
-          breakpoints={{
-            0: {
-              slidesPerView: 1.1,
-            },
-            640: {
-              slidesPerView: 2.1,
-            },
-            1024: {
-              slidesPerView: 3.1,
-            },
-            1280: {
-              slidesPerView: 4.5,
-            },
-          }}
-        >
-          {CARDS.map((card: Card) => (
-            <SwiperSlide key={card.role}>
-              <div className="family-card flex flex-col gap-5">
-                {/* Image (natural height preserved) */}
-                <Image
-                  src={card.image}
-                  width={400}
-                  height={432}
-                  className="border-secondary-foreground rounded-3xl border"
-                  alt={card.heading}
-                />
+                  {/* Name & Role */}
+                  <div className="flex flex-col gap-1.5">
+                    <h1 className="font-neue text-xl font-medium sm:text-2xl">
+                      {card.heading}
+                    </h1>
+                    <h3 className="text-xs uppercase opacity-60 sm:text-sm">
+                      {card.role}
+                    </h3>
+                  </div>
 
-                {/* Name & Role */}
-                <div className="flex flex-col gap-1.5">
-                  <h1 className="font-neue text-xl font-medium sm:text-2xl">
-                    {card.heading}
-                  </h1>
-                  <h3 className="text-xs uppercase opacity-60 sm:text-sm">
-                    {card.role}
-                  </h3>
+                  {/* Description */}
+                  <p className="max-w-60 text-sm sm:text-base">
+                    {card.description}
+                  </p>
                 </div>
-
-                {/* Description */}
-                <p className="max-w-60 text-sm sm:text-base">
-                  {card.description}
-                </p>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <button
+            type="button"
+            ref={nextRef}
+            className="hidden h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-white/90 shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-white md:flex"
+          >
+            <ArrowRight />
+          </button>
+        </div>
       </div>
     </section>
   );
