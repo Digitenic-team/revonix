@@ -9,7 +9,7 @@ import { ScrollTrigger } from "gsap/all";
 const IMAGES: string[] = [
   "pixis.svg",
   "smart_target_logo.png",
-  "claire.png",
+  "claire-ai.png",
   "ethosmed.png",
 ];
 
