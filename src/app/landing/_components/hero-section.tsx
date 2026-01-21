@@ -111,7 +111,7 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-[url('/assets/images/background.svg')] bg-cover bg-center bg-no-repeat"
+      className="relative h-full w-full overflow-x-visible bg-[url('/assets/images/background.svg')] bg-cover bg-center bg-no-repeat"
     >
       <Image
         src="/assets/images/vector1.svg"
@@ -165,26 +165,18 @@ export function HeroSection() {
           </div>
         </div>
 
-        <section className="hidden w-full flex-col flex-wrap justify-center gap-5 overflow-hidden sm:flex-row md:items-start lg:flex lg:flex-nowrap lg:items-center lg:justify-between lg:gap-5">
-          {IMAGES.map((img: IMAGE, index: number) => {
+        <section className="relative right-0 hidden w-screen flex-nowrap items-center justify-center gap-5 overflow-visible lg:flex">
+          {IMAGES.map((img: IMAGE) => {
             return (
               <div
                 key={img.alt}
                 className={cn(
-                  "hero-card gsap-init relative h-60 sm:h-80 md:h-115",
-                  index === 0 || index === IMAGES.length - 1
-                    ? "md:100 w-65 sm:w-85.5 lg:w-81.5"
-                    : "md:100 w-65 sm:w-85.5 lg:w-162.5",
+                  "hero-card gsap-init md:100 relative h-60 w-65 shrink-0 -translate-x-1/2 sm:h-80 sm:w-85.5 md:h-115 lg:w-162.5",
                 )}
               >
                 <div
                   className={cn(
-                    index === 0
-                      ? "rounded-4xl lg:rounded-l-none"
-                      : index === IMAGES.length - 1
-                        ? "rounded-4xl lg:rounded-r-none"
-                        : "rounded-4xl",
-                    "border-secondary-foreground relative h-full w-full overflow-hidden border",
+                    "border-secondary-foreground relative h-full w-full overflow-hidden rounded-4xl border",
                   )}
                 >
                   <Image
