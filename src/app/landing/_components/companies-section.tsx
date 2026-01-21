@@ -7,6 +7,7 @@ import { useRef } from "react";
 import { ScrollTrigger } from "gsap/all";
 
 const IMAGES: string[] = [
+  "pixis.svg",
   "com-1.png",
   "com-2.png",
   "com-3.png",
@@ -16,7 +17,6 @@ const IMAGES: string[] = [
   "com-7.png",
   "com-8.png",
   "com-9.png",
-  "pixis.svg",
 ];
 
 export function CompaniesSection() {
@@ -33,7 +33,7 @@ export function CompaniesSection() {
         defaults: { ease: "power3.out" },
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 80%",
+          start: "top 90%",
           end: "bottom 30%",
           toggleActions: "play reverse play reverse",
         },
