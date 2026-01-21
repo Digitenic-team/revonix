@@ -8,15 +8,9 @@ import { ScrollTrigger } from "gsap/all";
 
 const IMAGES: string[] = [
   "pixis.svg",
-  "com-1.png",
-  "com-2.png",
-  "com-3.png",
-  "com-4.png",
-  "com-5.png",
-  "com-6.png",
-  "com-7.png",
-  "com-8.png",
-  "com-9.png",
+  "smart_target_logo.png",
+  "claire.png",
+  "ethosmed.png",
 ];
 
 export function CompaniesSection() {
