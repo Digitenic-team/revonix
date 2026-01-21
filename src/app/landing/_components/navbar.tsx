@@ -162,7 +162,7 @@ export function Navbar() {
         <Link href="/landing">
           <Image
             src="/assets/images/revonix-logo.png"
-            width={130}
+            width={124}
             height={26}
             priority
             alt="Revonix Logo"
@@ -171,7 +171,7 @@ export function Navbar() {
         </Link>
 
         {/* Links - desktop */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="mt-2 hidden items-center gap-8 md:flex">
           {LINKS.map((link: NavLink) => (
             <Link
               key={link.link}

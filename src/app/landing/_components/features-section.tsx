@@ -109,12 +109,7 @@ export function FeaturesSection() {
             onMouseLeave={() =>
               gsap.to(cardRefs.current[idx], { scale: 1, rotate: 0 })
             }
-            className={cn(
-              idx === 0
-                ? "border-secondary-foreground border border-dashed bg-white shadow-[0_11px_24px_0_rgba(55,90,217,0.10)]"
-                : "bg-primary-foreground",
-              "relative flex min-w-74 flex-1 flex-col items-start gap-6.5 rounded-4xl p-6",
-            )}
+            className="border-secondary-foreground relative flex min-w-74 flex-1 flex-col items-start gap-6.5 rounded-4xl border border-dashed bg-white p-6 shadow-[0_11px_24px_0_rgba(55,90,217,0.10)]"
           >
             <Image
               src="/assets/images/card-side-vector.png"

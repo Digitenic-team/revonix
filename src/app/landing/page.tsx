@@ -7,7 +7,7 @@ import { TechnologySection } from "./_components/technology-section";
 import { FeaturesSection } from "./_components/features-section";
 import { Footer } from "./_components/footer";
 import { TestimonialsSection } from "./_components/testimonials";
-import { FamilySection } from "./_components/family-section";
+// import { FamilySection } from "./_components/family-section";
 
 export default function Landing() {
   return (
@@ -20,7 +20,7 @@ export default function Landing() {
       <TechnologySection />
       <FeaturesSection />
       <TestimonialsSection />
-      <FamilySection />
+      {/* <FamilySection />*/}
       <Footer />
     </main>
   );

@@ -8,6 +8,8 @@ import gsap from "gsap";
 import { cn } from "@/lib/utils";
 import { ScrollTrigger } from "gsap/all";
 import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/free-mode";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 type Card = {
