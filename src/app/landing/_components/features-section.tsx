@@ -47,7 +47,7 @@ export function FeaturesSection() {
         .timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 80%",
+            start: "top 90%",
             end: "bottom 20%",
             toggleActions: "play reverse play reverse",
           },
@@ -62,14 +62,14 @@ export function FeaturesSection() {
           {
             y: 0,
             opacity: 1,
-            duration: 0.8,
+            duration: 0.7,
             ease: "power3.out",
           },
         )
         .fromTo(
           cards,
           {
-            y: 40,
+            y: 35,
             opacity: 0,
           },
           {
