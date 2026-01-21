@@ -84,21 +84,23 @@ export function CompaniesSection() {
       </h1>
 
       {/* Company logos */}
-      <div className="flex max-w-208 flex-wrap items-start justify-center gap-3 sm:gap-4 md:gap-5">
+      <div className="flex max-w-300 flex-wrap items-start justify-center gap-3 sm:gap-4 md:gap-5">
         {IMAGES.map((url: string) => (
           <div
             key={url}
-            className="company-card border-secondary-foreground bg-primary-foreground flex h-28 w-28 flex-col items-center justify-center gap-2.5 rounded-3xl border p-4 sm:h-32 sm:w-32 sm:p-5 md:h-37 md:w-37 md:p-6"
+            className="group border-secondary-foreground bg-primary-foreground relative flex h-28 w-28 items-center justify-center overflow-hidden rounded-3xl border p-4 transition-all duration-300 sm:h-32 sm:w-32 sm:p-5 md:h-37 md:w-37 md:p-6 lg:h-68 lg:w-68 lg:p-10"
           >
-            <div className="flex h-full w-full items-center justify-center">
-              <Image
-                src={`/assets/images/${url}`}
-                alt="company logo"
-                width={1000}
-                height={1000}
-                className="max-h-full max-w-full object-contain"
-              />
-            </div>
+            {/* Image */}
+            <Image
+              src={`/assets/images/${url}`}
+              alt="company logo"
+              width={1000}
+              height={1000}
+              className="relative z-10 max-h-full max-w-full object-contain"
+            />
+
+            {/* Overlay */}
+            <div className="absolute inset-0 z-20 bg-gray-300/20 transition-all duration-500 group-hover:opacity-0" />
           </div>
         ))}
       </div>
