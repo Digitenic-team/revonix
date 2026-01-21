@@ -121,7 +121,7 @@ export function OverwhelmingSection() {
   return (
     <section
       ref={sectionRef}
-      className="mx-auto mt-38 flex max-w-360 flex-col items-center gap-[4.38rem] px-4"
+      className="mx-auto mt-46 flex max-w-360 flex-col items-center gap-[4.38rem] px-4"
     >
       {/* Heading */}
       <h1 className="over-heading bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[32px] font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">

@@ -18,7 +18,7 @@ type IMAGE = {
 
 const IMAGES: IMAGE[] = [
   { src: "/assets/images/kesko-ai-project.png", alt: "Phone UI" },
-  { src: "/assets/images/school-project.png", alt: "Dashboard UI" },
+  { src: "/assets/images/klerva-landing-page.png", alt: "Dashboard UI" },
   {
     src: "/assets/images/clarity-project.png",
     alt: "Sound Collection",

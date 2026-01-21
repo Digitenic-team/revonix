@@ -82,7 +82,7 @@ export function Footer() {
   );
 
   return (
-    <footer className="mx-auto mt-30 flex max-w-360 flex-col items-start gap-[4.38rem] self-stretch overflow-hidden px-4">
+    <footer className="mx-auto mt-46 flex max-w-360 flex-col items-start gap-[4.38rem] self-stretch overflow-hidden px-4">
       <section
         ref={heroRef}
         className="relative flex items-center justify-center gap-25 self-stretch overflow-hidden rounded-[1.875rem] bg-[linear-gradient(180deg,#010101_3.79%,#3558DA_100%)] p-20 shadow-[0_51px_51px_0_rgba(54,89,218,0.09),0_13px_28px_0_rgba(54,89,218,0.10)]"
