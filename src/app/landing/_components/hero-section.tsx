@@ -165,13 +165,13 @@ export function HeroSection() {
           </div>
         </div>
 
-        <section className="relative right-0 hidden w-screen flex-nowrap items-center justify-center gap-5 overflow-visible lg:flex">
+        <section className="relative hidden w-screen flex-nowrap items-center justify-center gap-5 overflow-visible lg:flex">
           {IMAGES.map((img: IMAGE) => {
             return (
               <div
                 key={img.alt}
                 className={cn(
-                  "hero-card gsap-init md:100 relative h-60 w-65 shrink-0 -translate-x-1/2 sm:h-80 sm:w-85.5 md:h-115 lg:w-162.5",
+                  "hero-card gsap-init md:100 h-60 w-65 shrink-0 sm:h-80 sm:w-85.5 md:h-115 lg:w-162.5",
                 )}
               >
                 <div
