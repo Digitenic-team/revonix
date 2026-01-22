@@ -173,7 +173,7 @@ export function TestimonialsSection() {
             {/* Left Image */}
             <div className="relative min-h-100 w-full lg:h-auto lg:flex-1">
               <Image
-                src="/assets/images/slider1.png"
+                src="/assets/images/clarity-project.png"
                 fill
                 alt="Slider Image"
                 className="rounded-2xl object-cover lg:rounded-3xl"
@@ -200,18 +200,19 @@ export function TestimonialsSection() {
               {/* Author */}
               <div className="flex items-center gap-3">
                 <Image
-                  src="/assets/images/profile1.png"
+                  src="/assets/images/test1.jpeg"
                   width={48}
                   height={48}
+                  className="rounded-full"
                   alt="Profile Image"
                 />
 
                 <div className="flex flex-col">
                   <h3 className="text-secondary text-base font-medium sm:text-lg">
-                    Navid Nathoo
+                    Courtney Hoatson
                   </h3>
                   <p className="text-secondary text-xs uppercase opacity-60 sm:text-sm">
-                    Founder
+                    Founder, Claire AI
                   </p>
                 </div>
               </div>
