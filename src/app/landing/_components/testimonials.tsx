@@ -171,14 +171,16 @@ export function TestimonialsSection() {
 
           <div className="testimonial-slide-content flex min-h-112 w-full cursor-pointer flex-col gap-4 active:cursor-grab md:h-auto md:flex-row md:gap-0">
             {/* Left Image */}
-            <div className="relative min-h-100 w-full lg:h-auto lg:flex-1">
-              <Image
-                src="/assets/images/clarity-project.png"
-                fill
-                alt="Slider Image"
-                className="rounded-2xl object-cover lg:rounded-3xl"
-                priority
-              />
+            <div className="relative w-full rounded-2xl bg-gray-200/60 lg:flex-1">
+              <div className="relative h-full w-full">
+                <Image
+                  src="/assets/images/clarity-project.png"
+                  fill
+                  alt="Slider Image"
+                  className="rounded-2xl object-contain lg:rounded-3xl"
+                  priority
+                />
+              </div>
             </div>
 
             {/* Right Content */}
