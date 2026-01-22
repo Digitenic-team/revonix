@@ -166,7 +166,7 @@ export function TestimonialsSection() {
                 width={900}
                 height={600}
                 priority
-                className="object-contain"
+                className="rounded-2xl object-contain"
               />
             </div>
 
