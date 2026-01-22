@@ -100,7 +100,7 @@ export function CompaniesSection() {
             />
 
             {/* Overlay */}
-            <div className="absolute inset-0 z-20 bg-sky-200/30 transition-all duration-500 group-hover:opacity-0" />
+            <div className="absolute inset-0 z-20 bg-gray-200/30 transition-all duration-500 group-hover:opacity-0" />
           </div>
         ))}
       </div>

@@ -82,7 +82,7 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-full min-h-150 w-full overflow-x-visible bg-[url('/assets/images/background.svg')] bg-cover bg-center bg-no-repeat lg:min-h-238"
+      className="relative h-220 w-full overflow-x-visible bg-[url('/assets/images/background.svg')] bg-cover bg-center bg-no-repeat"
     >
       <Image
         src="/assets/images/vector1.svg"
@@ -116,7 +116,7 @@ export function HeroSection() {
       {/* Navbar */}
       <Navbar />
 
-      <div className="flex flex-col items-center gap-18 self-stretch pt-18">
+      <div className="flex min-h-screen flex-col items-center gap-18 self-stretch pt-60">
         <div className="mx-auto flex max-w-360 flex-col items-center gap-10 px-4">
           <div className="flex flex-col items-center gap-4 px-5 md:px-0">
             <h1 className="hero-heading gsap-init justify-between bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[32px] leading-9 font-medium text-transparent sm:text-5xl sm:leading-16 md:text-[3.625rem]">
