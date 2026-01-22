@@ -49,7 +49,6 @@ export function FeaturesSection() {
             start: "top 80%",
             end: "bottom 10%",
             toggleActions: "play reverse play reverse",
-            markers: true,
           },
         })
 
