@@ -82,7 +82,7 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-full w-full overflow-x-visible bg-[url('/assets/images/background.svg')] bg-cover bg-center bg-no-repeat"
+      className="relative h-full min-h-150 w-full overflow-x-visible bg-[url('/assets/images/background.svg')] bg-cover bg-center bg-no-repeat lg:min-h-238"
     >
       <Image
         src="/assets/images/vector1.svg"
