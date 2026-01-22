@@ -82,34 +82,34 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-220 w-full overflow-x-visible bg-[url('/assets/images/background.svg')] bg-cover bg-center bg-no-repeat"
+      className="relative min-h-screen w-full overflow-x-visible bg-[url('/assets/images/background.svg')] bg-cover bg-center bg-no-repeat"
     >
       <Image
         src="/assets/images/vector1.svg"
         width={218}
         height={218}
-        className="pointer-events-none absolute top-80 hidden xl:block"
+        className="pointer-events-none absolute top-90 hidden xl:block"
         alt=""
       />
       <Image
         src="/assets/images/vector2.svg"
         width={160}
         height={160}
-        className="pointer-events-none absolute top-96 left-120 hidden xl:block"
+        className="pointer-events-none absolute top-128 left-120 hidden xl:block"
         alt=""
       />
       <Image
         src="/assets/images/vector3.svg"
         width={218}
         height={218}
-        className="pointer-events-none absolute top-75 right-65 hidden xl:block"
+        className="pointer-events-none absolute top-110 right-65 hidden xl:block"
         alt=""
       />
       <Image
         src="/assets/images/vector4.svg"
         width={160}
         height={160}
-        className="pointer-events-none absolute top-0 right-38 hidden xl:block"
+        className="pointer-events-none absolute top-10 right-38 hidden xl:block"
         alt=""
       />
 
