@@ -1,16 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { cn } from "@/lib/utils";
 import { ScrollTrigger } from "gsap/all";
-import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 
 type Card = {
   text: string;
@@ -19,30 +16,24 @@ type Card = {
   position: string;
 };
 
-type Testimonial = {
-  text: string;
-  name: string;
-  role: string;
-};
-
 const CARDS: Card[] = [
   {
     text: '"Great experience with the Revonix team. They are professional, reliable, and excellent at problem-solving. They understood the requirements well and delivered quality work on time. Highly recommended."',
     imageUrl: "client1.jpeg",
     name: "Leutrim M.",
-    position: "FOUNDER",
+    position: "Founder - Budgethub",
   },
   {
     text: `"I was extremely cautious of who we engaged as part of this project, as it's quite a complex project and we wanted someone aligned who will be part of the journey. Thank you"`,
     imageUrl: "client2.jpeg",
     name: "Pepe Badesha",
-    position: "FOUNDER",
+    position: "CEO - Flytribe",
   },
   {
     text: '"Revonix team delivered excellent Bubble work. Communication was clear and consistent, the quality was solid, and they showed great accountability throughout the process. Highly recommended!"',
     imageUrl: "client3.jpeg",
-    name: "Lucas Casa de Vito",
-    position: "FOUNDER",
+    name: "Lucas",
+    position: "Founder, GROWFORTH AI",
   },
 ];
 
@@ -70,9 +61,6 @@ export function TestimonialsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const founderCardsRef = useRef<HTMLElement>(null);
   const founderCardRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  const prevRef = useRef<HTMLButtonElement>(null);
-  const nextRef = useRef<HTMLButtonElement>(null);
 
   gsap.registerPlugin(useGSAP);
   gsap.registerPlugin(ScrollTrigger);
@@ -263,11 +251,9 @@ export function TestimonialsSection() {
                 <h1 className="text-secondary font-medium tracking-[-0.0125rem] sm:text-[1.25rem]">
                   {card.name}
                 </h1>
-                {/*
                 <h3 className="text-secondary text-[0.875rem] font-normal uppercase opacity-60">
                   {card.position}
                 </h3>
-                  */}
               </div>
             </div>
           </div>
