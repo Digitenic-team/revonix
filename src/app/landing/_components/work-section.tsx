@@ -66,9 +66,9 @@ export function WorkSection() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top center",
-          end: `bottom +=${cards.length * 300}`,
-          scrub: true,
+          start: "top 80%",
+          end: "bottom 60%",
+          toggleActions: "play reverse play reverse",
         },
       });
 

@@ -60,35 +60,21 @@ export function JourneySection() {
         },
       });
 
-      ftl
-        .fromTo(
-          ".journey-heading",
-          {
-            y: 30,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: "back.out(1.7)",
-          },
-        )
-        .fromTo(
-          cards,
-          {
-            scale: 0.8,
-            opacity: 0,
-          },
-          {
-            scale: 1,
-            opacity: 1,
-            stagger: 0.15,
-            duration: 0.8,
-            ease: "power3.out",
-          },
-          "-=0.3",
-        );
+      ftl.fromTo(
+        cards,
+        {
+          scale: 0.8,
+          opacity: 0,
+        },
+        {
+          scale: 1,
+          opacity: 1,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        "-=0.3",
+      );
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -146,7 +132,7 @@ export function JourneySection() {
       className="relative mx-auto mt-46 flex max-w-360 flex-col items-center gap-[4.38rem] self-stretch px-4"
     >
       {/* Heading */}
-      <h1 className="journey-heading bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[32px] font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">
+      <h1 className="journey-heading bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[32px] leading-20 font-medium tracking-[-0.035rem] text-transparent sm:text-5xl md:text-[3.5rem]">
         Where are you in the{" "}
         <span className="text-primary font-medium tracking-[-0.035rem]">
           AI journey?

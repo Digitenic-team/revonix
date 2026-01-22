@@ -1,6 +1,5 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
@@ -47,9 +46,10 @@ export function FeaturesSection() {
         .timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 90%",
-            end: "bottom 20%",
+            start: "top 80%",
+            end: "bottom 10%",
             toggleActions: "play reverse play reverse",
+            markers: true,
           },
         })
 
@@ -62,7 +62,7 @@ export function FeaturesSection() {
           {
             y: 0,
             opacity: 1,
-            duration: 0.7,
+            duration: 0.6,
             ease: "power3.out",
           },
         )
