@@ -2,30 +2,11 @@
 
 import { useRef } from "react";
 import { StyledButton } from "@/components/styled-button";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Navbar } from "./navbar";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-
-type IMAGE = {
-  src: string;
-  alt: string;
-};
-
-const IMAGES: IMAGE[] = [
-  { src: "/assets/images/kesko-ai-project.png", alt: "Phone UI" },
-  { src: "/assets/images/klerva-landing-page.png", alt: "Dashboard UI" },
-  {
-    src: "/assets/images/clarity-project.png",
-    alt: "Sound Collection",
-  },
-  { src: "/assets/images/referral-loop-project.png", alt: "Mobile UI" },
-];
-
 gsap.registerPlugin(ScrollTrigger);
 
 export function HeroSection() {
@@ -78,16 +59,6 @@ export function HeroSection() {
             duration: 0.45,
           },
           "-=0.35",
-        )
-        .to(
-          ".hero-card",
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.6,
-            stagger: 0.08,
-          },
-          "-=0.25",
         );
 
       mm.add("(min-width: 1024px)", (): void => {
@@ -164,78 +135,6 @@ export function HeroSection() {
             <StyledButton className="py-6">Book a Strategy Call</StyledButton>
           </div>
         </div>
-
-        <section className="relative hidden w-screen flex-nowrap items-center justify-center gap-5 overflow-visible lg:flex">
-          {IMAGES.map((img: IMAGE) => {
-            return (
-              <div
-                key={img.alt}
-                className={cn(
-                  "hero-card gsap-init md:100 h-60 w-65 shrink-0 sm:h-80 sm:w-85.5 md:h-115 lg:w-162.5",
-                )}
-              >
-                <div
-                  className={cn(
-                    "border-secondary-foreground relative h-full w-full overflow-hidden rounded-4xl border",
-                  )}
-                >
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    priority
-                    className="object-cover"
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(270deg,rgba(53,88,218,0)_42.94%,#3558DA_49.26%)] mix-blend-hue" />
-                </div>
-              </div>
-            );
-          })}
-        </section>
-
-        {/* MOBILE / TABLET ONLY – Swiper */}
-        <section className="block w-full overflow-hidden lg:hidden">
-          <Swiper
-            modules={[Autoplay]}
-            loop={true}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-              pauseOnMouseEnter: true,
-            }}
-            slidesPerView={1.15}
-            centeredSlides={true}
-            spaceBetween={16}
-            grabCursor={true}
-            slidesOffsetBefore={16}
-            slidesOffsetAfter={16}
-            className="w-full"
-          >
-            {IMAGES.map((img: IMAGE, index: number) => (
-              <SwiperSlide
-                key={img.alt}
-                className={cn(
-                  index === 0 || index === IMAGES.length - 1
-                    ? "w-65 sm:w-85.5"
-                    : "w-65 sm:w-85.5",
-                )}
-              >
-                <div className="relative h-60 sm:h-120">
-                  <div className="border-secondary-foreground relative h-full w-full overflow-hidden rounded-4xl border">
-                    <Image
-                      src={img.src}
-                      alt={img.alt}
-                      fill
-                      priority
-                      className="object-cover"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(270deg,rgba(53,88,218,0)_42.94%,#3558DA_49.26%)] mix-blend-hue" />
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </section>
       </div>
     </section>
   );
