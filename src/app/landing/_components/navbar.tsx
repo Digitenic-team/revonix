@@ -243,7 +243,7 @@ export function Navbar() {
       </nav>
 
       {/* Mobile dropdown */}
-      <div className="mobile-menu pointer-events-none invisible fixed top-[4.5rem] left-1/2 z-40 w-[calc(100%-2rem)] -translate-x-1/2 rounded-b-3xl border border-[#EEE] bg-white p-6 shadow-lg md:hidden">
+      <div className="mobile-menu pointer-events-none invisible fixed top-[4.5rem] left-1/2 z-40 w-[calc(100%-2rem)] -translate-x-1/2 rounded-3xl border border-[#EEE] bg-white p-6 shadow-lg md:hidden">
         {LINKS.map((link: NavLink) => (
           <Link
             key={link.title}
