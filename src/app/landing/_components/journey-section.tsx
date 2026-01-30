@@ -76,52 +76,57 @@ export function JourneySection() {
         "-=0.3",
       );
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "center center",
-          end: `+=${cards.length * 300}`,
-          pin: true,
-          scrub: 0.6,
-          anticipatePin: 1,
-        },
-      });
+      // Only run pinning animation on desktop (1024px and above)
+      const mm = gsap.matchMedia();
 
-      // SVG draw animation
-      tl.to(
-        path,
-        {
-          strokeDashoffset: 0,
-          ease: "none",
-          duration: cards.length,
-        },
-        0,
-      );
-
-      // Card activation logic
-      cards.forEach((_: HTMLElement, i: number): void => {
-        tl.to(
-          {},
-          {
-            duration: 1,
-            onUpdate: (): void => {
-              const progress = tl.progress() * cards.length;
-              const activeIndex = Math.min(
-                cards.length - 1,
-                Math.floor(progress),
-              );
-
-              cards.forEach((c: HTMLElement): void =>
-                c.classList.remove("is-active"),
-              );
-              cards[activeIndex]?.classList.add("is-active");
-            },
+      mm.add("(min-width: 1024px)", (): void => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "center center",
+            end: `+=${cards.length * 300}`,
+            pin: true,
+            scrub: 0.6,
+            anticipatePin: 1,
           },
-          i,
-        );
-      });
+        });
 
-      cards[0]?.classList.add("is-active");
+        // SVG draw animation
+        tl.to(
+          path,
+          {
+            strokeDashoffset: 0,
+            ease: "none",
+            duration: cards.length,
+          },
+          0,
+        );
+
+        // Card activation logic
+        cards.forEach((_: HTMLElement, i: number): void => {
+          tl.to(
+            {},
+            {
+              duration: 1,
+              onUpdate: (): void => {
+                const progress = tl.progress() * cards.length;
+                const activeIndex = Math.min(
+                  cards.length - 1,
+                  Math.floor(progress),
+                );
+
+                cards.forEach((c: HTMLElement): void =>
+                  c.classList.remove("is-active"),
+                );
+                cards[activeIndex]?.classList.add("is-active");
+              },
+            },
+            i,
+          );
+        });
+
+        cards[0]?.classList.add("is-active");
+      });
     },
     { scope: sectionRef },
   );
