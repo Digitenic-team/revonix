@@ -119,7 +119,7 @@ export function HeroSection() {
       <div className="flex min-h-screen flex-col items-center gap-18 self-stretch pt-60">
         <div className="mx-auto flex max-w-360 flex-col items-center gap-10 px-4">
           <div className="flex flex-col items-center gap-4 px-5 md:px-0">
-            <h1 className="hero-heading gsap-init justify-between bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[32px] leading-9 font-medium text-transparent sm:text-5xl sm:leading-16 md:text-[3.625rem]">
+            <h1 className="hero-heading gsap-init justify-between bg-[radial-gradient(117.71%_63.41%_at_38.85%_66.79%,_#010101_0%,_#3558DA_100%)] bg-clip-text text-center text-[36px] leading-9 font-medium text-transparent sm:text-5xl sm:leading-16 md:text-[3.625rem]">
               Your competitor isn’t smarter —
               <br />
               Their team just has AI doing the work.
