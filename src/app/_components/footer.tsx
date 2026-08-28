@@ -135,7 +135,7 @@ export function Footer() {
         <div className="flex flex-col flex-wrap items-start justify-between gap-12 self-stretch py-4 md:items-start lg:flex-row">
           {/* Left Side */}
           <div className="flex flex-col items-start gap-4 md:gap-12.5">
-            <Link href="/landing">
+            <Link href="/">
               <Image
                 src="/assets/images/footer-logo.png"
                 width={180}

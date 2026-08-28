@@ -212,7 +212,7 @@ export function Navbar() {
         </div>
 
         {/* Logo */}
-        <Link href="/landing">
+        <Link href="/">
           <Image
             src="/assets/images/revonix-logo.png"
             width={124}
