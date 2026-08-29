@@ -1,5 +1,6 @@
 "use client";
 
+import { BOOKING_URL } from "@/lib/constants";
 import { StyledButton } from "@/components/styled-button";
 import { StyledButtonLight } from "@/components/styled-button-light";
 import Image from "next/image";
@@ -25,10 +26,11 @@ const footerSections: FooterSection[] = [
       "AI Agents & Decision Systems",
     ],
   },
-  {
-    title: "Company",
-    links: ["How We Work", "Our Approach", "Meet the Team", "Contact"],
-  },
+  // Hidden until these pages exist — restore once the links have destinations.
+  // {
+  //   title: "Company",
+  //   links: ["How We Work", "Our Approach", "Meet the Team", "Contact"],
+  // },
   {
     title: "Contact",
     links: ["hello@revonix.ai", "LinkedIn"],
@@ -122,7 +124,10 @@ export function Footer() {
               about what’s actually possible.
             </p>
           </div>
-          <StyledButtonLight className="relative py-6 text-sm">
+          <StyledButtonLight
+            href={BOOKING_URL}
+            className="relative py-6 text-sm"
+          >
             Book a Strategy Call
           </StyledButtonLight>
         </div>
@@ -148,7 +153,9 @@ export function Footer() {
                 We help teams cut through AI noise and turn automation into
                 real, working systems.
               </p>
-              <StyledButton className="py-6">Get Started</StyledButton>
+              <StyledButton href={BOOKING_URL} className="py-6">
+                Get Started
+              </StyledButton>
             </div>
           </div>
 

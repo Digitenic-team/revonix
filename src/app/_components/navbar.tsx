@@ -1,5 +1,6 @@
 "use client";
 
+import { BOOKING_URL } from "@/lib/constants";
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -238,7 +239,9 @@ export function Navbar() {
 
         {/* Button */}
         <div className="nav-button hidden md:block [@media(min-width:400px)]:block">
-          <StyledButton className="py-6">Get Started</StyledButton>
+          <StyledButton href={BOOKING_URL} className="py-6">
+            Get Started
+          </StyledButton>
         </div>
       </nav>
 
@@ -254,7 +257,10 @@ export function Navbar() {
             {link.title}
           </Link>
         ))}
-        <StyledButton className="mobile-item mt-4 w-full py-3">
+        <StyledButton
+          href={BOOKING_URL}
+          className="mobile-item mt-4 w-full py-3"
+        >
           Get Started
         </StyledButton>
       </div>

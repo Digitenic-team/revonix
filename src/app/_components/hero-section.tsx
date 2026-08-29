@@ -1,5 +1,6 @@
 "use client";
 
+import { BOOKING_URL } from "@/lib/constants";
 import { useRef } from "react";
 import { StyledButton } from "@/components/styled-button";
 import Image from "next/image";
@@ -132,7 +133,9 @@ export function HeroSection() {
           </div>
 
           <div className="hero-button gsap-init">
-            <StyledButton className="py-6">Book a Strategy Call</StyledButton>
+            <StyledButton href={BOOKING_URL} className="py-6">
+              Book a Strategy Call
+            </StyledButton>
           </div>
         </div>
       </div>

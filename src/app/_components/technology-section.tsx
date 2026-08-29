@@ -1,5 +1,6 @@
 "use client";
 
+import { BOOKING_URL } from "@/lib/constants";
 import { StyledButtonLight } from "@/components/styled-button-light";
 import { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -186,7 +187,7 @@ export function TechnologySection() {
               Systems that replace manual work and actually get used.
             </p>
           </div>
-          <StyledButtonLight className="relative py-6">
+          <StyledButtonLight href={BOOKING_URL} className="relative py-6">
             Book a Strategy Call
           </StyledButtonLight>
         </div>
