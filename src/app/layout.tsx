@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://revonix.co"),
   title: "Revonix - AI Solutions for Business Growth",
   description:
     "Transform your business with AI. From exploration to implementation, we help you automate workflows and scale with custom AI systems tailored to your needs.",
@@ -32,6 +33,8 @@ export const metadata: Metadata = {
       "Transform your business with AI. From exploration to implementation, we help you automate workflows and scale with custom AI systems.",
     type: "website",
     locale: "en_US",
+    url: "https://revonix.co",
+    siteName: "Revonix",
   },
   twitter: {
     card: "summary_large_image",

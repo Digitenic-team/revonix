@@ -10,20 +10,26 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
 
+type FooterLink = {
+  label: string;
+  /** Omit to render as plain text — used for entries with no destination yet. */
+  href?: string;
+};
+
 type FooterSection = {
   title: string;
-  links: string[];
+  links: FooterLink[];
 };
 
 const footerSections: FooterSection[] = [
   {
     title: "Services",
     links: [
-      "AI & Intelligent Automation",
-      "Low-Code Development",
-      "Custom Web & Mobile Apps",
-      "Workflow Automation",
-      "AI Agents & Decision Systems",
+      { label: "AI & Intelligent Automation", href: "#services" },
+      { label: "Low-Code Development", href: "#services" },
+      { label: "Custom Web & Mobile Apps", href: "#services" },
+      { label: "Workflow Automation", href: "#services" },
+      { label: "AI Agents & Decision Systems", href: "#services" },
     ],
   },
   // Hidden until these pages exist — restore once the links have destinations.
@@ -33,7 +39,7 @@ const footerSections: FooterSection[] = [
   // },
   {
     title: "Contact",
-    links: ["hello@revonix.ai", "LinkedIn"],
+    links: [{ label: "hello@revonix.ai", href: "mailto:hello@revonix.ai" }],
   },
 ];
 
@@ -65,7 +71,7 @@ export function Footer() {
 
       if (linksRef.current) {
         const linkBlocks = linksRef.current.querySelectorAll(
-          "div.flex-col > h2, div.flex-col > p",
+          "div.flex-col > h2, div.flex-col > p, .footer-link",
         );
         gsap.from(linkBlocks, {
           y: 30,
@@ -169,14 +175,24 @@ export function Footer() {
                 <h2 className="text-secondary text-center text-[1.125rem] font-medium tracking-[-0.01125rem]">
                   {section.title}
                 </h2>
-                {section.links.map((link: string) => (
-                  <p
-                    key={link}
-                    className="text-secondary text-center text-[1rem] font-normal tracking-[-0.01rem] opacity-60"
-                  >
-                    {link}
-                  </p>
-                ))}
+                {section.links.map((link: FooterLink) =>
+                  link.href ? (
+                    <Link
+                      key={link.label}
+                      href={link.href}
+                      className="footer-link text-secondary text-center text-[1rem] font-normal tracking-[-0.01rem] opacity-60 transition-opacity hover:opacity-100"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <p
+                      key={link.label}
+                      className="text-secondary text-center text-[1rem] font-normal tracking-[-0.01rem] opacity-60"
+                    >
+                      {link.label}
+                    </p>
+                  ),
+                )}
               </div>
             ))}
           </div>
@@ -188,6 +204,7 @@ export function Footer() {
             <p className="text-secondary text-center text-sm font-normal tracking-[-0.01rem] opacity-60 sm:text-[1rem]">
               © Revonix 2025. All rights reserved.
             </p>
+            {/* Hidden until these pages exist — restore once they have destinations.
             <div className="flex items-center gap-8">
               <p className="text-secondary text-center text-sm font-normal tracking-[-0.01rem] opacity-60 sm:text-[1rem]">
                 Privacy Policy
@@ -195,7 +212,7 @@ export function Footer() {
               <p className="text-secondary text-center text-sm font-normal tracking-[-0.01rem] opacity-60 sm:text-[1rem]">
                 Terms of Service
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
