@@ -16,15 +16,19 @@ type NavLink = {
 const LINKS: NavLink[] = [
   {
     title: "Services",
-    link: "#services",
+    link: "/#services",
   },
   {
     title: "Process",
-    link: "#process",
+    link: "/#process",
+  },
+  {
+    title: "Case Studies",
+    link: "/case-studies",
   },
   {
     title: "Reviews",
-    link: "#reviews",
+    link: "/#reviews",
   },
 ];
 

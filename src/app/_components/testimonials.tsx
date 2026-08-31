@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
-import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { cn } from "@/lib/utils";
 import { ScrollTrigger } from "gsap/all";
+import Image from "next/image";
+import { useRef } from "react";
+import { cn } from "@/lib/utils";
 import "swiper/css";
 import "swiper/css/free-mode";
 
@@ -165,7 +165,6 @@ export function TestimonialsSection() {
                 alt="Slider Image"
                 width={900}
                 height={600}
-                priority
                 className="rounded-2xl object-contain"
               />
             </div>

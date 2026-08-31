@@ -1,14 +1,14 @@
 "use client";
 
-import { BOOKING_URL } from "@/lib/constants";
-import { StyledButtonLight } from "@/components/styled-button-light";
-import { useState, useRef } from "react";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { ScrollTrigger } from "gsap/all";
-import { CardIconWrapper } from "@/components/card-icon-wrapper";
-import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+import Image from "next/image";
+import { useRef, useState } from "react";
+import { CardIconWrapper } from "@/components/card-icon-wrapper";
+import { StyledButtonLight } from "@/components/styled-button-light";
+import { BOOKING_URL } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 interface Cards {
   icon: string;
@@ -176,7 +176,6 @@ export function TechnologySection() {
           alt="Background"
           fill
           className="absolute inset-0 object-cover mix-blend-color-burn"
-          priority
         />
         <div className="tech-left mx-auto flex w-full flex-1 flex-col gap-6 self-stretch px-6 lg:max-w-200 lg:px-0 xl:mx-0 xl:max-w-130 xl:shrink-0 xl:items-start">
           <div className="flex flex-1 flex-col gap-4 self-stretch xl:items-start">

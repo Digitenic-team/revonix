@@ -1,14 +1,14 @@
 "use client";
 
-import { BOOKING_URL } from "@/lib/constants";
-import { StyledButton } from "@/components/styled-button";
-import { StyledButtonLight } from "@/components/styled-button-light";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/all";
+import { StyledButton } from "@/components/styled-button";
+import { StyledButtonLight } from "@/components/styled-button-light";
+import { BOOKING_URL } from "@/lib/constants";
 
 type FooterLink = {
   label: string;
@@ -25,18 +25,17 @@ const footerSections: FooterSection[] = [
   {
     title: "Services",
     links: [
-      { label: "AI & Intelligent Automation", href: "#services" },
-      { label: "Low-Code Development", href: "#services" },
-      { label: "Custom Web & Mobile Apps", href: "#services" },
-      { label: "Workflow Automation", href: "#services" },
-      { label: "AI Agents & Decision Systems", href: "#services" },
+      { label: "AI & Intelligent Automation", href: "/#services" },
+      { label: "Low-Code Development", href: "/#services" },
+      { label: "Custom Web & Mobile Apps", href: "/#services" },
+      { label: "Workflow Automation", href: "/#services" },
+      { label: "AI Agents & Decision Systems", href: "/#services" },
     ],
   },
-  // Hidden until these pages exist — restore once the links have destinations.
-  // {
-  //   title: "Company",
-  //   links: ["How We Work", "Our Approach", "Meet the Team", "Contact"],
-  // },
+  {
+    title: "Company",
+    links: [{ label: "Case Studies", href: "/case-studies" }],
+  },
   {
     title: "Contact",
     links: [{ label: "hello@revonix.ai", href: "mailto:hello@revonix.ai" }],
@@ -100,7 +99,6 @@ export function Footer() {
           alt="Background"
           fill
           className="absolute inset-0 object-cover mix-blend-color-burn"
-          priority
         />
 
         <Image
