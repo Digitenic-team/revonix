@@ -1,0 +1,88 @@
+---
+title: Automating WhatsApp Booking & Support
+subtitle: Handling FAQs and appointments without turning every message into staff work
+summary: Built an AI WhatsApp agent that understands English, Urdu, and Roman Urdu, answers business questions, manages appointments through Google Calendar, and hands conversations to staff when human judgment is needed.
+client: Confidential
+industry: Services
+year: "2026"
+featured: true
+order: 3
+services:
+- AI Agents & Decision Systems
+- Workflow Automation
+heroImage: /assets/images/automating-whatsapp-and-support-cover.png
+metrics:
+- value: 3
+  label: Language formats handled
+- value: 3
+  label: Booking actions automated
+- value: 1
+  label: Human escalation path
+techStack:
+- n8n
+- Anthropic Claude
+- LangChain
+- WhatsApp Business Cloud
+- Google Calendar
+- Google Sheets
+---
+
+## The problem
+
+For many service businesses, WhatsApp becomes the front desk.
+
+Customers ask the same questions repeatedly:
+
+What time are you open?
+Do you have availability tomorrow?
+Can I move my appointment?
+Can I cancel my booking?
+
+Individually, none of these conversations require much work.
+
+At volume, they turn into a constant stream of interruptions.
+
+The challenge becomes harder when customers naturally switch between English, Urdu, Roman Urdu, and Roman Hindi — and when an automated system needs to understand not just what someone said, but what they are trying to do.
+
+A simple chatbot wasn't enough.
+
+The system needed to distinguish between a question and an action, interact with the actual booking calendar, remember where a conversation was, and know when to stop automating.
+
+## What we built
+
+We built an AI assistant directly into the business's WhatsApp workflow.
+
+Every incoming message is interpreted by Claude to determine the customer's intent and the next action.
+
+For common questions, the agent pulls information from a maintained FAQ knowledge base instead of inventing an answer.
+
+For appointments, it connects directly to Google Calendar and can:
+
+* **Check availability**
+* **Create bookings**
+* **Reschedule existing appointments**
+* **Cancel appointments**
+
+The agent also maintains conversation state, allowing a booking conversation to continue naturally across multiple messages rather than treating every message as a new request.
+
+And because customer conversations don't always fit neatly into predefined workflows, we designed human handoff as part of the system from the beginning.
+
+If the AI is uncertain — or the customer simply asks for a person — the conversation is escalated to staff through WhatsApp.
+
+Unanswered handoffs are checked again on a schedule so a conversation doesn't disappear just because automation stopped.
+
+## The outcome
+
+* Routine questions no longer require someone to manually reply every time
+* Customers can book, reschedule, and cancel directly through the same WhatsApp conversation
+* Google Calendar remains the source of truth rather than creating a separate booking system staff need to maintain
+* English, Urdu, Roman Urdu, and Roman Hindi conversations can move through the same workflow
+* Conversation context persists across multi-message interactions
+* Staff are brought in when judgment is required instead of monitoring every conversation
+* Human handoffs remain visible until somebody deals with them
+
+The result wasn't a chatbot sitting beside the business.
+
+It was an assistant connected to the systems the business already used.
+
+> Answering a message is easy. The useful automation starts when the system can actually do what the customer is asking for.

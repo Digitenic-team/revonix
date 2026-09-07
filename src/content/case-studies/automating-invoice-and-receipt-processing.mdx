@@ -1,0 +1,89 @@
+---
+title: Automating Invoice & Receipt Processing
+subtitle: Turning documents from three channels into clean, review-ready financial records
+summary: Built an AI-powered document workflow that captures receipts and invoices from Gmail, Google Drive, and WhatsApp, extracts and validates the data, and sends only uncertain documents to a human for review.
+client: Confidential
+industry: Business Operations
+year: "2026"
+featured: true
+order: 2
+services:
+- AI & Intelligent Automation
+- Workflow Automation
+heroImage: /assets/images/automating-invoice-and-receipt-processing-cover.png
+metrics:
+- value: 3
+  label: Intake channels unified
+- value: 1
+  label: Human review queue
+- value: 100%
+  label: Source files archived
+techStack:
+- n8n
+- Google Gemini
+- Gmail
+- Google Drive
+- Google Sheets
+- WhatsApp Business Cloud
+- Slack
+---
+
+## The problem
+
+Receipts and invoices rarely arrive through one clean system.
+
+Some came through email. Others were uploaded to Google Drive. Others arrived as photos or documents over WhatsApp.
+
+Someone still had to open each file, read it, extract the important numbers, check that those numbers made sense, enter the data into a spreadsheet, and make sure the original document was stored somewhere it could be found later.
+
+The problem wasn't that any individual step was difficult.
+
+It was that the same small set of steps had to be repeated for every document.
+
+And fully automating financial documents without any checks created a different problem: one incorrectly read total could quietly become bad financial data.
+
+So the goal wasn't simply:
+
+**Can AI read an invoice?**
+
+It was:
+
+**Can the entire document workflow run automatically while still knowing when a human should step in?**
+
+## What we built
+
+We built one intake and processing pipeline across Gmail, Google Drive, and WhatsApp.
+
+Whenever a new receipt or invoice arrives, the system captures the original document and sends it through Gemini's vision capabilities to extract the structured information needed by the business.
+
+But extraction is only the first step.
+
+The workflow also:
+
+* **Normalises the extracted data** into a consistent structure regardless of where the document came from
+* **Validates important numbers** before anything is written to the accounting log
+* **Scores the result for confidence** to decide whether it can continue automatically
+* **Logs high-confidence documents** directly into Google Sheets
+* **Archives every original file** in Google Drive for traceability
+* **Confirms successful processing** back to the sender where appropriate
+* **Routes uncertain documents to a review queue** instead of guessing
+* **Alerts the team in Slack** when human attention is actually required
+
+That last part was important.
+
+We didn't try to remove humans from the process entirely.
+
+We removed them from the documents where they weren't adding anything.
+
+## The outcome
+
+* Documents from three different channels now enter the same workflow automatically
+* High-confidence invoices and receipts can be processed without manual data entry
+* Every source document is archived consistently instead of being scattered across inboxes and conversations
+* Validation happens before extracted data reaches the financial log
+* Uncertain documents are surfaced deliberately rather than silently introducing bad data
+* The team reviews exceptions instead of processing every document
+
+The result is a workflow where AI handles the repetitive work and people handle the judgment calls.
+
+> The goal wasn't to make document processing fully autonomous. It was to make human attention the exception instead of the default.
