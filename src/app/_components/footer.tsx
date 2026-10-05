@@ -38,9 +38,21 @@ const footerSections: FooterSection[] = [
   },
   {
     title: "Contact",
-    links: [{ label: "hello@revonix.ai", href: "mailto:hello@revonix.ai" }],
+    links: [
+      { label: "hello@revonix.co", href: "mailto:hello@revonix.co" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/company/revonixco" },
+    ],
   },
 ];
+
+const companyAddress = [
+  "Revonix Innovation LLC",
+  "30 N Gould St",
+  "Ste R",
+  "Sheridan, WY 82801",
+];
+
+const isExternal = (href: string) => /^https?:\/\//.test(href);
 
 export function Footer() {
   const heroRef = useRef<HTMLElement>(null);
@@ -69,8 +81,12 @@ export function Footer() {
       }
 
       if (linksRef.current) {
+        // Animate the .footer-item wrappers, never the links themselves: the
+        // links carry a CSS opacity transition for hover, and GSAP re-reading
+        // opacity mid-transition records 0 as the end value, leaving them
+        // invisible.
         const linkBlocks = linksRef.current.querySelectorAll(
-          "div.flex-col > h2, div.flex-col > p, .footer-link",
+          "div.flex-col > h2, div.flex-col > p, .footer-item",
         );
         gsap.from(linkBlocks, {
           y: 30,
@@ -164,7 +180,7 @@ export function Footer() {
           </div>
 
           {/* Right Side - Footer Links */}
-          <div className="mt-6 flex flex-col items-start gap-18 sm:mt-0 sm:flex-row sm:items-start">
+          <div className="mt-6 flex flex-col items-start gap-18 sm:mt-0 sm:grid sm:grid-cols-2 sm:gap-12 md:flex md:flex-row lg:gap-x-18">
             {footerSections.map((section: FooterSection) => (
               <div
                 key={section.title}
@@ -173,26 +189,45 @@ export function Footer() {
                 <h2 className="text-secondary text-center text-[1.125rem] font-medium tracking-[-0.01125rem]">
                   {section.title}
                 </h2>
-                {section.links.map((link: FooterLink) =>
-                  link.href ? (
-                    <Link
-                      key={link.label}
-                      href={link.href}
-                      className="footer-link text-secondary text-center text-[1rem] font-normal tracking-[-0.01rem] opacity-60 transition-opacity hover:opacity-100"
-                    >
-                      {link.label}
-                    </Link>
-                  ) : (
-                    <p
-                      key={link.label}
-                      className="text-secondary text-center text-[1rem] font-normal tracking-[-0.01rem] opacity-60"
-                    >
-                      {link.label}
-                    </p>
-                  ),
-                )}
+                <ul className="flex flex-col items-start gap-2.5">
+                  {section.links.map((link: FooterLink) => (
+                    <li key={link.label} className="footer-item">
+                      {link.href ? (
+                        <Link
+                          href={link.href}
+                          target={isExternal(link.href) ? "_blank" : undefined}
+                          rel={
+                            isExternal(link.href)
+                              ? "noopener noreferrer"
+                              : undefined
+                          }
+                          className="text-secondary text-[1rem] font-normal tracking-[-0.01rem] opacity-60 transition-opacity hover:opacity-100"
+                        >
+                          {link.label}
+                        </Link>
+                      ) : (
+                        <p className="text-secondary text-[1rem] font-normal tracking-[-0.01rem] opacity-60">
+                          {link.label}
+                        </p>
+                      )}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
+
+            <div className="flex flex-col items-start gap-2.5">
+              <h2 className="text-secondary text-center text-[1.125rem] font-medium tracking-[-0.01125rem]">
+                Address
+              </h2>
+              <address className="footer-item text-secondary text-[1rem] leading-relaxed font-normal tracking-[-0.01rem] not-italic">
+                {companyAddress.map((line) => (
+                  <span key={line} className="block opacity-60">
+                    {line}
+                  </span>
+                ))}
+              </address>
+            </div>
           </div>
         </div>
 

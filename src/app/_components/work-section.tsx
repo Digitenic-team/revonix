@@ -1,12 +1,12 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { gsap } from "gsap";
-import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { useRef } from "react";
 import { IconWrapper } from "@/components/icon-wrapper";
-import { JarIcon, TerminalIcon, UsersIcon, ReloadIcon } from "./icons";
+import { cn } from "@/lib/utils";
+import { JarIcon, ReloadIcon, TerminalIcon, UsersIcon } from "./icons";
 
 type Cards = {
   icon: React.ComponentType<{ className?: string }>;
@@ -107,11 +107,15 @@ export function WorkSection() {
           start: "top center",
           end: "bottom center",
           onEnter: () => {
-            cards.forEach((c) => c.classList.remove("is-active"));
+            cards.forEach((c) => {
+              c.classList.remove("is-active");
+            });
             card.classList.add("is-active");
           },
           onEnterBack: () => {
-            cards.forEach((c) => c.classList.remove("is-active"));
+            cards.forEach((c) => {
+              c.classList.remove("is-active");
+            });
             card.classList.add("is-active");
           },
         });

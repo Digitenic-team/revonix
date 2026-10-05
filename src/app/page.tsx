@@ -1,13 +1,13 @@
+import { CaseStudiesSection } from "./_components/case-studies-section";
+import { CompaniesSection } from "./_components/companies-section";
+import { FeaturesSection } from "./_components/features-section";
+import { Footer } from "./_components/footer";
 import { HeroSection } from "./_components/hero-section";
 import { JourneySection } from "./_components/journey-section";
 import { OverwhelmingSection } from "./_components/overwhelming-section";
-import { CompaniesSection } from "./_components/companies-section";
-import { WorkSection } from "./_components/work-section";
 import { TechnologySection } from "./_components/technology-section";
-import { FeaturesSection } from "./_components/features-section";
-import { Footer } from "./_components/footer";
 import { TestimonialsSection } from "./_components/testimonials";
-import { CaseStudiesSection } from "./_components/case-studies-section";
+import { WorkSection } from "./_components/work-section";
 // import { FamilySection } from "./_components/family-section";
 
 export default function Landing() {

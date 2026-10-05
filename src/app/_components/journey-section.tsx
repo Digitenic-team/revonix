@@ -1,10 +1,10 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { useRef } from "react";
-import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { useRef } from "react";
+import { cn } from "@/lib/utils";
 
 type CardData = {
   heading: string;
@@ -115,9 +115,9 @@ export function JourneySection() {
                   Math.floor(progress),
                 );
 
-                cards.forEach((c: HTMLElement): void =>
-                  c.classList.remove("is-active"),
-                );
+                cards.forEach((c: HTMLElement): void => {
+                  c.classList.remove("is-active");
+                });
                 cards[activeIndex]?.classList.add("is-active");
               },
             },

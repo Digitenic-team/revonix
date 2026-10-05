@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import neueMontreal from "../app/fonts/neue-montreal";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
+import neueMontreal from "../app/fonts/neue-montreal";
 import "./globals.css";
 
 const geistSans = Geist({
