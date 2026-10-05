@@ -1,12 +1,12 @@
 "use client";
 
-import { BOOKING_URL } from "@/lib/constants";
-import { useEffect, useState, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { StyledButton } from "@/components/styled-button";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
+import { BOOKING_URL } from "@/lib/constants";
 
 type NavLink = {
   title: string;

@@ -1,13 +1,14 @@
 "use client";
 
-import { BOOKING_URL } from "@/lib/constants";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/all";
+import Image from "next/image";
 import { useRef } from "react";
 import { StyledButton } from "@/components/styled-button";
-import Image from "next/image";
+import { BOOKING_URL } from "@/lib/constants";
 import { Navbar } from "./navbar";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/all";
+
 gsap.registerPlugin(ScrollTrigger);
 
 export function HeroSection() {

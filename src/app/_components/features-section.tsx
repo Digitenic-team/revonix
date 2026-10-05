@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
-import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import Image from "next/image";
+import { useRef } from "react";
 
 interface Card {
   heading: string;
@@ -97,6 +97,7 @@ export function FeaturesSection() {
 
       <div className="flex flex-wrap items-center gap-5 self-stretch">
         {CARDS.map((card: Card, idx: number) => (
+          // biome-ignore lint/a11y/noStaticElementInteractions: decorative hover tilt only; the card has no action to expose
           <div
             key={card.heading}
             ref={(el: HTMLDivElement | null): void => {

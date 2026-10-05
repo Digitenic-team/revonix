@@ -1,13 +1,14 @@
 "use client";
 
-import { StyledButton } from "@/components/styled-button";
-import { useRef, useState, useEffect } from "react";
-import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import gsap from "gsap";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperInstance } from "swiper/types";
+import { StyledButton } from "@/components/styled-button";
 import "swiper/css";
 import "swiper/css/free-mode";
 import { ScrollTrigger } from "gsap/all";
@@ -54,15 +55,23 @@ const CARDS: Card[] = [
 
 export function FamilySection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [swiperInstance, setSwiperInstance] = useState<any>(null);
+  const [swiperInstance, setSwiperInstance] = useState<SwiperInstance | null>(
+    null,
+  );
 
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (swiperInstance && prevRef.current && nextRef.current) {
-      swiperInstance.params.navigation.prevEl = prevRef.current;
-      swiperInstance.params.navigation.nextEl = nextRef.current;
+    const navigation = swiperInstance?.params.navigation;
+    if (
+      swiperInstance &&
+      typeof navigation === "object" &&
+      prevRef.current &&
+      nextRef.current
+    ) {
+      navigation.prevEl = prevRef.current;
+      navigation.nextEl = nextRef.current;
       swiperInstance.navigation.destroy();
       swiperInstance.navigation.init();
       swiperInstance.navigation.update();

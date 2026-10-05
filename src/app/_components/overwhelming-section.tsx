@@ -1,11 +1,11 @@
 "use client";
 
-import { useRef } from "react";
-import Image from "next/image";
-import { StyledCircle } from "@/components/styled-circle";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/all";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+import Image from "next/image";
+import { useRef } from "react";
+import { StyledCircle } from "@/components/styled-circle";
 
 type Icons = {
   url: string;
