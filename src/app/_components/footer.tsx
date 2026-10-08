@@ -40,6 +40,11 @@ const footerSections: FooterSection[] = [
     title: "Contact",
     links: [
       { label: "hello@revonix.co", href: "mailto:hello@revonix.co" },
+      {
+        label: "muhammadali600666@gmail.com",
+        href: "mailto:muhammadali600666@gmail.com",
+      },
+      { label: "+1 (832) 323-7219", href: "tel:+18323237219" },
       { label: "LinkedIn", href: "https://www.linkedin.com/company/revonixco" },
     ],
   },
